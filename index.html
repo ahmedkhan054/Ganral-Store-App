@@ -1,0 +1,3011 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#4f46e5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Chota Dukan</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#eef1f6;--card:#fff;--card2:#f8fafc;--text:#0f172a;--muted:#64748b;
+  --primary:#4f46e5;--primary2:#7c3aed;--success:#16a34a;--danger:#dc2626;
+  --warning:#f59e0b;--info:#0891b2;--border:#e2e8f0;--radius:18px;
+  --shadow:0 2px 12px rgba(15,23,42,.07);--shadow-lg:0 10px 30px rgba(15,23,42,.14);
+}
+[data-theme="dark"]{--bg:#0b1220;--card:#151f33;--card2:#1b2740;--text:#e2e8f0;--muted:#94a3b8;--border:#243044;--shadow:0 2px 12px rgba(0,0,0,.35);--shadow-lg:0 10px 30px rgba(0,0,0,.5)}
+html[dir="rtl"] body{font-family:'Noto Nastaliq Urdu','Segoe UI',Tahoma,sans-serif}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.45;padding-bottom:calc(78px + env(safe-area-inset-bottom));transition:background .25s,color .25s;overflow-x:hidden}
+::-webkit-scrollbar{width:0;height:0}
+.topbar{position:sticky;top:0;z-index:150;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;padding-top:calc(12px + env(safe-area-inset-top));background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;box-shadow:0 4px 18px rgba(79,70,229,.28)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:1.15rem}
+.brand i{font-size:1.35rem;color:#fbbf24}
+.topbar .icon-btn{background:rgba(255,255,255,.16);border:none;color:#fff;width:38px;height:38px;border-radius:12px;font-size:.85rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;transition:.2s;margin-left:6px}
+.topbar .icon-btn:active{transform:scale(.9);background:rgba(255,255,255,.3)}
+.wrap{padding:14px 14px 20px;max-width:760px;margin:0 auto}
+.page-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.page-head h4{margin:0;font-weight:800;font-size:1.25rem;flex:1}
+.back-btn{width:40px;height:40px;border-radius:13px;border:none;background:var(--card);color:var(--text);box-shadow:var(--shadow);font-size:1rem;display:inline-flex;align-items:center;justify-content:center}
+.back-btn:active{transform:scale(.92)}
+.card-x{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:12px}
+.stat{background:var(--card);border-radius:var(--radius);padding:14px 12px;box-shadow:var(--shadow);border:1px solid var(--border);text-align:center;position:relative;overflow:hidden;height:100%;cursor:pointer;transition:.15s}
+.stat:active{transform:scale(.97)}
+.stat::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--c,#ccc)}
+html[dir="rtl"] .stat::before{left:auto;right:0}
+.stat .ico{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.15rem;color:#fff;background:var(--c,#ccc)}
+.stat .num{font-size:1.4rem;font-weight:800;color:var(--c);line-height:1.15;word-break:break-word}
+.stat .lbl{font-size:.74rem;color:var(--muted);font-weight:600;margin-top:2px}
+.stat .view-all{position:absolute;bottom:6px;right:8px;font-size:.68rem;font-weight:800;color:var(--c);opacity:.85}
+html[dir="rtl"] .stat .view-all{right:auto;left:8px}
+.btn-x{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;border:none;border-radius:15px;padding:14px;font-weight:700;font-size:1rem;color:#fff;transition:.15s;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.btn-x:active{transform:scale(.97);filter:brightness(.95)}
+.btn-x i{font-size:1.15rem}
+.bg-p{background:linear-gradient(135deg,var(--primary),var(--primary2))}
+.bg-s{background:linear-gradient(135deg,#16a34a,#22c55e)}
+.bg-d{background:linear-gradient(135deg,#dc2626,#ef4444)}
+.bg-w{background:linear-gradient(135deg,#f59e0b,#fbbf24)}
+.bg-i{background:linear-gradient(135deg,#0891b2,#06b6d4)}
+.bg-g{background:linear-gradient(135deg,#475569,#64748b)}
+.btn-soft{background:var(--card2);color:var(--text);border:1px solid var(--border);box-shadow:none;font-weight:600}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:30px;background:var(--card2);border:1px solid var(--border);color:var(--muted);font-size:.82rem;font-weight:700;white-space:nowrap}
+.chip.active{background:var(--primary);border-color:var(--primary);color:#fff}
+.form-label{font-weight:700;font-size:.85rem;color:var(--muted);margin-bottom:5px}
+.form-control,.form-select{background:var(--card2);border:1.5px solid var(--border);color:var(--text);border-radius:13px;padding:11px 13px;font-size:1rem;font-weight:600}
+.form-control:focus,.form-select:focus{background:var(--card2);color:var(--text);border-color:var(--primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 18%,transparent)}
+.form-control::placeholder{color:var(--muted);font-weight:500;opacity:.7}
+.input-icon{position:relative}
+.input-icon i{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.95rem}
+html[dir="rtl"] .input-icon i{right:auto;left:14px}
+.voice{background:var(--info);color:#fff;border:none;width:30px;height:30px;border-radius:50%;font-size:.8rem;display:inline-flex;align-items:center;justify-content:center;margin-left:6px}
+.scan-btn{background:var(--warning);color:#fff;border:none;width:40px;height:40px;border-radius:12px;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.scan-btn:active{transform:scale(.9)}
+.prod{background:var(--card);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--border);height:100%;display:flex;flex-direction:column;transition:.18s}
+.prod:active{transform:scale(.975)}
+.prod .img{height:120px;background:var(--card2);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:2rem;position:relative}
+.prod .img img{width:100%;height:100%;object-fit:cover}
+.prod .body{padding:10px 11px;flex:1;display:flex;flex-direction:column}
+.prod h6{font-weight:800;font-size:.92rem;margin:0 0 4px;line-height:1.25}
+.prod .price{font-weight:800;color:var(--success);font-size:1rem}
+.prod .qty{position:absolute;top:7px;right:7px;font-size:.7rem;font-weight:800;padding:3px 9px;border-radius:20px;color:#fff;background:var(--success)}
+html[dir="rtl"] .prod .qty{right:auto;left:7px}
+.prod .qty.low{background:var(--danger)}
+.prod .qty.mid{background:var(--warning)}
+.li{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:15px;padding:13px 14px;margin-bottom:9px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.li:active{transform:scale(.985)}
+.li .av{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.05rem;color:#fff;flex-shrink:0}
+.li .info{flex:1;min-width:0}
+.li .info b{display:block;font-weight:700;font-size:.97rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li .info small{color:var(--muted);font-size:.78rem}
+.li .amt{font-weight:800;font-size:.95rem;white-space:nowrap}
+.cart-row{display:flex;align-items:center;gap:9px;padding:10px;border-radius:13px;background:var(--card2);border:1px solid var(--border);margin-bottom:8px}
+.qty-btn{width:32px;height:32px;border-radius:9px;border:none;background:var(--card);color:var(--text);font-weight:800;font-size:.95rem;border:1px solid var(--border);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.qty-btn.plus{background:var(--success);color:#fff;border-color:var(--success)}
+.qty-btn.minus{background:var(--danger);color:#fff;border-color:var(--danger)}
+.bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:200;display:flex;background:var(--card);border-top:1px solid var(--border);padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -4px 24px rgba(15,23,42,.1)}
+.bottomnav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:9px 2px 8px;color:var(--muted);text-decoration:none;font-size:.68rem;font-weight:700;position:relative;transition:.18s}
+.bottomnav a i{font-size:1.2rem;transition:.18s}
+.bottomnav a.active{color:var(--primary)}
+.bottomnav a.active i{transform:translateY(-2px) scale(1.08)}
+.bottomnav a.fab i{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.35rem;margin-top:-26px;box-shadow:0 8px 22px rgba(22,163,74,.45);border:4px solid var(--card)}
+.backdrop{position:fixed;inset:0;background:rgba(2,6,23,.6);z-index:400;opacity:0;pointer-events:none;transition:opacity .28s;backdrop-filter:blur(2px)}
+.backdrop.open{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:401;background:var(--card);border-radius:26px 26px 0 0;max-height:88vh;display:flex;flex-direction:column;transform:translateY(110%);transition:transform .3s cubic-bezier(.4,0,.2,1);padding-bottom:env(safe-area-inset-bottom);box-shadow:var(--shadow-lg)}
+.sheet.open{transform:translateY(0)}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 18px 12px;border-bottom:1px solid var(--border);flex-shrink:0}
+.sheet-head h5{margin:0;font-weight:800;font-size:1.05rem}
+.sheet-head button{width:34px;height:34px;border-radius:11px;border:none;background:var(--card2);color:var(--text);font-size:.95rem}
+.sheet-body{overflow-y:auto;padding:14px 16px 20px;flex:1;-webkit-overflow-scrolling:touch}
+.sheet-body.no-pad{padding:0}
+.grab{width:44px;height:4px;border-radius:4px;background:var(--border);margin:8px auto 0}
+#toastBox{position:fixed;top:calc(74px + env(safe-area-inset-top));left:12px;right:12px;z-index:900;display:flex;flex-direction:column;gap:8px;pointer-events:none;align-items:center}
+.toast-x{background:var(--card);color:var(--text);padding:12px 18px;border-radius:14px;font-weight:700;font-size:.9rem;box-shadow:var(--shadow-lg);border-left:5px solid var(--success);display:flex;align-items:center;gap:10px;max-width:100%;animation:slideDown .3s}
+.toast-x.danger{border-left-color:var(--danger)}
+.toast-x.warning{border-left-color:var(--warning)}
+.toast-x.info{border-left-color:var(--info)}
+@keyframes slideDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+.badge-x{font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:20px;display:inline-block}
+.b-green{background:color-mix(in srgb,#16a34a 15%,transparent);color:#16a34a}
+.b-red{background:color-mix(in srgb,#dc2626 15%,transparent);color:#dc2626}
+.b-amber{background:color-mix(in srgb,#f59e0b 20%,transparent);color:#b45309}
+.empty{text-align:center;padding:44px 20px;color:var(--muted)}
+.empty i{font-size:3.2rem;opacity:.28;margin-bottom:14px;display:block}
+.row-total{display:flex;justify-content:space-between;padding:7px 0;font-weight:600;font-size:.95rem}
+.row-total.big{font-size:1.2rem;font-weight:800;border-top:2px dashed var(--border);padding-top:12px;margin-top:6px}
+.alert-x{border-radius:15px;padding:13px 15px;font-weight:700;font-size:.87rem;display:flex;gap:11px;align-items:flex-start;border:1px solid}
+.alert-warn{background:color-mix(in srgb,#f59e0b 12%,transparent);border-color:color-mix(in srgb,#f59e0b 35%,transparent);color:#b45309}
+.alert-danger{background:color-mix(in srgb,#dc2626 12%,transparent);border-color:color-mix(in srgb,#dc2626 35%,transparent);color:#dc2626}
+.alert-info{background:color-mix(in srgb,#0891b2 12%,transparent);border-color:color-mix(in srgb,#0891b2 35%,transparent);color:#0891b2}
+.alert-success{background:color-mix(in srgb,#16a34a 12%,transparent);border-color:color-mix(in srgb,#16a34a 35%,transparent);color:#16a34a}
+.scroll-x{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:12px}
+.scroll-x::-webkit-scrollbar{display:none}
+.seg{display:flex;background:var(--card2);border:1px solid var(--border);border-radius:13px;padding:4px;gap:4px}
+.seg button{flex:1;border:none;background:transparent;color:var(--muted);font-weight:700;padding:9px;border-radius:10px;font-size:.85rem}
+.seg button.active{background:var(--primary);color:#fff;box-shadow:0 3px 10px rgba(79,70,229,.35)}
+.receipt{background:#fff;color:#111;border-radius:14px;padding:18px;font-family:'Courier New',monospace;font-size:.85rem}
+.receipt h5{text-align:center;font-weight:800;margin:0 0 2px}
+.receipt .r-line{display:flex;justify-content:space-between;padding:3px 0}
+.receipt hr{border:none;border-top:1px dashed #999;margin:9px 0}
+.lang-menu{display:flex;flex-direction:column;gap:8px;padding:4px}
+.lang-menu button{display:flex;align-items:center;gap:14px;padding:16px;border-radius:14px;border:2px solid var(--border);background:var(--card2);color:var(--text);font-weight:700;font-size:1rem;text-align:left;transition:.15s}
+.lang-menu button.active{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 12%,transparent);color:var(--primary)}
+.lang-menu button:active{transform:scale(.98)}
+.lang-menu .flag{font-size:1.6rem}
+.cat-card{background:var(--card);border-radius:16px;padding:14px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:10px;cursor:pointer;transition:.15s}
+.cat-card:active{transform:scale(.985)}
+.cat-card .cat-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.cat-card .cat-ico{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff;flex-shrink:0}
+.cat-card .cat-name{font-weight:800;font-size:1.05rem;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cat-card .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center}
+.cat-card .cat-grid > div{background:var(--card2);border-radius:11px;padding:8px 4px}
+.cat-card .cat-grid .cv{font-weight:800;font-size:.95rem;line-height:1.1}
+.cat-card .cat-grid .cl{font-size:.62rem;color:var(--muted);font-weight:700;margin-top:2px;text-transform:uppercase;letter-spacing:.3px}
+.dead-row{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:15px;padding:13px 14px;margin-bottom:9px;box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid var(--danger)}
+.dead-row.warn{border-left-color:var(--warning)}
+.dead-row .dead-days{background:var(--danger);color:#fff;font-weight:800;font-size:.7rem;padding:4px 10px;border-radius:20px;text-align:center;line-height:1.1}
+.dead-row.warn .dead-days{background:var(--warning)}
+/* ===== SCANNER ===== */
+.scanner-box{position:relative;background:#000;min-height:280px;border-radius:14px;overflow:hidden}
+.scanner-box video{border-radius:14px!important;width:100%!important;height:auto!important;object-fit:cover!important}
+#qrReader{width:100%!important;min-height:280px}
+#qrReader img{display:none!important}
+#qrReader__dashboard_section_csr{display:none!important}
+#qrReader__dashboard_section_fsr{display:none!important}
+#qrReader__header_message{display:none!important}
+#qrReader__status_span{display:none!important}
+#qrReader__scan_region{background:transparent!important}
+#qrReader__scan_region img{display:none!important}
+.scan-line{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--warning),transparent);animation:scanline 2s linear infinite;z-index:10;pointer-events:none}
+@keyframes scanline{0%{top:10%}50%{top:90%}100%{top:10%}}
+.scan-corner{position:absolute;width:24px;height:24px;border:3px solid #22c55e;z-index:5;pointer-events:none}
+.scan-corner.tl{top:15%;left:8%;border-right:none;border-bottom:none;border-radius:4px 0 0 0}
+.scan-corner.tr{top:15%;right:8%;border-left:none;border-bottom:none;border-radius:0 4px 0 0}
+.scan-corner.bl{bottom:15%;left:8%;border-right:none;border-top:none;border-radius:0 0 0 4px}
+.scan-corner.br{bottom:15%;right:8%;border-left:none;border-top:none;border-radius:0 0 4px 0}
+.scan-ctrl-btn{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border-radius:30px;background:var(--card2);border:1.5px solid var(--border);color:var(--text);font-size:.78rem;font-weight:800;transition:.15s;cursor:pointer}
+.scan-ctrl-btn:active{transform:scale(.94);background:var(--primary);color:#fff;border-color:var(--primary)}
+.scan-ctrl-btn.on{background:var(--warning);border-color:var(--warning);color:#fff}
+.size-opt-btn{display:flex;align-items:center;justify-content:space-between;width:100%;padding:13px 16px;margin-bottom:8px;border-radius:14px;border:2px solid;font-weight:800;font-size:.95rem;transition:.15s;cursor:pointer}
+.size-opt-btn:active{transform:scale(.97)}
+.size-opt-btn.sale{background:color-mix(in srgb,#16a34a 10%,transparent);border-color:color-mix(in srgb,#16a34a 40%,transparent);color:#16a34a}
+.size-opt-btn.buy{background:color-mix(in srgb,#4f46e5 10%,transparent);border-color:color-mix(in srgb,#4f46e5 40%,transparent);color:#4f46e5}
+.size-opt-btn.disabled{background:var(--card2);border-color:var(--border);color:var(--muted);opacity:.5;cursor:not-allowed}
+[data-theme="dark"] .size-opt-btn.sale{color:#22c55e}
+[data-theme="dark"] .size-opt-btn.buy{color:#a5b4fc}
+@media print{body *{visibility:hidden}#sheet,#sheet *{visibility:visible}#sheet{position:absolute;top:0;left:0;right:0;max-height:none;transform:none;border-radius:0}.sheet-head,.no-print{display:none!important}.backdrop{display:none}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand" onclick="go('dashboard')"><i class="fas fa-store"></i> <span id="brandName">Chota Dukan</span></div>
+  <div style="display:flex;align-items:center">
+    <button class="icon-btn" onclick="openLangMenu()" id="langBtn" title="Language">RU</button>
+    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn"><i class="fas fa-moon"></i></button>
+    <button class="icon-btn" onclick="go('settings')"><i class="fas fa-cog"></i></button>
+  </div>
+</header>
+
+<main id="main"></main>
+
+<nav class="bottomnav">
+  <a href="javascript:void(0)" onclick="go('dashboard')" data-nav="dashboard"><i class="fas fa-home"></i><span data-t="home">Home</span></a>
+  <a href="javascript:void(0)" onclick="go('products')" data-nav="products"><i class="fas fa-boxes-stacked"></i><span data-t="stock">Stock</span></a>
+  <a href="javascript:void(0)" onclick="startSale()" data-nav="sale_form" class="fab"><i class="fas fa-cart-plus"></i><span data-t="sell">Bech</span></a>
+  <a href="javascript:void(0)" onclick="go('udhar')" data-nav="udhar"><i class="fas fa-hand-holding-dollar"></i><span data-t="udhar">Udhar</span></a>
+  <a href="javascript:void(0)" onclick="go('ledger')" data-nav="ledger"><i class="fas fa-book"></i><span data-t="ledger">Hisab</span></a>
+</nav>
+
+<div class="backdrop" id="backdrop" onclick="closeSheet()"></div>
+<div class="sheet" id="sheet"></div>
+<div id="toastBox"></div>
+
+<script>
+/* ============================================================
+   LANGUAGE SYSTEM
+============================================================ */
+let LANG = localStorage.getItem('cd_lang') || 'ru';
+
+const STR = {
+  ru: {
+    home:'Home', stock:'Stock', sell:'Bech', buy:'Khareed', ledger:'Hisab', udhar:'Udhar',
+    todays_calc:'Aaj ka Hisab', todays_sale:'AAJ KI BIKRI', recv:'Lena Hai', pay:'Dena Hai',
+    stock_val:'Stock Value', todays_exp:'Aaj ka Kharcha', view_all:'Sab Dekhein',
+    received:'Paisa Liya', paid:'Paisa Diya', exp:'Kharcha', recent_sales:'Recent Bikri',
+    low_stock:'Stock khatam ho raha hai!', profit:'Munafa', sales_count:'bikri',
+    greeting_morning:'Assalam-o-Alaikum', greeting_afternoon:'Good Afternoon', greeting_evening:'Good Evening',
+    customer:'Customer', supplier:'Supplier', products:'Products', customers:'Customers',
+    suppliers:'Suppliers', sales:'Bikriyan', purchases:'Khareedari', expenses:'Kharcha',
+    payments:'Payments', items:'Items',
+    add:'Add', save:'Save', cancel:'Cancel', delete:'Delete', edit:'Edit', update:'Update',
+    yes:'Haan', no:'Nahi', ok:'Theek Hai', full:'Pura', call:'Call', view:'Dekhein',
+    name:'Naam', phone:'Phone', address:'Address', amount:'Amount', date:'Date', notes:'Notes',
+    category:'Category', quantity:'Quantity', min_stock:'Min Stock', photo:'Photo (optional)',
+    khareed_price:'Khareed', bikri_price:'Bikri', opening_balance:'Opening Balance',
+    opening_balance_hint:'Purana hisab adjust karne ke liye',
+    boxes:'Box', pieces_per_box:'Pieces/Box', total_qty:'Total Quantity', per_box:'/box', pcs:'pcs',
+    barcode:'Barcode', scan:'Scan', scan_barcode:'Barcode Scan Karein', scan_now:'Camera Se Scan',
+    scanning:'Scan ho raha hai...', scan_hint:'Camera ko barcode par seedha rakhein',
+    barcode_found:'Barcode mil gaya', barcode_not_found:'Is barcode ka product nahi mila',
+    add_with_barcode:'Is barcode se naya product add karein?', camera_error:'Camera nahi khul saka',
+    camera_perm:'Camera ki permission dein aur dubara try karein',
+    new_sale:'Nayi Bikri', new_purchase:'Nayi Khareed', new_product:'Naya Product',
+    new_customer:'Naya Customer', new_supplier:'Naya Supplier', new_expense:'Naya Kharcha',
+    settings:'Settings', reports:'Reports',
+    search:'Dhoondein...', no_data:'Koi data nahi', no_match:'Kuch nahi mila',
+    no_sales_yet:'Abhi koi bikri nahi hui', no_purchases_yet:'Abhi koi khareed nahi hui',
+    cart_empty:'Cart khali hai', no_product_yet:'Abhi koi product nahi',
+    no_receivable:'Kisi se lena nahi 😊', no_payable:'Kisi ko dena nahi 😊',
+    no_transactions:'Koi transaction nahi', no_expenses:'Abhi koi kharcha nahi',
+    total:'Total', paid_amt:'Paid', remaining:'Baaki', discount:'Discount', subtotal:'Subtotal',
+    item_add:'Item Add', save_sale:'Bikri Save Karein', save_purchase:'Khareed Save Karein',
+    cart:'Cart', cash:'Cash', credit:'Udhar', cash_sale:'Cash Sale', cash_customer:'Cash Customer',
+    sale_type:'Type', pick_product:'Product Chunein', select_party:'Chunein',
+    all:'Sab', out_of_stock:'Khatam', kitna_left:'Stock',
+    share_wa:'WhatsApp', print:'Print', receipt:'Receipt', bikri_receipt:'Bikri Receipt',
+    bill_no:'Bill #', thanks:'Shukriya! Dobara tashreef laayein 🙏', whatsapp_msg:'Shukriya',
+    udhar_customers:'Udhar Customers (Lena Hai)', udhar_suppliers:'Udhar Suppliers (Dena Hai)',
+    party_detail:'Party Detail', transactions:'Lain Dain', pay_full:'Pura',
+    current_balance:'Current Balance', lena_hai:'Lena Hai', dena_hai:'Dena Hai',
+    biz_total:'Kul Karobar', yaad_dilana:'Udhar Yaad Dilana',
+    ledger_title:'Hisab', lena_list:'Lena Wale', dena_list:'Dena Wale',
+    backup:'Backup', restore:'Restore', reset:'Sab Reset', shop_name:'Dukan ka Naam',
+    data_summary:'Data Summary', storage_used:'Storage', storage_warn:'Storage 80% bhar gaya! Backup lein.',
+    backup_download:'Download', backup_restore:'Backup File Upload',
+    backup_desc:'Saara data JSON file mein. Safe jagah rakhein.',
+    restore_desc:'Backup file upload karein. Purana data replace hoga.',
+    reset_desc:'Saara data delete ho jayega. Backup zaroor lein!',
+    backup_reminder:'Backup Reminder', never_backed_up:'Kabhi backup nahi liya',
+    days_ago_backup:'{n} din pehle backup liya tha', take_backup_today:'Aaj backup lein!',
+    recalc:'Recalculate Balances',
+    today:'Aaj', yesterday:'Kal',
+    report_bikri:'Bikri', report_khareed:'Khareed', report_net:'Net Munafa', report_kharcha:'Kharcha',
+    top_products:'Top Products', units:'units', hisab:'Hisab',
+    range_today:'Aaj', range_7d:'7 Din', range_30d:'30 Din', range_month:'Is Mahine', range_year:'Saal',
+    from:'Se', to:'Tak',
+    exp_bijli:'Bijli', exp_kiraya:'Kiraya', exp_transport:'Transport', exp_salary:'Salary',
+    exp_safai:'Safai', exp_khana:'Khana', exp_other:'Other',
+    today_exp:'Aaj', month_exp:'Is Mahine',
+    t_added:'Add ho gaya!', t_updated:'Update ho gaya!', t_deleted:'Delete ho gaya',
+    t_saved:'Save ho gaya!', t_name_required:'Naam zaroori hai', t_amount_invalid:'Amount sahi daalein',
+    t_add_items_first:'Pehle koi item add karein', t_paid_exceeds:'Paid total se zyada nahi ho sakta',
+    t_select_customer:'Udhar ke liye customer chunein', t_select_supplier:'Supplier chunein',
+    t_select_party:'Party chunein', t_party_required:'Pehle party chunein',
+    t_sale_saved:'Bikri save ho gayi! 🎉', t_purchase_saved:'Khareed save ho gayi! 🎉',
+    t_payment_saved:'Payment record ho gayi!', t_payment_too_much:'Baaki sirf {amt} hai. Phir bhi record karein?',
+    t_no_party:'Koi party baaki nahi', t_stock_only:'{name} ka stock sirf {n} hai',
+    t_photo_large:'Photo bohot bari hai (900KB se kam rakhein)',
+    t_storage_full:'Storage full! Backup lein.', t_backup_done:'Backup download ho gaya!',
+    t_restored:'Data restore ho gaya!', t_invalid_file:'File sahi nahi hai',
+    t_reset_done:'Sab data reset ho gaya', t_chrome_needed:'Chrome browser use karein',
+    t_listen_failed:'Sun nahi paya, dubara try karein', t_speaking:'Boliye...',
+    t_recalc_done:'Balances recalculate ho gaye!',
+    c_delete:'Delete Karein?', c_delete_product:'Ye product delete ho jayega.',
+    c_delete_party:'Saara record delete ho jayega.', c_delete_sale:'Sale delete ho jayegi aur stock wapas aayega.',
+    c_delete_purchase:'Khareed delete ho jayegi aur stock kam hoga.',
+    c_delete_expense:'Kharcha delete karein?',
+    c_reset:'SAARA data delete? Ye wapas nahi aayega!',
+    c_reset_confirm:'Aakhri confirm: Backup liya?',
+    c_restore:'Purana data replace ho jayega. Jari?',
+    c_extra_amount:'Zyada Amount?',
+    c_yes_do_it:'Haan, karo', c_no:'Nahi',
+    balance:'Baaki', current:'Current', items_word:'item', or:'ya',
+    categories:'Categories', category_analytics:'Category Analytics', cat_view:'Category View',
+    dead_stock:'Dead Stock', dead_stock_desc:'Ye items bohat din se nahi bike', days_idle:'din se nahi bika',
+    never_sold:'Kabhi nahi bika', last_sold:'Aakhri bikri', days:'din',
+    total_categories:'Kul Categories', total_items:'Kul Items', with_photo:'Photo Ke Saath',
+    without_photo:'Photo Ke Bagair', stock_qty:'Stock Qty', potential_profit:'Munafa',
+    no_categories:'Abhi koi category nahi', category_items:'Items',
+    monthly_pl:'Is Mahine ka Profit/Loss', this_month:'Is Mahine', last_month:'Pichle Mahine',
+    profit_earned:'Munafa Kamaya', loss_incurred:'Nuqsan Hua', break_even:'Barabar',
+    dead_stock_alert:'Dead Stock Alert', dead_stock_msg:'{n} items 30+ din se nahi bike',
+    view_dead:'Dead Stock Dekhein', no_dead_stock:'Sab items active hain 😊',
+    sort_by:'Sort', by_days:'Din se', by_value:'Value se', by_qty:'Qty se',
+    items_in_cat:'{n} items', photo_count:'{n} pic', no_photo:'Pic nahi',
+    total_stock_value:'Kul Stock Value', potential_revenue:'Bikri se aayega',
+    avg_days:'Avg Days', never_sold_count:'{n} items kabhi nahi bike',
+    box:'box', box_plus:'+',
+    monthly_summary:'Mahine Ka Hisab', this_month_summary:'Is Mahine Ka Khulasa',
+    prev_month:'Pichla Mahine', next_month:'Agla Mahine', full_report:'Puri Report Dekhein',
+    udhar_given:'Udhar Diya', udhar_taken:'Udhar Liya', month_sales:'Bikri', month_purchase:'Khareed',
+    month_expense:'Kharcha', month_net:'Net Munafa', month_count:'{n} sales is mahine',
+    unit:'Unit / Naap', unit_piece:'Piece', unit_kg:'Kilogram', unit_gram:'Gram',
+    unit_liter:'Liter', unit_ml:'Milliliter', unit_hint:'Kg/Liter select karne par sale/purchase mein size options aayenge',
+    size_picker_title:'Kitna chahiye?', base_rate:'Base rate', per_kg:'per kg', per_liter:'per Liter',
+    available_stock:'Available stock', custom_amount:'Custom amount', custom_hint:'e.g. 0.75 = 750g',
+    scan_manual:'Ya barcode manually likhein', scan_torch:'Torch', scan_zoom_in:'Zoom +', scan_zoom_out:'Zoom −',
+    scan_hint_strong:'Barcode ko frame ke andar rakhein • Achhi roshni mein scan karein', scan_retry:'Camera band ho gaya, dubara koshish karein'
+  },
+  en: {
+    home:'Home', stock:'Stock', sell:'Sell', buy:'Buy', ledger:'Ledger', udhar:'Credit',
+    todays_calc:"Today's Summary", todays_sale:"TODAY'S SALES", recv:'Receivable', pay:'Payable',
+    stock_val:'Stock Value', todays_exp:"Today's Expense", view_all:'View All',
+    received:'Received', paid:'Paid', exp:'Expense', recent_sales:'Recent Sales',
+    low_stock:'Low stock alert!', profit:'Profit', sales_count:'sales',
+    greeting_morning:'Good Morning', greeting_afternoon:'Good Afternoon', greeting_evening:'Good Evening',
+    customer:'Customer', supplier:'Supplier', products:'Products', customers:'Customers',
+    suppliers:'Suppliers', sales:'Sales', purchases:'Purchases', expenses:'Expenses',
+    payments:'Payments', items:'Items',
+    add:'Add', save:'Save', cancel:'Cancel', delete:'Delete', edit:'Edit', update:'Update',
+    yes:'Yes', no:'No', ok:'OK', full:'Full', call:'Call', view:'View',
+    name:'Name', phone:'Phone', address:'Address', amount:'Amount', date:'Date', notes:'Notes',
+    category:'Category', quantity:'Quantity', min_stock:'Min Stock', photo:'Photo (optional)',
+    khareed_price:'Purchase', bikri_price:'Sell', opening_balance:'Opening Balance',
+    opening_balance_hint:'To adjust old balance',
+    boxes:'Boxes', pieces_per_box:'Pieces/Box', total_qty:'Total Quantity', per_box:'/box', pcs:'pcs',
+    barcode:'Barcode', scan:'Scan', scan_barcode:'Scan Barcode', scan_now:'Scan with Camera',
+    scanning:'Scanning...', scan_hint:'Point camera directly at the barcode',
+    barcode_found:'Barcode found', barcode_not_found:'No product with this barcode',
+    add_with_barcode:'Add new product with this barcode?', camera_error:'Camera could not open',
+    camera_perm:'Grant camera permission and try again',
+    new_sale:'New Sale', new_purchase:'New Purchase', new_product:'New Product',
+    new_customer:'New Customer', new_supplier:'New Supplier', new_expense:'New Expense',
+    settings:'Settings', reports:'Reports',
+    search:'Search...', no_data:'No data', no_match:'Nothing found',
+    no_sales_yet:'No sales yet', no_purchases_yet:'No purchases yet',
+    cart_empty:'Cart is empty', no_product_yet:'No products yet',
+    no_receivable:'No receivables 😊', no_payable:'No payables 😊',
+    no_transactions:'No transactions', no_expenses:'No expenses yet',
+    total:'Total', paid_amt:'Paid', remaining:'Remaining', discount:'Discount', subtotal:'Subtotal',
+    item_add:'Add Item', save_sale:'Save Sale', save_purchase:'Save Purchase',
+    cart:'Cart', cash:'Cash', credit:'Credit', cash_sale:'Cash Sale', cash_customer:'Cash Customer',
+    sale_type:'Type', pick_product:'Select Product', select_party:'Select',
+    all:'All', out_of_stock:'Out', kitna_left:'Stock',
+    share_wa:'WhatsApp', print:'Print', receipt:'Receipt', bikri_receipt:'Sales Receipt',
+    bill_no:'Bill #', thanks:'Thank you! Come again 🙏', whatsapp_msg:'Thanks',
+    udhar_customers:'Credit Customers (Receivable)', udhar_suppliers:'Credit Suppliers (Payable)',
+    party_detail:'Party Detail', transactions:'Transactions', pay_full:'Full',
+    current_balance:'Current Balance', lena_hai:'Receivable', dena_hai:'Payable',
+    biz_total:'Total Business', yaad_dilana:'Payment Reminder',
+    ledger_title:'Ledger', lena_list:'Receivables', dena_list:'Payables',
+    backup:'Backup', restore:'Restore', reset:'Reset All', shop_name:'Shop Name',
+    data_summary:'Data Summary', storage_used:'Storage', storage_warn:'Storage 80% full! Please backup.',
+    backup_download:'Download', backup_restore:'Upload Backup File',
+    backup_desc:'All data as JSON file. Keep it safe.',
+    restore_desc:'Upload backup file. Old data will be replaced.',
+    reset_desc:'All data will be deleted. Please backup first!',
+    backup_reminder:'Backup Reminder', never_backed_up:'Never backed up',
+    days_ago_backup:'Last backup {n} days ago', take_backup_today:'Take backup today!',
+    recalc:'Recalculate Balances',
+    today:'Today', yesterday:'Yesterday',
+    report_bikri:'Sales', report_khareed:'Purchases', report_net:'Net Profit', report_kharcha:'Expense',
+    top_products:'Top Products', units:'units', hisab:'Summary',
+    range_today:'Today', range_7d:'7 Days', range_30d:'30 Days', range_month:'This Month', range_year:'Year',
+    from:'From', to:'To',
+    exp_bijli:'Electricity', exp_kiraya:'Rent', exp_transport:'Transport', exp_salary:'Salary',
+    exp_safai:'Maintenance', exp_khana:'Food', exp_other:'Other',
+    today_exp:'Today', month_exp:'This Month',
+    t_added:'Added!', t_updated:'Updated!', t_deleted:'Deleted',
+    t_saved:'Saved!', t_name_required:'Name is required', t_amount_invalid:'Enter valid amount',
+    t_add_items_first:'Add items first', t_paid_exceeds:'Paid cannot exceed total',
+    t_select_customer:'Select customer for credit', t_select_supplier:'Select supplier',
+    t_select_party:'Select party', t_party_required:'Select party first',
+    t_sale_saved:'Sale saved! 🎉', t_purchase_saved:'Purchase saved! 🎉',
+    t_payment_saved:'Payment recorded!', t_payment_too_much:'Only {amt} remaining. Record anyway?',
+    t_no_party:'No pending party', t_stock_only:'{name} only has {n} in stock',
+    t_photo_large:'Photo too large (keep under 900KB)',
+    t_storage_full:'Storage full! Please backup.', t_backup_done:'Backup downloaded!',
+    t_restored:'Data restored!', t_invalid_file:'Invalid file',
+    t_reset_done:'All data reset', t_chrome_needed:'Please use Chrome browser',
+    t_listen_failed:"Couldn't hear, try again", t_speaking:'Speak now...',
+    t_recalc_done:'Balances recalculated!',
+    c_delete:'Delete?', c_delete_product:'This product will be deleted.',
+    c_delete_party:'All record will be deleted.', c_delete_sale:'Sale will be deleted and stock restored.',
+    c_delete_purchase:'Purchase will be deleted and stock reduced.',
+    c_delete_expense:'Delete this expense?',
+    c_reset:'DELETE ALL data? This cannot be undone!',
+    c_reset_confirm:'Final confirm: Backup taken?',
+    c_restore:'Old data will be replaced. Continue?',
+    c_extra_amount:'Amount Too High?',
+    c_yes_do_it:'Yes, do it', c_no:'No',
+    balance:'Balance', current:'Current', items_word:'item', or:'or',
+    categories:'Categories', category_analytics:'Category Analytics', cat_view:'Category View',
+    dead_stock:'Dead Stock', dead_stock_desc:'Items not sold for many days', days_idle:'days idle',
+    never_sold:'Never sold', last_sold:'Last sold', days:'days',
+    total_categories:'Total Categories', total_items:'Total Items', with_photo:'With Photo',
+    without_photo:'Without Photo', stock_qty:'Stock Qty', potential_profit:'Profit',
+    no_categories:'No categories yet', category_items:'Items',
+    monthly_pl:'Monthly Profit/Loss', this_month:'This Month', last_month:'Last Month',
+    profit_earned:'Profit Earned', loss_incurred:'Loss Incurred', break_even:'Break Even',
+    dead_stock_alert:'Dead Stock Alert', dead_stock_msg:'{n} items not sold in 30+ days',
+    view_dead:'View Dead Stock', no_dead_stock:'All items active 😊',
+    sort_by:'Sort', by_days:'By days', by_value:'By value', by_qty:'By qty',
+    items_in_cat:'{n} items', photo_count:'{n} pic', no_photo:'No pic',
+    total_stock_value:'Total Stock Value', potential_revenue:'Revenue potential',
+    avg_days:'Avg Days', never_sold_count:'{n} never sold',
+    box:'box', box_plus:'+',
+    monthly_summary:'Monthly Summary', this_month_summary:'Monthly Overview',
+    prev_month:'Previous Month', next_month:'Next Month', full_report:'View Full Report',
+    udhar_given:'Credit Given', udhar_taken:'Credit Taken', month_sales:'Sales', month_purchase:'Purchases',
+    month_expense:'Expenses', month_net:'Net Profit', month_count:'{n} sales this month',
+    unit:'Unit / Size', unit_piece:'Piece', unit_kg:'Kilogram', unit_gram:'Gram',
+    unit_liter:'Liter', unit_ml:'Milliliter', unit_hint:'Select Kg/Liter to get size options (250g, 500g, 1kg) in sale/purchase',
+    size_picker_title:'How much do you want?', base_rate:'Base rate', per_kg:'per kg', per_liter:'per Liter',
+    available_stock:'Available stock', custom_amount:'Custom amount', custom_hint:'e.g. 0.75 = 750g',
+    scan_manual:'Or type barcode manually', scan_torch:'Torch', scan_zoom_in:'Zoom +', scan_zoom_out:'Zoom −',
+    scan_hint_strong:'Keep barcode inside frame • Scan in good light', scan_retry:'Camera closed, please try again'
+  },
+  ur: {
+    home:'ہوم', stock:'اسٹاک', sell:'بیچیں', buy:'خریدیں', ledger:'حساب', udhar:'اُدھار',
+    todays_calc:'آج کا حساب', todays_sale:'آج کی بِکری', recv:'لینا ہے', pay:'دینا ہے',
+    stock_val:'اسٹاک ویلیو', todays_exp:'آج کا خرچہ', view_all:'سب دیکھیں',
+    received:'پیسہ لیا', paid:'پیسہ دیا', exp:'خرچہ', recent_sales:'حالیہ بِکری',
+    low_stock:'اسٹاک ختم ہو رہا ہے!', profit:'منافع', sales_count:'بِکریاں',
+    greeting_morning:'السلام علیکم', greeting_afternoon:'نیک دن', greeting_evening:'نیک شام',
+    customer:'گاہک', supplier:'سپلائر', products:'پروڈکٹس', customers:'گاہک',
+    suppliers:'سپلائرز', sales:'بِکریاں', purchases:'خریداری', expenses:'اخراجات',
+    payments:'ادائیگیاں', items:'اشیاء',
+    add:'شامل کریں', save:'محفوظ کریں', cancel:'منسوخ', delete:'حذف کریں', edit:'تبدیلی', update:'اپ ڈیٹ',
+    yes:'ہاں', no:'نہیں', ok:'ٹھیک ہے', full:'پورا', call:'کال', view:'دیکھیں',
+    name:'نام', phone:'فون', address:'پتہ', amount:'رقم', date:'تاریخ', notes:'نوٹس',
+    category:'قسم', quantity:'تعداد', min_stock:'کم از کم', photo:'تصویر (اختیاری)',
+    khareed_price:'خرید', bikri_price:'بِکری', opening_balance:'ابتدائی بیلنس',
+    opening_balance_hint:'پرانے حساب کو ایڈجسٹ کرنے کے لیے',
+    boxes:'بکس', pieces_per_box:'فی بکس', total_qty:'کل تعداد', per_box:'/بکس', pcs:'عدد',
+    barcode:'بارکوڈ', scan:'اسکین', scan_barcode:'بارکوڈ اسکین کریں', scan_now:'کیمرے سے اسکین',
+    scanning:'اسکین ہو رہا ہے...', scan_hint:'کیمرے کو سیدھا بارکوڈ پر رکھیں',
+    barcode_found:'بارکوڈ مل گیا', barcode_not_found:'اس بارکوڈ کا پروڈکٹ نہیں ملا',
+    add_with_barcode:'اس بارکوڈ سے نیا پروڈکٹ شامل کریں؟', camera_error:'کیمرہ نہیں کھل سکا',
+    camera_perm:'کیمرے کی اجازت دیں اور دوبارہ کوشش کریں',
+    new_sale:'نئی بِکری', new_purchase:'نئی خریداری', new_product:'نیا پروڈکٹ',
+    new_customer:'نیا گاہک', new_supplier:'نیا سپلائر', new_expense:'نیا خرچہ',
+    settings:'سیٹنگز', reports:'رپورٹس',
+    search:'ڈھونڈیں...', no_data:'کوئی ڈیٹا نہیں', no_match:'کچھ نہیں ملا',
+    no_sales_yet:'ابھی کوئی بِکری نہیں', no_purchases_yet:'ابھی کوئی خریداری نہیں',
+    cart_empty:'ٹوکری خالی ہے', no_product_yet:'ابھی کوئی پروڈکٹ نہیں',
+    no_receivable:'کسی سے لینا نہیں 😊', no_payable:'کسی کو دینا نہیں 😊',
+    no_transactions:'کوئی لین دین نہیں', no_expenses:'ابھی کوئی خرچہ نہیں',
+    total:'کل', paid_amt:'ادا شدہ', remaining:'باقی', discount:'رعایت', subtotal:'ذیلی میزان',
+    item_add:'آئٹم شامل کریں', save_sale:'بِکری محفوظ کریں', save_purchase:'خریداری محفوظ کریں',
+    cart:'ٹوکری', cash:'نقد', credit:'اُدھار', cash_sale:'نقد بِکری', cash_customer:'نقد گاہک',
+    sale_type:'قسم', pick_product:'پروڈکٹ چنیں', select_party:'چنیں',
+    all:'سب', out_of_stock:'ختم', kitna_left:'اسٹاک',
+    share_wa:'واٹس ایپ', print:'پرنٹ', receipt:'رسید', bikri_receipt:'بِکری رسید',
+    bill_no:'بل نمبر', thanks:'شکریہ! دوبارہ تشریف لائیں 🙏', whatsapp_msg:'شکریہ',
+    udhar_customers:'اُدھار گاہک (لینا ہے)', udhar_suppliers:'اُدھار سپلائر (دینا ہے)',
+    party_detail:'پارٹی تفصیل', transactions:'لین دین', pay_full:'پورا',
+    current_balance:'موجودہ بیلنس', lena_hai:'لینا ہے', dena_hai:'دینا ہے',
+    biz_total:'کل کاروبار', yaad_dilana:'اُدھار یاد دلائیں',
+    ledger_title:'حساب', lena_list:'لینے والے', dena_list:'دینے والے',
+    backup:'بیک اپ', restore:'ری سٹور', reset:'سب ری سیٹ', shop_name:'دکان کا نام',
+    data_summary:'ڈیٹا کا خلاصہ', storage_used:'اسٹوریج', storage_warn:'اسٹوریج 80% بھر گیا! بیک اپ لیں۔',
+    backup_download:'ڈاؤن لوڈ', backup_restore:'بیک اپ فائل اپلوڈ کریں',
+    backup_desc:'سارا ڈیٹا JSON فائل میں۔ محفوظ جگہ رکھیں۔',
+    restore_desc:'بیک اپ فائل اپلوڈ کریں۔ پرانا ڈیٹا بدل جائے گا۔',
+    reset_desc:'سارا ڈیٹا حذف ہو جائے گا۔ پہلے بیک اپ ضرور لیں!',
+    backup_reminder:'بیک اپ یاد دہانی', never_backed_up:'کبھی بیک اپ نہیں لیا',
+    days_ago_backup:'{n} دن پہلے بیک اپ لیا تھا', take_backup_today:'آج بیک اپ لیں!',
+    recalc:'بیلنس دوبارہ حساب کریں',
+    today:'آج', yesterday:'کل',
+    report_bikri:'بِکری', report_khareed:'خریداری', report_net:'خالص منافع', report_kharcha:'خرچہ',
+    top_products:'بہترین پروڈکٹس', units:'عدد', hisab:'حساب',
+    range_today:'آج', range_7d:'7 دن', range_30d:'30 دن', range_month:'اس مہینے', range_year:'سال',
+    from:'سے', to:'تک',
+    exp_bijli:'بجلی', exp_kiraya:'کرایہ', exp_transport:'ٹرانسپورٹ', exp_salary:'تنخواہ',
+    exp_safai:'صفائی', exp_khana:'کھانا', exp_other:'دیگر',
+    today_exp:'آج', month_exp:'اس مہینے',
+    t_added:'شامل ہو گیا!', t_updated:'اپ ڈیٹ ہو گیا!', t_deleted:'حذف ہو گیا',
+    t_saved:'محفوظ ہو گیا!', t_name_required:'نام ضروری ہے', t_amount_invalid:'صحیح رقم درج کریں',
+    t_add_items_first:'پہلے کوئی آئٹم شامل کریں', t_paid_exceeds:'ادا شدہ کل سے زیادہ نہیں ہو سکتی',
+    t_select_customer:'اُدھار کے لیے گاہک چنیں', t_select_supplier:'سپلائر چنیں',
+    t_select_party:'پارٹی چنیں', t_party_required:'پہلے پارٹی چنیں',
+    t_sale_saved:'بِکری محفوظ ہو گئی! 🎉', t_purchase_saved:'خریداری محفوظ ہو گئی! 🎉',
+    t_payment_saved:'ادائیگی ریکارڈ ہو گئی!', t_payment_too_much:'باقی صرف {amt} ہے۔ پھر بھی ریکارڈ کریں؟',
+    t_no_party:'کوئی پارٹی باقی نہیں', t_stock_only:'{name} کا اسٹاک صرف {n} ہے',
+    t_photo_large:'تصویر بہت بڑی ہے (900KB سے کم رکھیں)',
+    t_storage_full:'اسٹوریج بھر گیا! بیک اپ لیں۔', t_backup_done:'بیک اپ ڈاؤن لوڈ ہو گیا!',
+    t_restored:'ڈیٹا بحال ہو گیا!', t_invalid_file:'فائل غلط ہے',
+    t_reset_done:'سارا ڈیٹا ری سیٹ ہو گیا', t_chrome_needed:'کروم براؤزر استعمال کریں',
+    t_listen_failed:'سن نہیں سکا، دوبارہ کوشش کریں', t_speaking:'بولیے...',
+    t_recalc_done:'بیلنس دوبارہ حساب ہو گئے!',
+    c_delete:'حذف کریں؟', c_delete_product:'یہ پروڈکٹ حذف ہو جائے گا۔',
+    c_delete_party:'سارا ریکارڈ حذف ہو جائے گا۔', c_delete_sale:'بِکری حذف ہو جائے گی اور اسٹاک واپس آئے گا۔',
+    c_delete_purchase:'خریداری حذف ہو جائے گی اور اسٹاک کم ہو گا۔',
+    c_delete_expense:'یہ خرچہ حذف کریں؟',
+    c_reset:'سارا ڈیٹا حذف؟ یہ واپس نہیں آئے گا!',
+    c_reset_confirm:'آخری تصدیق: بیک اپ لیا؟',
+    c_restore:'پرانا ڈیٹا بدل جائے گا۔ جاری رکھیں؟',
+    c_extra_amount:'زیادہ رقم؟',
+    c_yes_do_it:'ہاں، کریں', c_no:'نہیں',
+    balance:'بیلنس', current:'موجودہ', items_word:'آئٹم', or:'یا',
+    categories:'اقسام', category_analytics:'اقسام کا تجزیہ', cat_view:'اقسام دیکھیں',
+    dead_stock:'باسی اسٹاک', dead_stock_desc:'یہ آئٹمز کافی دنوں سے نہیں بکے', days_idle:'دن سے نہیں بکا',
+    never_sold:'کبھی نہیں بکا', last_sold:'آخری بِکری', days:'دن',
+    total_categories:'کل اقسام', total_items:'کل آئٹمز', with_photo:'تصویر کے ساتھ',
+    without_photo:'تصویر کے بغیر', stock_qty:'اسٹاک تعداد', potential_profit:'منافع',
+    no_categories:'ابھی کوئی قسم نہیں', category_items:'آئٹمز',
+    monthly_pl:'اس مہینے کا منافع/نقصان', this_month:'اس مہینے', last_month:'پچھلے مہینے',
+    profit_earned:'منافع کمایا', loss_incurred:'نقصان ہوا', break_even:'برابر',
+    dead_stock_alert:'باسی اسٹاک الرٹ', dead_stock_msg:'{n} آئٹمز 30+ دن سے نہیں بکے',
+    view_dead:'باسی اسٹاک دیکھیں', no_dead_stock:'تمام آئٹمز فعال ہیں 😊',
+    sort_by:'ترتیب', by_days:'دن سے', by_value:'قیمت سے', by_qty:'تعداد سے',
+    items_in_cat:'{n} آئٹمز', photo_count:'{n} تصویر', no_photo:'تصویر نہیں',
+    total_stock_value:'کل اسٹاک ویلیو', potential_revenue:'بِکری سے آئے گا',
+    avg_days:'اوسط دن', never_sold_count:'{n} کبھی نہیں بکے',
+    box:'بکس', box_plus:'+',
+    monthly_summary:'مہینے کا حساب', this_month_summary:'اس مہینے کا خلاصہ',
+    prev_month:'پچھلا مہینہ', next_month:'اگلا مہینہ', full_report:'پوری رپورٹ دیکھیں',
+    udhar_given:'اُدھار دیا', udhar_taken:'اُدھار لیا', month_sales:'بِکری', month_purchase:'خریداری',
+    month_expense:'خرچہ', month_net:'خالص منافع', month_count:'{n} بِکریاں اس مہینے',
+    unit:'یونٹ / ناپ', unit_piece:'عدد', unit_kg:'کلوگرام', unit_gram:'گرام',
+    unit_liter:'لیٹر', unit_ml:'ملی لیٹر', unit_hint:'کلوگرام یا لیٹر منتخب کرنے پر بِکری/خریداری میں سائز کے آپشن (250 گرام، 500 گرام، 1 کلو) آئیں گے',
+    size_picker_title:'کتنا چاہیے؟', base_rate:'بنیادی ریٹ', per_kg:'فی کلو', per_liter:'فی لیٹر',
+    available_stock:'دستیاب اسٹاک', custom_amount:'اپنی مرضی کی مقدار', custom_hint:'مثلاً 0.75 = 750 گرام',
+    scan_manual:'یا بارکوڈ خود لکھیں', scan_torch:'ٹارچ', scan_zoom_in:'زوم +', scan_zoom_out:'زوم −',
+    scan_hint_strong:'بارکوڈ کو فریم کے اندر رکھیں • اچھی روشنی میں اسکین کریں', scan_retry:'کیمرہ بند ہو گیا، دوبارہ کوشش کریں'
+  }
+};
+
+function t(k, vars){
+  let s = (STR[LANG] && STR[LANG][k]) ?? (STR.en[k]) ?? k;
+  if(vars) Object.keys(vars).forEach(v => { s = s.replace(new RegExp('\\{'+v+'\\}','g'), vars[v]); });
+  return s;
+}
+
+function applyLang(){
+  const htmlEl = document.getElementById('htmlRoot');
+  htmlEl.lang = LANG === 'ur' ? 'ur' : 'en';
+  htmlEl.dir = LANG === 'ur' ? 'rtl' : 'ltr';
+  document.getElementById('langBtn').textContent = LANG.toUpperCase();
+  document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t(el.dataset.t); });
+  go(currentPage, pageParams);
+}
+
+function setLang(l){
+  LANG = l; localStorage.setItem('cd_lang', l);
+  closeSheet(); applyLang(); toast(t('t_saved'), 'success');
+}
+
+function openLangMenu(){
+  openSheet(`
+    <div class="grab"></div>
+    <div class="sheet-head"><h5><i class="fas fa-globe" style="color:var(--primary)"></i> Language / زبان</h5><button onclick="closeSheet()"><i class="fas fa-times"></i></button></div>
+    <div class="sheet-body">
+      <div class="lang-menu">
+        <button class="${LANG==='ru'?'active':''}" onclick="setLang('ru')"><span class="flag">🇵🇰</span><div><div>Roman Urdu</div><small style="color:var(--muted);font-weight:600">Bech, Khareed, Hisab</small></div></button>
+        <button class="${LANG==='en'?'active':''}" onclick="setLang('en')"><span class="flag">🇬🇧</span><div><div>English</div><small style="color:var(--muted);font-weight:600">Sell, Buy, Ledger</small></div></button>
+        <button class="${LANG==='ur'?'active':''}" onclick="setLang('ur')"><span class="flag">🇵🇰</span><div><div style="font-family:'Noto Nastaliq Urdu'">اردو</div><small style="color:var(--muted);font-weight:600">بیچیں، خریدیں، حساب</small></div></button>
+      </div>
+    </div>
+  `);
+}
+
+/* ============================================================
+   DATA LAYER
+============================================================ */
+const DB = {
+  get(k,d=[]){ try{ const v=localStorage.getItem('cd_'+k); return v?JSON.parse(v):d; }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem('cd_'+k, JSON.stringify(v)); }catch(e){ toast(t('t_storage_full'), 'danger'); } },
+  nextId(k){ const a=DB.get(k); return a.reduce((m,x)=>Math.max(m,x.id||0),0)+1; },
+  calcBalance(type, id){
+    const key = type==='customer' ? 'customers' : 'suppliers';
+    const p = DB.get(key).find(x=>x.id===id);
+    if(!p) return 0;
+    const opening = +p.opening_balance || 0;
+    let bal = opening;
+    if(type==='customer'){
+      DB.get('sales').filter(s=>s.customer_id===id).forEach(s=>{ bal += (+s.remaining||0); });
+      DB.get('payments').filter(x=>x.type==='customer'&&x.party_id===id).forEach(x=>{ bal -= (+x.amount||0); });
+    } else {
+      DB.get('purchases').filter(s=>s.supplier_id===id).forEach(s=>{ bal += (+s.remaining||0); });
+      DB.get('payments').filter(x=>x.type==='supplier'&&x.party_id===id).forEach(x=>{ bal -= (+x.amount||0); });
+    }
+    return Math.max(0, bal);
+  },
+  recalcAll(){
+    const customers = DB.get('customers');
+    customers.forEach(c => { c.balance = DB.calcBalance('customer', c.id); });
+    DB.set('customers', customers);
+    const suppliers = DB.get('suppliers');
+    suppliers.forEach(s => { s.balance = DB.calcBalance('supplier', s.id); });
+    DB.set('suppliers', suppliers);
+  },
+  usage(){ return new Blob([JSON.stringify(localStorage)]).size; }
+};
+
+/* ============================================================
+   HELPERS
+============================================================ */
+const fmt = n => 'Rs ' + Number(n||0).toLocaleString('en-PK',{maximumFractionDigits:2});
+const fmtN = n => Number(n||0).toLocaleString('en-PK',{maximumFractionDigits:2});
+const today = () => { const d=new Date(); return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10); };
+const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const initials = s => (s||'?').trim().split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase();
+const avatarColor = s => { const c=['#4f46e5','#0891b2','#16a34a','#f59e0b','#dc2626','#7c3aed','#db2777','#0d9488']; let h=0; for(const ch of String(s||'')) h=(h*31+ch.charCodeAt(0))%997; return c[h%c.length]; };
+const dateFmt = d => { if(!d) return ''; return new Date(d+'T00:00:00').toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}); };
+const shortDate = d => {
+  if(!d) return '';
+  const dt=new Date(d+'T00:00:00'); const t2=new Date(); t2.setHours(0,0,0,0);
+  const diff=Math.round((t2-dt)/86400000);
+  if(diff===0) return t('today');
+  if(diff===1) return t('yesterday');
+  return dt.toLocaleDateString('en-GB',{day:'2-digit',month:'short'});
+};
+function daysSince(d){
+  if(!d) return Infinity;
+  const dt = new Date(d + 'T00:00:00');
+  const now = new Date(); now.setHours(0,0,0,0);
+  return Math.floor((now - dt) / 86400000);
+}
+function recalcBoxes(p){
+  const ppb = +p.pieces_per_box || 0;
+  if(ppb >= 1 && (+p.quantity||0) >= 0){
+    p.boxes = Math.floor((+p.quantity||0) / ppb);
+  }
+}
+function boxDisplayText(p){
+  const ppb = +p.pieces_per_box || 0;
+  const qty = +p.quantity || 0;
+  if(ppb <= 1 || qty <= 0) return '';
+  const fullBoxes = Math.floor(qty / ppb);
+  const rem = qty % ppb;
+  const boxWord = t('box');
+  let s = `<i class="fas fa-box"></i> ${fullBoxes} ${boxWord}`;
+  if(rem > 0) s += ` + ${rem} ${t('pcs')}`;
+  s += ` (${qty} ${t('pcs')})`;
+  return s;
+}
+function unitDisplay(p){
+  const u = p.unit || 'piece';
+  if(u === 'piece') return '';
+  const icons = {kg:'⚖️', gram:'⚖️', liter:'🧴', ml:'🧴'};
+  const labels = {kg:'kg', gram:'g', liter:'L', ml:'ml'};
+  return ` ${icons[u]||''}${labels[u]||u}`;
+}
+function unitBadge(p){
+  const u = (p && p.unit) || 'piece';
+  const map = {
+    piece: {icon:'🔢', label: LANG==='ur' ? 'عدد' : (LANG==='ru' ? 'Pcs' : 'Piece'), color:'#64748b'},
+    kg:    {icon:'⚖️', label:'Kg',    color:'#0891b2'},
+    gram:  {icon:'⚖️', label:'Gram',  color:'#0891b2'},
+    liter: {icon:'🧴', label:'Liter', color:'#7c3aed'},
+    ml:    {icon:'🧴', label:'ml',    color:'#7c3aed'}
+  };
+  const m = map[u] || map.piece;
+  return `<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:8px;background:${m.color}22;color:${m.color};font-size:.66rem;font-weight:800;white-space:nowrap;line-height:1.2;border:1px solid ${m.color}44">${m.icon} ${m.label}</span>`;
+}
+function getLastSold(productId){
+  const sales = DB.get('sales');
+  let last = null;
+  sales.forEach(s => {
+    if((s.items||[]).some(it => it.product_id === productId)){
+      if(!last || s.sale_date > last) last = s.sale_date;
+    }
+  });
+  return last;
+}
+function getTotalSold(productId){
+  let qty = 0;
+  DB.get('sales').forEach(s => {
+    (s.items||[]).forEach(it => {
+      if(it.product_id === productId) qty += +it.quantity || 0;
+    });
+  });
+  return qty;
+}
+function getCategoryStats(){
+  const products = DB.get('products');
+  const map = {};
+  products.forEach(p => {
+    const cat = (p.category || '').trim() || '—';
+    if(!map[cat]) map[cat] = { name: cat, count: 0, qty: 0, withPhoto: 0, stockValue: 0, saleValue: 0, profit: 0, items: [] };
+    const c = map[cat];
+    c.count++;
+    c.qty += +p.quantity || 0;
+    if(p.photo) c.withPhoto++;
+    c.stockValue += (+p.quantity||0) * (+p.purchase_price||0);
+    c.saleValue += (+p.quantity||0) * (+p.sale_price||0);
+    c.profit += (+p.quantity||0) * ((+p.sale_price||0) - (+p.purchase_price||0));
+    c.items.push(p);
+  });
+  return Object.values(map).sort((a,b)=> b.stockValue - a.stockValue);
+}
+function getDeadStock(minDays = 30){
+  const products = DB.get('products');
+  return products.map(p => {
+    const last = getLastSold(p.id);
+    const days = last ? daysSince(last) : Infinity;
+    return { ...p, last_sold: last, days_idle: days, total_sold: getTotalSold(p.id), stockValue: (+p.quantity||0)*(+p.purchase_price||0) };
+  }).filter(p => {
+    if((+p.quantity||0) <= 0) return false;
+    return p.days_idle >= minDays;
+  }).sort((a,b) => (b.days_idle === Infinity ? 99999 : b.days_idle) - (a.days_idle === Infinity ? 99999 : a.days_idle));
+}
+function getMonthPL(monthStr){
+  const sales = DB.get('sales').filter(s => (s.sale_date||'').slice(0,7) === monthStr);
+  const expenses = DB.get('expenses').filter(e => (e.expense_date||'').slice(0,7) === monthStr);
+  const purchases = DB.get('purchases').filter(p => (p.purchase_date||'').slice(0,7) === monthStr);
+  const totSale = sales.reduce((a,s)=>a+(+s.total_amount||0),0);
+  const totProfit = sales.reduce((a,s)=>a+(+s.profit||0),0);
+  const totExp = expenses.reduce((a,e)=>a+(+e.amount||0),0);
+  const totPur = purchases.reduce((a,p)=>a+(+p.total_amount||0),0);
+  const netProfit = totProfit - totExp;
+  return { totSale, totProfit, totExp, totPur, netProfit, salesCount: sales.length };
+}
+function getMonthlySummary(monthStr){
+  const sales = DB.get('sales').filter(s => (s.sale_date||'').slice(0,7) === monthStr);
+  const purchases = DB.get('purchases').filter(p => (p.purchase_date||'').slice(0,7) === monthStr);
+  const expenses = DB.get('expenses').filter(e => (e.expense_date||'').slice(0,7) === monthStr);
+  const totSale = sales.reduce((a,s)=>a+(+s.total_amount||0),0);
+  const totProfit = sales.reduce((a,s)=>a+(+s.profit||0),0);
+  const totPur = purchases.reduce((a,p)=>a+(+p.total_amount||0),0);
+  const totExp = expenses.reduce((a,e)=>a+(+e.amount||0),0);
+  const udharGiven = sales.reduce((a,s)=>a+(+s.remaining||0),0);
+  const udharTaken = purchases.reduce((a,p)=>a+(+p.remaining||0),0);
+  const netProfit = totProfit - totExp;
+  return { totSale, totProfit, totPur, totExp, udharGiven, udharTaken, netProfit, salesCount: sales.length };
+}
+function monthLabel(m){
+  const [y, mo] = m.split('-');
+  const dt = new Date(parseInt(y), parseInt(mo)-1, 1);
+  const locale = LANG === 'ur' ? 'ur-PK' : 'en-GB';
+  return dt.toLocaleDateString(locale, { month: 'short', year: 'numeric' });
+}
+function shiftMonth(m, delta){
+  const [y, mo] = m.split('-').map(Number);
+  const d = new Date(y, mo-1+delta, 1);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+}
+function monthIsFuture(m){ return m > today().slice(0,7); }
+
+/* ============================================================
+   TOAST + SHEET + CONFIRM
+============================================================ */
+function toast(msg, type='success'){
+  const icons={success:'fa-circle-check',danger:'fa-circle-xmark',warning:'fa-triangle-exclamation',info:'fa-circle-info'};
+  const el=document.createElement('div');
+  el.className='toast-x '+type;
+  el.innerHTML=`<i class="fas ${icons[type]||icons.success}"></i><span>${esc(msg)}</span>`;
+  document.getElementById('toastBox').appendChild(el);
+  setTimeout(()=>{ el.style.transition='.3s'; el.style.opacity='0'; el.style.transform='translateY(-12px)'; setTimeout(()=>el.remove(),320); },2400);
+}
+function openSheet(html){ const s=document.getElementById('sheet'); s.innerHTML=html; document.getElementById('backdrop').classList.add('open'); requestAnimationFrame(()=>s.classList.add('open')); }
+function closeSheet(){ const s=document.getElementById('sheet'); s.classList.remove('open'); document.getElementById('backdrop').classList.remove('open'); }
+function confirmBox(msg, onOk, opts={}){
+  openSheet(`<div class="grab"></div><div style="padding:26px 22px 22px;text-align:center">
+    <div style="width:66px;height:66px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;background:${opts.danger?'color-mix(in srgb,#dc2626 15%,transparent)':'color-mix(in srgb,#f59e0b 18%,transparent)'}">
+      <i class="fas fa-exclamation-triangle" style="font-size:1.7rem;color:${opts.danger?'#dc2626':'#f59e0b'}"></i></div>
+    <h5 style="font-weight:800;margin-bottom:6px">${esc(opts.title||t('c_delete'))}</h5>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:22px">${esc(msg)}</p>
+    <div style="display:flex;gap:10px">
+      <button class="btn-x btn-soft" onclick="closeSheet()">${t('c_no')}</button>
+      <button class="btn-x ${opts.danger?'bg-d':'bg-p'}" id="cfmOk">${t('c_yes_do_it')}</button>
+    </div></div>`);
+  document.getElementById('cfmOk').onclick=()=>{ closeSheet(); onOk(); };
+}
+function startVoice(id){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR) return toast(t('t_chrome_needed'),'warning');
+  const rec=new SR(); rec.lang=LANG==='en'?'en-US':'ur-PK'; rec.continuous=false; rec.interimResults=false;
+  rec.onstart=()=>toast(t('t_speaking'),'info');
+  rec.onresult=e=>{ const el=document.getElementById(id); if(el) el.value=e.results[0][0].transcript; };
+  rec.onerror=()=>toast(t('t_listen_failed'),'danger');
+  rec.start();
+}
+function toggleTheme(){
+  const cur=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',cur);
+  localStorage.setItem('cd_theme',cur);
+  document.getElementById('themeBtn').innerHTML=cur==='dark'?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
+  if(currentPage==='reports') drawChart();
+}
+(function initTheme(){
+  const th=localStorage.getItem('cd_theme')||'light';
+  document.documentElement.setAttribute('data-theme',th);
+  setTimeout(()=>{ const b=document.getElementById('themeBtn'); if(b) b.innerHTML=th==='dark'?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>'; },0);
+})();
+
+/* ============================================================
+   📷 BARCODE SCANNER — FIXED
+============================================================ */
+let scannerInstance = null;
+let scannerTorchOn = false;
+let scannerZoomLevel = 1;
+let scannerLastCode = '';
+let scannerLastTime = 0;
+let scannerCallback = null;
+let scannerStarting = false;
+
+function openScanner(onResult, opts){
+  opts = opts || {};
+  if(typeof Html5Qrcode === 'undefined'){
+    return toast('Scanner library load nahi hui. Internet check karein.', 'danger');
+  }
+  if(scannerInstance || scannerStarting){ return; }
+
+  scannerCallback = onResult || null;
+  scannerTorchOn = false;
+  scannerZoomLevel = 1;
+  scannerLastCode = '';
+  scannerLastTime = 0;
+  scannerStarting = true;
+
+  openSheet(`
+    <div class="grab"></div>
+    <div class="sheet-head">
+      <h5><i class="fas fa-camera" style="color:var(--warning)"></i> ${t('scan_barcode')}</h5>
+      <button onclick="closeScanner()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="sheet-body no-pad">
+      <div style="padding:12px 16px 0">
+        <div class="scanner-box" id="scannerBox">
+          <div id="qrReader"></div>
+          <div class="scan-line"></div>
+          <div class="scan-corner tl"></div>
+          <div class="scan-corner tr"></div>
+          <div class="scan-corner bl"></div>
+          <div class="scan-corner br"></div>
+        </div>
+      </div>
+      <div style="padding:10px 16px 6px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap">
+        <button id="torchBtn" class="scan-ctrl-btn" onclick="toggleScannerTorch()" style="display:none"><i class="fas fa-lightbulb"></i> ${t('scan_torch')}</button>
+        <button id="zoomInBtn" class="scan-ctrl-btn" onclick="zoomScanner(1)" style="display:none"><i class="fas fa-search-plus"></i> ${t('scan_zoom_in')}</button>
+        <button id="zoomOutBtn" class="scan-ctrl-btn" onclick="zoomScanner(-1)" style="display:none"><i class="fas fa-search-minus"></i> ${t('scan_zoom_out')}</button>
+      </div>
+      <div id="scanStatus" style="padding:6px 16px 10px;text-align:center;color:var(--muted);font-weight:600;font-size:.82rem">
+        <i class="fas fa-spinner fa-spin"></i> Camera khul raha hai...
+      </div>
+      <div style="padding:0 16px 8px">
+        <div style="display:flex;gap:6px">
+          <input class="form-control" id="manualBarcode" placeholder="${t('scan_manual')}" autocomplete="off" style="font-size:.9rem">
+          <button class="back-btn" style="background:var(--success);color:#fff;flex-shrink:0" onclick="submitManualBarcode()"><i class="fas fa-check"></i></button>
+        </div>
+      </div>
+      <div style="padding:8px 16px 16px">
+        <button class="btn-x btn-soft" onclick="closeScanner()">${t('cancel')}</button>
+      </div>
+    </div>
+  `);
+
+  setTimeout(() => startScannerCamera(), 500);
+}
+
+async function startScannerCamera(){
+  if(!scannerStarting) return;
+  if(!document.getElementById('qrReader')){ scannerStarting = false; return; }
+  if(scannerInstance){ scannerStarting = false; return; }
+
+  const setStatus = (html) => {
+    const st = document.getElementById('scanStatus');
+    if(st) st.innerHTML = html;
+  };
+
+  // HTTPS check
+  const isSecure = (location.protocol === 'https:') || (location.hostname === 'localhost') || (location.hostname === '127.0.0.1');
+  if(!isSecure){
+    setStatus(`<span style="color:var(--danger);font-weight:700"><i class="fas fa-lock"></i> HTTPS zaroori hai</span><br>
+      <span style="font-size:.78rem;font-weight:600;color:var(--muted)">Camera sirf HTTPS ya localhost par chalta hai. Aap abhi <b>${location.protocol}//</b> se khol rahe ho. Manually barcode likh sakte ho.</span>`);
+    scannerStarting = false;
+    return;
+  }
+
+  try {
+    // Step 1: Kameras list karo - isse permission prompt trigger hoti hai
+    let cameras = [];
+    try {
+      cameras = await Html5Qrcode.getCameras();
+    } catch(permErr){
+      scannerStarting = false;
+      const name = (permErr && permErr.name) || '';
+      const msg = (permErr && permErr.message) || String(permErr);
+      let hint = 'Browser settings me camera ki permission dein.';
+      if(name === 'NotAllowedError') hint = 'Aapne camera ki permission block ki hai. URL bar me lock icon dabao → Camera → Allow karo.';
+      else if(name === 'NotFoundError') hint = 'Is device me koi camera nahi mila.';
+      else if(name === 'NotReadableError') hint = 'Camera kisi aur app (WhatsApp, Camera app) ne use kiya hua hai. Wo band karke dobara try karo.';
+      setStatus(`<span style="color:var(--danger);font-weight:700"><i class="fas fa-exclamation-triangle"></i> Camera permission issue</span><br>
+        <span style="font-size:.78rem;font-weight:600;color:var(--muted)">${esc(msg)}</span><br>
+        <span style="font-size:.78rem;font-weight:700;color:var(--warning);display:block;margin-top:6px">${hint}</span>`);
+      return;
+    }
+
+    if(!cameras || cameras.length === 0){
+      scannerStarting = false;
+      setStatus(`<span style="color:var(--danger);font-weight:700"><i class="fas fa-video-slash"></i> Koi camera nahi mila</span>`);
+      return;
+    }
+
+    // Step 2: Back camera prefer karo
+    let cameraId = cameras[cameras.length - 1].id;
+    for(const cam of cameras){
+      const lbl = (cam.label || '').toLowerCase();
+      if(lbl.includes('back') || lbl.includes('rear') || lbl.includes('environment')){
+        cameraId = cam.id;
+        break;
+      }
+    }
+
+    const html5QrCode = new Html5Qrcode("qrReader", { verbose: false });
+    scannerInstance = html5QrCode;
+    window._scannerObj = html5QrCode;
+
+    const onScanSuccess = (decodedText) => {
+      if(!scannerInstance) return;
+      const now = Date.now();
+      if(decodedText === scannerLastCode && now - scannerLastTime < 1500) return;
+      scannerLastCode = decodedText;
+      scannerLastTime = now;
+
+      try{ navigator.vibrate && navigator.vibrate([80,40,80]); }catch(e){}
+      setStatus(`<span style="color:var(--success);font-weight:800"><i class="fas fa-check-circle"></i> ${t('barcode_found')}: ${esc(decodedText)}</span>`);
+
+      setTimeout(()=>{
+        const cb = scannerCallback;
+        closeScanner();
+        if(cb) cb(decodedText);
+      }, 280);
+    };
+
+    const config = {
+      fps: 20,
+      qrbox: function(vw, vh){
+        const min = Math.min(vw, vh);
+        return { width: Math.floor(min * 0.85), height: Math.floor(min * 0.55) };
+      }
+    };
+
+    await html5QrCode.start(cameraId, config, onScanSuccess, () => {});
+
+    scannerStarting = false;
+    setStatus(`<i class="fas fa-camera"></i> ${t('scan_hint_strong')}`);
+    setupScannerControls();
+
+  } catch(err){
+    scannerStarting = false;
+    scannerInstance = null;
+    window._scannerObj = null;
+    const msg = (err && (err.message || err.toString())) || 'Unknown error';
+    setStatus(`<span style="color:var(--danger);font-weight:700"><i class="fas fa-exclamation-triangle"></i> Camera start nahi hua</span><br>
+      <span style="font-size:.8rem;font-weight:600">${esc(msg)}</span><br>
+      <span style="font-size:.78rem;font-weight:600;color:var(--muted);display:block;margin-top:6px">Manually barcode likhein ⬇️</span>`);
+  }
+}
+
+function setupScannerControls(){
+  const inst = window._scannerObj;
+  if(!inst) return;
+  setTimeout(()=>{
+    try{
+      if(!inst.getRunningTrackCapabilities) return;
+      const caps = inst.getRunningTrackCapabilities();
+      if(caps){
+        if(caps.torch){
+          const tb = document.getElementById('torchBtn');
+          if(tb) tb.style.display = 'inline-flex';
+        }
+        if(caps.zoom && caps.zoom.max > caps.zoom.min){
+          const zi = document.getElementById('zoomInBtn');
+          const zo = document.getElementById('zoomOutBtn');
+          if(zi) zi.style.display = 'inline-flex';
+          if(zo) zo.style.display = 'inline-flex';
+          if(caps.zoom.step) scannerZoomLevel = caps.zoom.min || 1;
+        }
+      }
+    }catch(e){}
+  }, 900);
+}
+
+function toggleScannerTorch(){
+  const inst = window._scannerObj;
+  if(!inst) return;
+  scannerTorchOn = !scannerTorchOn;
+  try{
+    inst.applyVideoConstraints({ advanced: [{ torch: scannerTorchOn }] });
+    const tb = document.getElementById('torchBtn');
+    if(tb) tb.classList.toggle('on', scannerTorchOn);
+  }catch(e){}
+}
+
+function zoomScanner(delta){
+  const inst = window._scannerObj;
+  if(!inst) return;
+  try{
+    const caps = inst.getRunningTrackCapabilities();
+    if(!caps || !caps.zoom) return;
+    const min = caps.zoom.min || 1;
+    const max = caps.zoom.max || 5;
+    const step = caps.zoom.step || 1;
+    scannerZoomLevel = Math.max(min, Math.min(max, (scannerZoomLevel || min) + (delta * step)));
+    inst.applyVideoConstraints({ advanced: [{ zoom: scannerZoomLevel }] });
+  }catch(e){}
+}
+
+function submitManualBarcode(){
+  const el = document.getElementById('manualBarcode');
+  const val = (el?.value || '').trim();
+  if(!val) return toast('Barcode likhein', 'warning');
+  const cb = scannerCallback;
+  closeScanner();
+  if(cb) cb(val);
+}
+
+function closeScanner(){
+  const inst = scannerInstance;
+  scannerInstance = null;
+  scannerStarting = false;
+  window._scannerObj = null;
+  scannerCallback = null;
+  if(inst){
+    try{
+      inst.stop().then(()=>{
+        try{ inst.clear(); }catch(e){}
+        closeSheet();
+      }).catch(()=>{
+        try{ inst.clear(); }catch(e){}
+        closeSheet();
+      });
+    }catch(e){ closeSheet(); }
+  } else {
+    closeSheet();
+  }
+}
+
+function scanForSale(){
+  openScanner((barcode) => {
+    const products = DB.get('products');
+    const p = products.find(x => (x.barcode||'').toString().trim() === barcode.trim());
+    if(p){
+      const isSale = cart.mode === 'sale';
+      if(isSale && (+p.quantity||0) <= 0){
+        return toast(t('t_stock_only',{name:p.name,n:p.quantity}),'danger');
+      }
+      if(p.unit === 'kg' || p.unit === 'liter'){
+        openSizePicker(p.id);
+      } else {
+        addToCart(p.id, 1);
+        setTimeout(()=>scanForSale(), 600);
+      }
+    } else {
+      confirmBox(t('barcode_not_found') + '\n' + t('add_with_barcode'), () => {
+        go('product_form', { id: null, barcode: barcode });
+      }, { title: t('barcode_not_found') });
+    }
+  });
+}
+
+function scanBarcodeForProduct(){
+  openScanner((barcode) => {
+    const el = document.getElementById('f_barcode');
+    if(el) el.value = barcode;
+    toast(t('barcode_found') + ': ' + barcode);
+  });
+}
+
+/* ============================================================
+   ⚖️ SIZE PICKER FOR KG / LITER PRODUCTS
+============================================================ */
+function getSizeOptions(unit){
+  if(unit === 'kg'){
+    return [
+      {label:'100 g', mult: 0.1},{label:'250 g', mult: 0.25},{label:'500 g', mult: 0.5},{label:'750 g', mult: 0.75},
+      {label:'1 kg', mult: 1},{label:'1.5 kg', mult: 1.5},{label:'2 kg', mult: 2},{label:'3 kg', mult: 3},{label:'5 kg', mult: 5}
+    ];
+  } else if(unit === 'liter'){
+    return [
+      {label:'100 ml', mult: 0.1},{label:'250 ml', mult: 0.25},{label:'500 ml', mult: 0.5},{label:'750 ml', mult: 0.75},
+      {label:'1 Liter', mult: 1},{label:'1.5 Liter', mult: 1.5},{label:'2 Liter', mult: 2},{label:'3 Liter', mult: 3},{label:'5 Liter', mult: 5}
+    ];
+  }
+  return [];
+}
+
+function openSizePicker(pid){
+  const p = DB.get('products').find(x=>x.id===pid);
+  if(!p) return;
+  const unit = p.unit || 'piece';
+  if(unit !== 'kg' && unit !== 'liter'){ addToCart(pid, 1); return; }
+  const opts = getSizeOptions(unit);
+  const isSale = cart.mode === 'sale';
+  const basePrice = isSale ? (+p.sale_price||0) : (+p.purchase_price||0);
+  const unitLabel = unit === 'kg' ? t('per_kg') : t('per_liter');
+  const stockAvailable = +p.quantity || 0;
+  const optionsHtml = opts.map(o => {
+    const price = basePrice * o.mult;
+    const canSell = !isSale || stockAvailable >= o.mult;
+    const cls = canSell ? (isSale ? 'sale' : 'buy') : 'disabled';
+    return `<button type="button" class="size-opt-btn ${cls}" ${canSell ? `onclick="addSizedToCart(${pid}, ${o.mult}, '${o.label}')"` : 'disabled'}>
+      <span>📦 ${o.label}</span><span>${fmt(price)}</span></button>`;
+  }).join('');
+  openSheet(`
+    <div class="grab"></div>
+    <div class="sheet-head">
+      <h5><i class="fas fa-balance-scale" style="color:var(--primary)"></i> ${esc(p.name)}</h5>
+      <button onclick="closeSheet()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="sheet-body">
+      <div class="alert-x alert-info mb-3" style="font-size:.85rem">
+        <i class="fas fa-info-circle"></i>
+        <div>${t('base_rate')}: <b>${fmt(basePrice)} ${unitLabel}</b>
+        ${isSale ? `<br>${t('available_stock')}: <b>${stockAvailable} ${unit}</b>` : ''}</div>
+      </div>
+      <b style="font-size:.9rem;display:block;margin-bottom:10px">⚖️ ${t('size_picker_title')}</b>
+      ${optionsHtml}
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
+        <label class="form-label">${t('custom_amount')} (${unit})</label>
+        <div style="display:flex;gap:8px">
+          <input type="number" step="0.01" inputmode="decimal" class="form-control" id="customSize" placeholder="${t('custom_hint')}">
+          <button type="button" class="back-btn" style="background:var(--success);color:#fff;flex-shrink:0;width:auto;padding:0 16px;font-weight:700" onclick="addCustomSizeToCart(${pid})"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+  `);
+}
+
+function addSizedToCart(pid, mult, sizeLabel){
+  const p = DB.get('products').find(x=>x.id===pid);
+  if(!p) return;
+  const isSale = cart.mode === 'sale';
+  const basePrice = isSale ? (+p.sale_price||0) : (+p.purchase_price||0);
+  const baseCost = +p.purchase_price || 0;
+  const unit = p.unit || 'piece';
+  if(isSale && (+p.quantity||0) < mult){
+    return toast(t('t_stock_only',{name:p.name,n:p.quantity}),'danger');
+  }
+  const itemKey = pid + '_sz_' + mult;
+  const existing = cart.items.find(i => (i.key||i.product_id) === itemKey);
+  if(existing){ existing.qty++; }
+  else {
+    cart.items.push({
+      key: itemKey, product_id: pid, name: p.name, size_mult: mult, size_label: sizeLabel,
+      unit: unit, qty: 1, price: basePrice * mult, cost: baseCost * mult,
+      stock: +p.quantity || 0, ppb: +p.pieces_per_box || 1
+    });
+  }
+  closeSheet(); renderCart();
+  if(isSale) calcSale(); else calcPurchase();
+  toast(p.name + ' ' + sizeLabel + ' — ' + t('t_added'));
+}
+
+function addCustomSizeToCart(pid){
+  const input = document.getElementById('customSize');
+  const val = parseFloat(input.value);
+  if(!val || val <= 0) return toast('Sahi amount likhein', 'warning');
+  const p = DB.get('products').find(x=>x.id===pid);
+  if(!p) return;
+  const unit = p.unit || 'piece';
+  let label = '';
+  if(unit === 'kg'){ label = val < 1 ? Math.round(val * 1000) + ' g' : val + ' kg'; }
+  else if(unit === 'liter'){ label = val < 1 ? Math.round(val * 1000) + ' ml' : val + ' L'; }
+  else { label = val + ' ' + unit; }
+  addSizedToCart(pid, val, label);
+}
+
+/* ============================================================
+   ROUTER
+============================================================ */
+let currentPage='dashboard';
+let pageParams={};
+let chartRef=null;
+const NAV_MAP={dashboard:'dashboard',products:'products',product_form:'products',categories:'products',
+  sale_form:'sale_form',sales:'sale_form',purchase_form:'purchase_form',purchases:'purchase_form',
+  ledger:'ledger',udhar:'udhar',payment:'ledger',party_detail:'ledger',dead_stock:'products'};
+
+function go(page, params={}){
+  currentPage=page; pageParams=params||{};
+  if(chartRef){ chartRef.destroy(); chartRef=null; }
+  const fn=pages[page]||pages.dashboard;
+  document.getElementById('main').innerHTML=fn(pageParams);
+  document.querySelectorAll('.bottomnav a').forEach(a=>a.classList.toggle('active', a.dataset.nav===(NAV_MAP[page]||page)));
+  window.scrollTo(0,0);
+  if(afterRender[page]) afterRender[page]();
+}
+const afterRender={
+  sale_form:()=>{ renderCart(); calcSale(); },
+  purchase_form:()=>{ renderCart(); calcPurchase(); },
+  reports:()=>drawChart()
+};
+
+/* ============================================================
+   PAGE: DASHBOARD
+============================================================ */
+let dashMonth = today().slice(0,7);
+
+function renderDashboard(){
+  const products=DB.get('products'), sales=DB.get('sales');
+  const customers=DB.get('customers'), suppliers=DB.get('suppliers'), expenses=DB.get('expenses');
+  const t0=today();
+  let todaySale=0, todayProfit=0, todayCount=0;
+  sales.forEach(s=>{ if(s.sale_date===t0){ todaySale+=(+s.total_amount||0); todayProfit+=(+s.profit||0); todayCount++; } });
+  const todayExpense=expenses.filter(e=>e.expense_date===t0).reduce((a,e)=>a+(+e.amount||0),0);
+  const dueFromCustomers=customers.reduce((a,c)=>a+(+c.balance||0),0);
+  const dueToSuppliers=suppliers.reduce((a,s)=>a+(+s.balance||0),0);
+  const stockValue=products.reduce((a,p)=>a+(+p.quantity||0)*(+p.purchase_price||0),0);
+  const lowStock=products.filter(p=>(+p.quantity||0)<=(+p.min_stock||5)).sort((a,b)=>a.quantity-b.quantity);
+  const recent=[...sales].sort((a,b)=>b.id-a.id).slice(0,5);
+  const deadStock = getDeadStock(30);
+  const greeting=(()=>{ const h=new Date().getHours(); return h<12?t('greeting_morning'):h<17?t('greeting_afternoon'):t('greeting_evening'); })();
+
+  const ms = getMonthlySummary(dashMonth);
+  const isCurrentMonth = dashMonth === today().slice(0,7);
+  const canGoNext = !monthIsFuture(shiftMonth(dashMonth, 1));
+
+  let html=`<div class="wrap">
+    <div style="margin-bottom:14px">
+      <div style="font-size:.82rem;color:var(--muted);font-weight:700">${greeting} 👋</div>
+      <div style="font-size:1.35rem;font-weight:800">${t('todays_calc')}</div>
+    </div>
+    <div class="card-x" style="background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;border:none;padding:20px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div style="font-size:.78rem;opacity:.85;font-weight:700;letter-spacing:.5px">${t('todays_sale')}</div>
+          <div style="font-size:2.1rem;font-weight:800;line-height:1.15;margin-top:2px">${fmt(todaySale)}</div>
+          <div style="font-size:.8rem;opacity:.9;margin-top:6px"><i class="fas fa-receipt"></i> ${todayCount} ${t('sales_count')} &nbsp;•&nbsp; <i class="fas fa-arrow-trend-up"></i> ${t('profit')} ${fmt(todayProfit)}</div>
+        </div>
+        <div style="width:52px;height:52px;border-radius:16px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.4rem"><i class="fas fa-cash-register"></i></div>
+      </div>
+    </div>
+
+    <div class="row g-2 mb-2">
+      <div class="col-6"><div class="stat" style="--c:#16a34a" onclick="go('udhar',{tab:'customer'})">
+        <div class="ico"><i class="fas fa-hand-holding-dollar"></i></div>
+        <div class="num">${fmt(dueFromCustomers)}</div>
+        <div class="lbl">${t('recv')}</div>
+        <div class="view-all">${t('view_all')} →</div>
+      </div></div>
+      <div class="col-6"><div class="stat" style="--c:#dc2626" onclick="go('udhar',{tab:'supplier'})">
+        <div class="ico"><i class="fas fa-hand-holding-heart"></i></div>
+        <div class="num">${fmt(dueToSuppliers)}</div>
+        <div class="lbl">${t('pay')}</div>
+        <div class="view-all">${t('view_all')} →</div>
+      </div></div>
+      <div class="col-6"><div class="stat" style="--c:#0891b2" onclick="go('products')">
+        <div class="ico"><i class="fas fa-warehouse"></i></div>
+        <div class="num">${fmt(stockValue)}</div>
+        <div class="lbl">${t('stock_val')}</div>
+        <div class="view-all">${t('view_all')} →</div>
+      </div></div>
+      <div class="col-6"><div class="stat" style="--c:#f59e0b" onclick="go('expenses')">
+        <div class="ico"><i class="fas fa-file-invoice-dollar"></i></div>
+        <div class="num">${fmt(todayExpense)}</div>
+        <div class="lbl">${t('todays_exp')}</div>
+        <div class="view-all">${t('view_all')} →</div>
+      </div></div>
+    </div>
+
+    <div class="row g-2 mb-3">
+      <div class="col-6"><button class="btn-x bg-s" onclick="startSale()"><i class="fas fa-cart-plus"></i> ${t('sell')}</button></div>
+      <div class="col-6"><button class="btn-x bg-p" onclick="startPurchase()"><i class="fas fa-truck"></i> ${t('buy')}</button></div>
+    </div>
+    <div class="row g-2 mb-3">
+      <div class="col-4"><button class="btn-x btn-soft" style="padding:12px;font-size:.82rem;flex-direction:column;gap:5px" onclick="scanForSale()"><i class="fas fa-barcode" style="color:#7c3aed;font-size:1.2rem"></i>${t('scan')}</button></div>
+      <div class="col-4"><button class="btn-x btn-soft" style="padding:12px;font-size:.82rem;flex-direction:column;gap:5px" onclick="showPayment('customer')"><i class="fas fa-hand-holding-dollar" style="color:#16a34a;font-size:1.2rem"></i>${t('received')}</button></div>
+      <div class="col-4"><button class="btn-x btn-soft" style="padding:12px;font-size:.82rem;flex-direction:column;gap:5px" onclick="showPayment('supplier')"><i class="fas fa-hand-holding-heart" style="color:#dc2626;font-size:1.2rem"></i>${t('paid')}</button></div>
+    </div>
+    <div class="row g-2 mb-3">
+      <div class="col-6"><button class="btn-x btn-soft" style="padding:12px;font-size:.82rem;flex-direction:column;gap:5px" onclick="go('expenses')"><i class="fas fa-receipt" style="color:#f59e0b;font-size:1.2rem"></i>${t('exp')}</button></div>
+      <div class="col-6"><button class="btn-x btn-soft" style="padding:12px;font-size:.82rem;flex-direction:column;gap:5px" onclick="go('reports')"><i class="fas fa-chart-line" style="color:#0891b2;font-size:1.2rem"></i>${t('reports')}</button></div>
+    </div>`;
+
+  html += `<div class="card-x" style="padding:0;overflow:hidden">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#0891b2,#06b6d4);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem"><i class="fas fa-calendar-alt"></i></div>
+        <div>
+          <div style="font-weight:800;font-size:.95rem">${t('monthly_summary')}</div>
+          <div style="font-size:.72rem;color:var(--muted);font-weight:600">${monthLabel(dashMonth)}${isCurrentMonth?' • '+t('this_month'):''}</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:4px">
+        <button class="back-btn" style="width:34px;height:34px;font-size:.85rem" onclick="setDashMonth(shiftMonth(dashMonth,-1))"><i class="fas fa-chevron-left"></i></button>
+        <button class="back-btn" style="width:34px;height:34px;font-size:.85rem;${!canGoNext?'opacity:.35;pointer-events:none':''}" onclick="${canGoNext?'setDashMonth(shiftMonth(dashMonth,1))':''}"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+    <div style="padding:14px 16px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="background:var(--card2);border-radius:13px;padding:11px 12px;border-left:4px solid #16a34a">
+          <div style="font-size:.68rem;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.3px">${t('month_sales')}</div>
+          <div style="font-size:1.1rem;font-weight:800;color:#16a34a;line-height:1.15;margin-top:2px">${fmt(ms.totSale)}</div>
+          <div style="font-size:.68rem;color:var(--muted);font-weight:600;margin-top:2px">${t('month_count',{n:ms.salesCount})}</div>
+        </div>
+        <div style="background:var(--card2);border-radius:13px;padding:11px 12px;border-left:4px solid #f59e0b">
+          <div style="font-size:.68rem;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.3px">${t('month_expense')}</div>
+          <div style="font-size:1.1rem;font-weight:800;color:#f59e0b;line-height:1.15;margin-top:2px">${fmt(ms.totExp)}</div>
+        </div>
+        <div style="background:var(--card2);border-radius:13px;padding:11px 12px;border-left:4px solid #16a34a">
+          <div style="font-size:.68rem;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.3px">${t('udhar_given')}</div>
+          <div style="font-size:1.1rem;font-weight:800;color:#16a34a;line-height:1.15;margin-top:2px">${fmt(ms.udharGiven)}</div>
+        </div>
+        <div style="background:var(--card2);border-radius:13px;padding:11px 12px;border-left:4px solid #dc2626">
+          <div style="font-size:.68rem;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.3px">${t('udhar_taken')}</div>
+          <div style="font-size:1.1rem;font-weight:800;color:#dc2626;line-height:1.15;margin-top:2px">${fmt(ms.udharTaken)}</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;background:${ms.netProfit>=0?'color-mix(in srgb,#16a34a 12%,transparent)':'color-mix(in srgb,#dc2626 12%,transparent)'};border-radius:13px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-size:.68rem;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.3px">${t('month_net')}</div>
+          <div style="font-size:1.35rem;font-weight:800;color:${ms.netProfit>=0?'#16a34a':'#dc2626'};line-height:1.15">${fmt(ms.netProfit)}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:.68rem;color:var(--muted);font-weight:800">${t('month_purchase')}</div>
+          <div style="font-size:.92rem;font-weight:800;color:#4f46e5">${fmt(ms.totPur)}</div>
+        </div>
+      </div>
+      <button class="chip" style="width:100%;justify-content:center;margin-top:12px;padding:10px" onclick="go('reports')">
+        <i class="fas fa-arrow-right"></i> ${t('full_report')}
+      </button>
+    </div>
+  </div>`;
+
+  if(deadStock.length){
+    html+=`<div class="alert-x alert-danger mb-3" onclick="go('dead_stock')" style="cursor:pointer">
+      <i class="fas fa-skull-crossbones"></i>
+      <div><b>${t('dead_stock_alert')}</b><br>
+      <span style="font-weight:600;font-size:.82rem">${t('dead_stock_msg',{n:deadStock.length})} — ${t('view_dead')} →</span></div>
+    </div>`;
+  }
+
+  if(lowStock.length){
+    html+=`<div class="alert-x alert-warn mb-3"><i class="fas fa-triangle-exclamation"></i><div><b>${t('low_stock')}</b><br>
+      <span style="font-weight:600;font-size:.82rem">${lowStock.slice(0,4).map(p=>esc(p.name)+' ('+p.quantity+')').join(' • ')}${lowStock.length>4?' +'+(lowStock.length-4):''}</span></div></div>`;
+  }
+
+  if(recent.length){
+    html+=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px">
+      <b style="font-size:1rem"><i class="fas fa-clock-rotate-left" style="color:var(--primary)"></i> ${t('recent_sales')}</b>
+      <button class="chip" onclick="go('sales')">${t('view_all')}</button></div>`;
+    recent.forEach(s=>{
+      const c=customers.find(x=>x.id===s.customer_id);
+      const name=c?c.name:t('cash_sale');
+      html+=`<div class="li" onclick="showReceipt(${s.id})">
+        <div class="av" style="background:${avatarColor(name)}">${initials(name)}</div>
+        <div class="info"><b>${esc(name)}</b><small>${shortDate(s.sale_date)} • ${(s.items||[]).length} ${t('items_word')}</small></div>
+        <div style="text-align:right"><div class="amt" style="color:var(--success)">${fmt(s.total_amount)}</div>
+          ${(+s.remaining>0)?`<span class="badge-x b-red">${t('remaining')} ${fmtN(s.remaining)}</span>`:`<span class="badge-x b-green">${t('paid_amt')}</span>`}</div>
+      </div>`;
+    });
+  }
+  html+=`</div>`;
+  return html;
+}
+
+function setDashMonth(m){ dashMonth = m; go('dashboard'); }
+
+/* ============================================================
+   PAGE: CATEGORIES
+============================================================ */
+function renderCategories(){
+  const cats = getCategoryStats();
+  const totalItems = cats.reduce((a,c)=>a+c.count,0);
+  const totalQty = cats.reduce((a,c)=>a+c.qty,0);
+  const totalStockValue = cats.reduce((a,c)=>a+c.stockValue,0);
+  const totalProfit = cats.reduce((a,c)=>a+c.profit,0);
+  const totalWithPhoto = cats.reduce((a,c)=>a+c.withPhoto,0);
+
+  let html = `<div class="wrap">
+    <div class="page-head">
+      <button class="back-btn" onclick="go('products')"><i class="fas fa-arrow-left"></i></button>
+      <h4><i class="fas fa-layer-group" style="color:var(--primary)"></i> ${t('category_analytics')}</h4>
+    </div>
+    <div class="row g-2 mb-3">
+      <div class="col-6"><div class="stat" style="--c:#4f46e5;cursor:default">
+        <div class="ico"><i class="fas fa-layer-group"></i></div><div class="num">${cats.length}</div><div class="lbl">${t('total_categories')}</div>
+      </div></div>
+      <div class="col-6"><div class="stat" style="--c:#0891b2;cursor:default">
+        <div class="ico"><i class="fas fa-box"></i></div><div class="num">${totalItems}</div><div class="lbl">${t('total_items')}</div>
+      </div></div>
+      <div class="col-6"><div class="stat" style="--c:#16a34a;cursor:default">
+        <div class="ico"><i class="fas fa-camera"></i></div><div class="num">${totalWithPhoto}<span style="font-size:.65em;opacity:.65">/${totalItems}</span></div><div class="lbl">${t('with_photo')}</div>
+      </div></div>
+      <div class="col-6"><div class="stat" style="--c:#f59e0b;cursor:default">
+        <div class="ico"><i class="fas fa-warehouse"></i></div><div class="num">${fmt(totalStockValue)}</div><div class="lbl">${t('total_stock_value')}</div>
+      </div></div>
+    </div>
+    <div class="alert-x alert-info mb-3">
+      <i class="fas fa-lightbulb"></i>
+      <div style="font-size:.82rem"><b>${t('potential_profit')}: ${fmt(totalProfit)}</b><br>
+      <span style="font-weight:600">${t('stock_qty')}: ${totalQty} units • ${t('items_in_cat',{n:cats.length})}</span></div>
+    </div>`;
+  if(!cats.length){
+    html+=`<div class="empty"><i class="fas fa-layer-group"></i><p>${t('no_categories')}</p></div>`;
+  } else {
+    cats.forEach(c => {
+      const color = avatarColor(c.name);
+      html+=`<div class="cat-card" onclick="openCategory('${esc(c.name).replace(/'/g,"\\'")}')">
+        <div class="cat-head">
+          <div class="cat-ico" style="background:${color}"><i class="fas fa-layer-group"></i></div>
+          <div class="cat-name">${esc(c.name)}</div>
+          <i class="fas fa-chevron-right" style="color:var(--muted)"></i>
+        </div>
+        <div class="cat-grid">
+          <div><div class="cv" style="color:#4f46e5">${c.count}</div><div class="cl">${t('category_items')}</div></div>
+          <div><div class="cv" style="color:#0891b2">${c.qty}</div><div class="cl">${t('stock_qty')}</div></div>
+          <div><div class="cv" style="color:#16a34a">${c.withPhoto}</div><div class="cl">📷</div></div>
+          <div><div class="cv" style="color:${c.profit>=0?'#f59e0b':'#dc2626'}">${fmtN(c.profit)}</div><div class="cl">${t('potential_profit')}</div></div>
+        </div>
+      </div>`;
+    });
+  }
+  html += `</div>`;
+  return html;
+}
+
+function openCategory(catName){
+  const products = DB.get('products').filter(p => ((p.category||'').trim() || '—') === catName);
+  const totalQty = products.reduce((a,p)=>a+(+p.quantity||0),0);
+  const stockVal = products.reduce((a,p)=>a+(+p.quantity||0)*(+p.purchase_price||0),0);
+  const profit = products.reduce((a,p)=>a+(+p.quantity||0)*((+p.sale_price||0)-(+p.purchase_price||0)),0);
+  const rows = products.sort((a,b)=>a.name.localeCompare(b.name)).map(p => {
+    const qty = +p.quantity || 0;
+    const lastSold = getLastSold(p.id);
+    const days = lastSold ? daysSince(lastSold) : null;
+    const daysLabel = lastSold ? (days === 0 ? t('today') : days === 1 ? t('yesterday') : `${days} ${t('days')}`) : t('never_sold');
+    const daysColor = (!lastSold || (days && days > 30)) ? 'var(--danger)' : (days > 14 ? 'var(--warning)' : 'var(--success)');
+    const boxText = boxDisplayText(p);
+    const bc = p.barcode ? ` • 🏷️ ${esc(p.barcode)}` : '';
+    return `<div class="li" style="cursor:pointer" onclick="closeSheet();editProduct(${p.id})">
+      <div class="av" style="background:${p.photo ? avatarColor(p.name) : 'var(--muted)'};overflow:hidden;padding:0">
+        ${p.photo ? `<img src="${p.photo}" style="width:100%;height:100%;object-fit:cover">` : `<i class="fas fa-image"></i>`}
+      </div>
+      <div class="info">
+        <b style="display:flex;align-items:center;gap:6px">
+          <span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.name)}</span>
+          ${unitBadge(p)}
+        </b>
+        <small><i class="fas fa-cubes"></i> ${qty}${boxText ? ' • '+boxText : ''}${bc} • ${t('last_sold')}: <span style="color:${daysColor};font-weight:700">${daysLabel}</span></small>
+      </div>
+      <div style="text-align:right">
+        <div class="amt" style="color:var(--success)">${fmt(p.sale_price)}</div>
+        <small style="font-size:.68rem;color:var(--muted)">${fmtN((+p.sale_price||0)-(+p.purchase_price||0))} profit</small>
+      </div>
+    </div>`;
+  }).join('');
+  openSheet(`
+    <div class="grab"></div>
+    <div class="sheet-head">
+      <h5><i class="fas fa-layer-group" style="color:var(--primary)"></i> ${esc(catName)}</h5>
+      <button onclick="closeSheet()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="sheet-body">
+      <div class="row g-2 mb-3">
+        <div class="col-6"><div class="stat" style="--c:#4f46e5;cursor:default"><div class="num">${products.length}</div><div class="lbl">${t('category_items')}</div></div></div>
+        <div class="col-6"><div class="stat" style="--c:#0891b2;cursor:default"><div class="num">${totalQty}</div><div class="lbl">${t('stock_qty')}</div></div></div>
+        <div class="col-6"><div class="stat" style="--c:#f59e0b;cursor:default"><div class="num">${fmt(stockVal)}</div><div class="lbl">${t('stock_val')}</div></div></div>
+        <div class="col-6"><div class="stat" style="--c:#16a34a;cursor:default"><div class="num">${fmt(profit)}</div><div class="lbl">${t('potential_profit')}</div></div></div>
+      </div>
+      <b style="font-size:.9rem;display:block;margin-bottom:8px">${t('products')} (${products.length})</b>
+      ${products.length ? rows : `<div class="empty"><i class="fas fa-box-open"></i><p>${t('no_data')}</p></div>`}
+    </div>
+  `);
+}
+
+/* ============================================================
+   PAGE: DEAD STOCK
+============================================================ */
+let deadSort = 'days';
+function renderDeadStock(){
+  let list = getDeadStock(30);
+  if(deadSort === 'value') list.sort((a,b)=>b.stockValue - a.stockValue);
+  else if(deadSort === 'qty') list.sort((a,b)=>(+b.quantity||0) - (+a.quantity||0));
+  const totalValue = list.reduce((a,p)=>a+p.stockValue,0);
+  const neverSold = list.filter(p=>!p.last_sold).length;
+  const avgDays = (() => {
+    const valid = list.filter(p=>p.last_sold);
+    if(!valid.length) return 0;
+    return Math.round(valid.reduce((a,p)=>a+p.days_idle,0)/valid.length);
+  })();
+  let html = `<div class="wrap">
+    <div class="page-head">
+      <button class="back-btn" onclick="go('dashboard')"><i class="fas fa-arrow-left"></i></button>
+      <h4><i class="fas fa-skull-crossbones" style="color:var(--danger)"></i> ${t('dead_stock')}</h4>
+      <button class="back-btn" onclick="go('products')"><i class="fas fa-boxes-stacked"></i></button>
+    </div>
+    <div class="alert-x alert-danger mb-3">
+      <i class="fas fa-triangle-exclamation"></i>
+      <div style="font-size:.82rem"><b>${t('dead_stock_desc')}</b><br><span style="font-weight:600">${t('dead_stock_msg',{n:list.length})}</span></div>
+    </div>
+    <div class="row g-2 mb-3">
+      <div class="col-6"><div class="stat" style="--c:#dc2626;cursor:default"><div class="ico"><i class="fas fa-box-open"></i></div><div class="num">${list.length}</div><div class="lbl">${t('dead_stock')}</div></div></div>
+      <div class="col-6"><div class="stat" style="--c:#f59e0b;cursor:default"><div class="ico"><i class="fas fa-coins"></i></div><div class="num">${fmt(totalValue)}</div><div class="lbl">${t('stock_val')}</div></div></div>
+      <div class="col-6"><div class="stat" style="--c:#7c3aed;cursor:default"><div class="ico"><i class="fas fa-calendar-xmark"></i></div><div class="num">${avgDays}</div><div class="lbl">${t('avg_days')}</div></div></div>
+      <div class="col-6"><div class="stat" style="--c:#0891b2;cursor:default"><div class="ico"><i class="fas fa-circle-question"></i></div><div class="num">${neverSold}</div><div class="lbl">${t('never_sold')}</div></div></div>
+    </div>
+    <div class="seg mb-3">
+      <button class="${deadSort==='days'?'active':''}" onclick="deadSort='days';go('dead_stock')">${t('by_days')}</button>
+      <button class="${deadSort==='value'?'active':''}" onclick="deadSort='value';go('dead_stock')">${t('by_value')}</button>
+      <button class="${deadSort==='qty'?'active':''}" onclick="deadSort='qty';go('dead_stock')">${t('by_qty')}</button>
+    </div>`;
+  if(!list.length){
+    html += `<div class="empty"><i class="fas fa-check-circle" style="color:var(--success)"></i><p>${t('no_dead_stock')}</p></div>`;
+  } else {
+    list.slice(0, 200).forEach(p => {
+      const qty = +p.quantity || 0;
+      const days = p.days_idle === Infinity ? null : p.days_idle;
+      const rowClass = (days === null || days > 45) ? '' : 'warn';
+      const daysText = days === null ? '∞' : days;
+      const isNever = !p.last_sold;
+      html+=`<div class="dead-row ${rowClass}" onclick="editProduct(${p.id})">
+        <div style="width:44px;height:44px;border-radius:13px;background:${p.photo?avatarColor(p.name):'var(--muted)'};overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff">
+          ${p.photo ? `<img src="${p.photo}" style="width:100%;height:100%;object-fit:cover">` : `<i class="fas fa-image"></i>`}
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:800;font-size:.95rem;display:flex;align-items:center;gap:6px">
+            <span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.name)}</span>
+            ${unitBadge(p)}
+          </div>
+          <div style="font-size:.72rem;color:var(--muted);font-weight:600;margin-top:2px">
+            ${isNever ? `<span style="color:var(--danger)"><i class="fas fa-ban"></i> ${t('never_sold')}</span>` : `<i class="fas fa-clock-rotate-left"></i> ${t('last_sold')}: ${shortDate(p.last_sold)}`} • <i class="fas fa-cubes"></i> ${qty}
+          </div>
+          <div style="font-size:.72rem;color:var(--muted);margin-top:2px">
+            <i class="fas fa-coins"></i> ${fmt(p.stockValue)} • ${t('potential_profit')}: ${fmtN(qty*((+p.sale_price||0)-(+p.purchase_price||0)))}
+          </div>
+        </div>
+        <div class="dead-days">${daysText}<br><span style="font-size:.65rem;font-weight:600">${t('days')}</span></div>
+      </div>`;
+    });
+  }
+  html += `</div>`;
+  return html;
+}
+
+/* ============================================================
+   PAGE: UDHAR
+============================================================ */
+let udharTab='customer';
+function renderUdhar(params){
+  if(params.tab) udharTab=params.tab;
+  const isC = udharTab==='customer';
+  const customers=DB.get('customers').filter(c=>(+c.balance||0)>0).sort((a,b)=>b.balance-a.balance);
+  const suppliers=DB.get('suppliers').filter(s=>(+s.balance||0)>0).sort((a,b)=>b.balance-a.balance);
+  const list = isC ? customers : suppliers;
+  const total = list.reduce((a,x)=>a+(+x.balance||0),0);
+  let html=`<div class="wrap">
+    <div class="page-head">
+      <button class="back-btn" onclick="go('dashboard')"><i class="fas fa-arrow-left"></i></button>
+      <h4><i class="fas fa-hand-holding-dollar" style="color:${isC?'var(--success)':'var(--danger)'}"></i> ${t('udhar')}</h4>
+    </div>
+    <div class="seg mb-3">
+      <button class="${isC?'active':''}" onclick="udharTab='customer';go('udhar')">${t('udhar_customers')} (${customers.length})</button>
+      <button class="${!isC?'active':''}" onclick="udharTab='supplier';go('udhar')">${t('udhar_suppliers')} (${suppliers.length})</button>
+    </div>
+    <div class="stat mb-3" style="--c:${isC?'#16a34a':'#dc2626'};cursor:default">
+      <div class="num">${fmt(total)}</div><div class="lbl">${isC?t('recv'):t('pay')}</div>
+    </div>`;
+  if(!list.length){
+    html+=`<div class="empty"><i class="fas fa-check-circle" style="color:var(--success)"></i><p>${isC?t('no_receivable'):t('no_payable')}</p></div>`;
+  } else {
+    list.forEach(p=>{
+      html+=`<div class="li" onclick="go('party_detail',{type:'${udharTab}',id:${p.id}})">
+        <div class="av" style="background:${avatarColor(p.name)}">${initials(p.name)}</div>
+        <div class="info"><b>${esc(p.name)}</b><small>${p.phone?esc(p.phone):(isC?t('customer'):t('supplier'))}</small></div>
+        <div style="text-align:right">
+          <div class="amt" style="color:${isC?'var(--success)':'var(--danger)'}">${fmt(p.balance)}</div>
+          <small style="color:var(--muted);font-size:.7rem">${isC?t('lena_hai'):t('dena_hai')}</small>
+        </div>
+      </div>`;
+    });
+  }
+  html+=`<div style="height:8px"></div></div>`;
+  return html;
+}
+
+/* ============================================================
+   PAGE: PRODUCTS
+============================================================ */
+let productFilter={q:'',cat:''};
+function renderProducts(){
+  const products=DB.get('products');
+  const cats=[...new Set(products.map(p=>p.category).filter(Boolean))];
+  const totalQty = products.reduce((a,p)=>a+(+p.quantity||0),0);
+  const withPhoto = products.filter(p=>p.photo).length;
+  const stockValue = products.reduce((a,p)=>a+(+p.quantity||0)*(+p.purchase_price||0),0);
+  let html=`<div class="wrap">
+    <div class="page-head">
+      <h4><i class="fas fa-boxes-stacked" style="color:var(--primary)"></i> ${t('stock')}</h4>
+      <button class="back-btn" style="background:var(--warning);color:#fff" onclick="scanForProductLookup()" title="${t('scan')}"><i class="fas fa-barcode"></i></button>
+      <button class="back-btn" style="background:var(--primary);color:#fff" onclick="go('categories')" title="${t('cat_view')}"><i class="fas fa-layer-group"></i></button>
+      <button class="back-btn" style="background:var(--success);color:#fff" onclick="editProduct(null)"><i class="fas fa-plus"></i></button>
+    </div>
+    <div class="row g-2 mb-2">
+      <div class="col-4"><div class="stat" style="--c:#4f46e5;cursor:default"><div class="num" style="font-size:1.2rem">${products.length}</div><div class="lbl">${t('total_items')}</div></div></div>
+      <div class="col-4"><div class="stat" style="--c:#0891b2;cursor:default"><div class="num" style="font-size:1.2rem">${cats.length}</div><div class="lbl">${t('categories')}</div></div></div>
+      <div class="col-4"><div class="stat" style="--c:#16a34a;cursor:default"><div class="num" style="font-size:1.2rem">${withPhoto}</div><div class="lbl">📷 ${t('with_photo')}</div></div></div>
+    </div>
+    <div class="alert-x alert-info mb-3" style="font-size:.82rem">
+      <i class="fas fa-warehouse"></i>
+      <div><b>${fmt(stockValue)}</b> — ${t('stock_val')} • <b>${totalQty}</b> units • <span style="color:var(--danger);font-weight:700">${products.length-withPhoto}</span> ${t('without_photo')}</div>
+    </div>
+    <div class="input-icon mb-3">
+      <input class="form-control" id="pSearch" placeholder="${t('search')}" value="${esc(productFilter.q)}" oninput="productFilter.q=this.value;refreshProductList()">
+      <i class="fas fa-magnifying-glass"></i>
+    </div>`;
+  if(cats.length){
+    html+=`<div class="scroll-x">
+      <button class="chip ${!productFilter.cat?'active':''}" onclick="productFilter.cat='';renderProductsRefresh()">${t('all')} (${products.length})</button>`;
+    cats.forEach(c=>{
+      const n=products.filter(p=>p.category===c).length;
+      html+=`<button class="chip ${productFilter.cat===c?'active':''}" onclick="productFilter.cat='${esc(c).replace(/'/g,"\\'")}';renderProductsRefresh()">${esc(c)} (${n})</button>`;
+    });
+    html+=`</div>`;
+  }
+  html+=`<div class="row g-2" id="prodGrid"></div></div>`;
+  setTimeout(refreshProductList,0);
+  return html;
+}
+function renderProductsRefresh(){ document.getElementById('main').innerHTML=renderProducts(); setTimeout(refreshProductList,0); }
+function refreshProductList(){
+  const grid=document.getElementById('prodGrid'); if(!grid) return;
+  const products=DB.get('products');
+  const q=(productFilter.q||'').toLowerCase().trim();
+  const cat=productFilter.cat;
+  let list=products.filter(p=>{
+    const mq=!q||p.name.toLowerCase().includes(q)||(p.category||'').toLowerCase().includes(q)||(p.barcode||'').includes(q);
+    const mc=!cat||p.category===cat;
+    return mq&&mc;
+  });
+  list.sort((a,b)=>a.name.localeCompare(b.name));
+  if(!list.length){
+    grid.innerHTML=`<div class="col-12"><div class="empty"><i class="fas fa-box-open"></i><p>${products.length?t('no_match'):t('no_product_yet')}</p>
+      ${!products.length?`<button class="btn-x bg-s mt-3" style="max-width:220px;margin:14px auto 0" onclick="editProduct(null)"><i class="fas fa-plus"></i> ${t('add')}</button>`:''}</div></div>`;
+    return;
+  }
+  grid.innerHTML=list.map(p=>{
+    const qty=+p.quantity||0, min=+p.min_stock||5;
+    const qCls=qty<=0?'low':qty<=min?'mid':'';
+    const profit=(+p.sale_price||0)-(+p.purchase_price||0);
+    const lastSold = getLastSold(p.id);
+    const days = lastSold ? daysSince(lastSold) : null;
+    const deadBadge = (days === null || days > 30) && qty > 0;
+    const boxText = boxDisplayText(p);
+    const boxLine = boxText ? `<div style="font-size:.68rem;color:var(--primary);font-weight:700;margin-bottom:4px">${boxText}</div>` : '';
+    return `<div class="col-6 col-md-4"><div class="prod" onclick="editProduct(${p.id})">
+      <div class="img">${p.photo?`<img src="${p.photo}">`:`<i class="fas fa-image"></i>`}<span class="qty ${qCls}">${qty}</span>
+      ${deadBadge?`<span style="position:absolute;bottom:6px;left:6px;background:var(--danger);color:#fff;font-size:.62rem;font-weight:800;padding:3px 8px;border-radius:10px"><i class="fas fa-skull-crossbones"></i> ${days===null?'∞':days}d</span>`:''}
+      </div>
+      <div class="body">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+          <h6 style="flex:1;min-width:0;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.name)}</h6>
+          ${unitBadge(p)}
+        </div>
+        ${p.category?`<div style="font-size:.72rem;color:var(--muted);font-weight:600;margin-bottom:5px">${esc(p.category)}</div>`:''}
+        ${boxLine}
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+          <span class="price">${fmt(p.sale_price)}</span>
+          ${profit>0?`<span class="badge-x b-green">+${fmtN(profit)}</span>`:''}
+        </div></div></div></div>`;
+  }).join('');
+}
+function scanForProductLookup(){
+  openScanner((barcode) => {
+    const products = DB.get('products');
+    const p = products.find(x => (x.barcode||'').toString().trim() === barcode.trim());
+    if(p){ toast(t('barcode_found') + ': ' + p.name); editProduct(p.id); }
+    else {
+      confirmBox(t('barcode_not_found') + '\n' + t('add_with_barcode'), () => {
+        go('product_form', { id: null, barcode: barcode });
+      }, { title: t('barcode_not_found') });
+    }
+  });
+}
+
+/* ============================================================
+   PAGE: PRODUCT FORM
+============================================================ */
+function editProduct(id, barcode){ const params = { id }; if(barcode) params.barcode = barcode; go('product_form', params); }
+function renderProductForm({id, barcode}){
+  const p=id?DB.get('products').find(x=>x.id===id):null;
+  const isEdit=!!p;
+  const lastSold = isEdit ? getLastSold(id) : null;
+  const totalSold = isEdit ? getTotalSold(id) : 0;
+  const barcodeVal = p?.barcode || barcode || '';
+  const unitVal = p?.unit || 'piece';
+  return `<div class="wrap">
+    <div class="page-head">
+      <button class="back-btn" onclick="go('products')"><i class="fas fa-arrow-left"></i></button>
+      <h4>${isEdit?t('edit'):t('new_product')}</h4>
+      ${isEdit?`<button class="back-btn" style="background:color-mix(in srgb,#dc2626 14%,transparent);color:#dc2626" onclick="deleteProduct(${id})"><i class="fas fa-trash"></i></button>`:''}
+    </div>
+    ${isEdit?`<div class="alert-x ${(!lastSold || daysSince(lastSold) > 30) ? 'alert-danger':'alert-success'} mb-3" style="font-size:.82rem">
+      <i class="fas ${(!lastSold || daysSince(lastSold) > 30) ? 'fa-skull-crossbones':'fa-check-circle'}"></i>
+      <div><b>${t('last_sold')}:</b> ${lastSold ? shortDate(lastSold) + ' (' + daysSince(lastSold) + ' ' + t('days') + ')' : t('never_sold')}<br>
+      <span style="font-weight:600">${t('stock_qty')}: ${p.quantity||0} • Kul bikri: ${totalSold} units</span></div>
+    </div>`:''}
+    <form onsubmit="saveProduct(event,${isEdit?id:'null'})">
+      <div class="card-x">
+        <div class="mb-3"><label class="form-label">${t('name')} * <button type="button" class="voice" onclick="startVoice('f_name')"><i class="fas fa-microphone"></i></button></label>
+          <input class="form-control" id="f_name" required value="${esc(p?.name||'')}" placeholder="Sugar / Surf Excel / Milk"></div>
+        <div class="mb-3"><label class="form-label">${t('category')}</label>
+          <input class="form-control" id="f_cat" value="${esc(p?.category||'')}" placeholder="Sabun, Chai..." list="catList">
+          <datalist id="catList">${[...new Set(DB.get('products').map(x=>x.category).filter(Boolean))].map(c=>`<option value="${esc(c)}">`).join('')}</datalist></div>
+        <div class="mb-3">
+          <label class="form-label">📏 ${t('unit')}</label>
+          <select class="form-select form-select-lg" id="f_unit">
+            <option value="piece" ${unitVal==='piece'?'selected':''}>🔢 ${t('unit_piece')} — normal items</option>
+            <option value="kg" ${unitVal==='kg'?'selected':''}>⚖️ ${t('unit_kg')}</option>
+            <option value="gram" ${unitVal==='gram'?'selected':''}>⚖️ ${t('unit_gram')}</option>
+            <option value="liter" ${unitVal==='liter'?'selected':''}>🧴 ${t('unit_liter')}</option>
+            <option value="ml" ${unitVal==='ml'?'selected':''}>🧴 ${t('unit_ml')}</option>
+          </select>
+          <small style="color:var(--muted);font-size:.72rem;font-weight:600"><i class="fas fa-info-circle"></i> ${t('unit_hint')}</small>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">🏷️ ${t('barcode')} <span style="color:var(--success);font-size:.75rem;font-weight:600">(Koi limit nahi)</span></label>
+          <div style="display:flex;gap:8px">
+            <input type="text" class="form-control" id="f_barcode" value="${esc(barcodeVal)}" placeholder="Scan karein ya manually likhein" autocomplete="off">
+            <button type="button" class="scan-btn" onclick="scanBarcodeForProduct()" title="${t('scan_now')}"><i class="fas fa-barcode"></i></button>
+          </div>
+        </div>
+        <div class="row g-2 mb-3">
+          <div class="col-6"><label class="form-label">${t('khareed_price')} *</label><input type="number" step="0.01" inputmode="decimal" class="form-control" id="f_pur" required value="${p?.purchase_price??''}" placeholder="0"></div>
+          <div class="col-6"><label class="form-label">${t('bikri_price')} *</label><input type="number" step="0.01" inputmode="decimal" class="form-control" id="f_sale" required value="${p?.sale_price??''}" placeholder="0"></div>
+        </div>
+        <div class="row g-2 mb-3">
+          <div class="col-6"><label class="form-label">📦 ${t('boxes')}</label><input type="number" inputmode="numeric" class="form-control" id="f_boxes" value="${p?.boxes??0}" oninput="calcTotalQty()" placeholder="0"></div>
+          <div class="col-6"><label class="form-label">${t('pieces_per_box')}</label><input type="number" inputmode="numeric" class="form-control" id="f_ppb" value="${p?.pieces_per_box??1}" oninput="calcTotalQty()" placeholder="1"></div>
+        </div>
+        <div class="row g-2 mb-3">
+          <div class="col-6"><label class="form-label">${t('total_qty')} *</label><input type="number" step="0.01" inputmode="decimal" class="form-control" id="f_qty" required value="${p?.quantity??0}" oninput="calcBoxes()"></div>
+          <div class="col-6"><label class="form-label">${t('min_stock')}</label><input type="number" step="0.01" inputmode="decimal" class="form-control" id="f_min" value="${p?.min_stock??5}"></div>
+        </div>
+        <div><label class="form-label">${t('photo')}</label>
+          <input type="file" accept="image/*" class="form-control" id="f_photo" onchange="previewImg(event,'imgPrev')">
+          <div id="imgPrevWrap" style="margin-top:10px;${p?.photo?'':'display:none'}"><img id="imgPrev" src="${p?.photo||''}" style="width:100%;max-height:180px;object-fit:cover;border-radius:13px"></div></div>
+      </div>
+      <button type="submit" class="btn-x ${isEdit?'bg-w':'bg-s'} mb-2"><i class="fas fa-floppy-disk"></i> ${isEdit?t('update'):t('save')}</button>
+      <button type="button" class="btn-x btn-soft" onclick="go('products')">${t('cancel')}</button>
+    </form></div>`;
+}
+function calcTotalQty(){
+  const boxes = parseInt(document.getElementById('f_boxes').value) || 0;
+  const ppb = parseInt(document.getElementById('f_ppb').value) || 1;
+  if(boxes > 0 && ppb >= 1){ document.getElementById('f_qty').value = boxes * ppb; }
+}
+function calcBoxes(){
+  const qty = parseFloat(document.getElementById('f_qty').value) || 0;
+  const ppb = parseInt(document.getElementById('f_ppb').value) || 1;
+  if(ppb >= 1 && qty >= 0){ document.getElementById('f_boxes').value = Math.floor(qty / ppb); }
+}
+let _photoData=null;
+function previewImg(e,id){
+  const file=e.target.files[0]; if(!file) return;
+  if(file.size>900000) toast(t('t_photo_large'), 'warning');
+  const r=new FileReader();
+  r.onload=ev=>{ _photoData=ev.target.result; const img=document.getElementById(id); img.src=_photoData; document.getElementById('imgPrevWrap').style.display='block'; };
+  r.readAsDataURL(file);
+}
+function saveProduct(e,id){
+  e.preventDefault();
+  const name=document.getElementById('f_name').value.trim();
+  if(!name) return toast(t('t_name_required'), 'danger');
+  const products=DB.get('products');
+  const barcode = document.getElementById('f_barcode').value.trim();
+  if(barcode){
+    const dup = products.find(x => x.id !== id && (x.barcode||'') === barcode);
+    if(dup){ return toast(`Barcode pehle se "${dup.name}" ke paas hai`, 'danger'); }
+  }
+  const data={
+    name, category:document.getElementById('f_cat').value.trim(),
+    unit: document.getElementById('f_unit')?.value || 'piece',
+    barcode: barcode,
+    purchase_price:parseFloat(document.getElementById('f_pur').value)||0,
+    sale_price:parseFloat(document.getElementById('f_sale').value)||0,
+    quantity:parseFloat(document.getElementById('f_qty').value)||0,
+    min_stock:parseFloat(document.getElementById('f_min').value)||5,
+    boxes:parseInt(document.getElementById('f_boxes').value)||0,
+    pieces_per_box:parseInt(document.getElementById('f_ppb').value)||1
+  };
+  recalcBoxes(data);
+  if(id){
+    const i=products.findIndex(x=>x.id===id);
+    if(i>-1){ products[i]={...products[i],...data}; if(_photoData) products[i].photo=_photoData; }
+    DB.set('products',products); toast(t('t_updated'), 'info');
+  } else {
+    products.push({id:DB.nextId('products'),...data,photo:_photoData||''});
+    DB.set('products',products); toast(t('t_added'));
+  }
+  _photoData=null; go('products');
+}
+function deleteProduct(id){
+  confirmBox(t('c_delete_product'), ()=>{
+    DB.set('products',DB.get('products').filter(p=>p.id!==id));
+    toast(t('t_deleted'),'danger'); go('products');
+  },{danger:true,title:t('c_delete')});
+}
+
+/* ============================================================
+   CART SYSTEM
+============================================================ */
+let cart={mode:'sale',items:[],meta:{}};
+function startSale(){ cart={mode:'sale',items:[],meta:{customer_id:null,type:'cash',date:today(),discount:0,paid:0,notes:''}}; go('sale_form'); }
+function startPurchase(){ cart={mode:'purchase',items:[],meta:{supplier_id:null,date:today(),paid:0,notes:''}}; go('purchase_form'); }
+
+function openProductPicker(){
+  const products=DB.get('products').slice().sort((a,b)=>a.name.localeCompare(b.name));
+  const isSale=cart.mode==='sale';
+  const listHtml=products.length?products.map(p=>{
+    const qty=+p.quantity||0; const out=isSale&&qty<=0;
+    const ppb=+p.pieces_per_box||1;
+    const isSized = p.unit === 'kg' || p.unit === 'liter';
+    const boxInfo = ppb>1 ? ' • 📦 '+ppb+'/box' : '';
+    const bcInfo = p.barcode ? ' • 🏷️ '+esc(p.barcode) : '';
+    const clickFn = isSized ? `openSizePicker(${p.id})` : `addToCart(${p.id},1)`;
+    return `<div class="li" style="${out?'opacity:.45':''}">
+      <div class="av" style="background:${avatarColor(p.name)}" ${out?'':`onclick="${clickFn}"`}>${initials(p.name)}</div>
+      <div class="info" ${out?'':`onclick="${clickFn}"`} style="cursor:${out?'default':'pointer'}">
+        <b style="display:flex;align-items:center;gap:6px">
+          <span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.name)}</span>
+          ${unitBadge(p)}
+        </b>
+        <small>${t('kitna_left')}: ${isSale?qty:fmt(p.purchase_price)}${boxInfo}${bcInfo}</small>
+      </div>
+      <div class="amt" style="color:var(--success)" ${out?'':`onclick="${clickFn}"`}>${isSized?'':fmt(isSale?p.sale_price:p.purchase_price)}</div>
+      ${out?`<span class="badge-x b-red">${t('out_of_stock')}</span>`:(isSized?`<span class="badge-x b-green">⚖️ Size</span>`:(ppb>1?`<button class="chip active" style="padding:6px 10px;font-size:.68rem" onclick="event.stopPropagation();addToCart(${p.id},${ppb})"><i class="fas fa-box"></i> +${t('box')}</button>`:''))}
+    </div>`;
+  }).join(''):`<div class="empty"><i class="fas fa-box-open"></i><p>${t('no_data')}</p></div>`;
+  openSheet(`<div class="grab"></div>
+    <div class="sheet-head"><h5><i class="fas fa-magnifying-glass" style="color:var(--primary)"></i> ${t('pick_product')}</h5><button onclick="closeSheet()"><i class="fas fa-times"></i></button></div>
+    <div style="padding:12px 16px 4px;display:flex;gap:8px">
+      <input class="form-control" id="pickSearch" placeholder="${t('search')}" autocomplete="off">
+      <button type="button" class="scan-btn" onclick="closeSheet();scanForSale()" title="${t('scan_now')}"><i class="fas fa-barcode"></i></button>
+    </div>
+    <div class="sheet-body" id="pickList">${listHtml}</div>`);
+  setTimeout(()=>{ const inp=document.getElementById('pickSearch'); if(inp){ inp.focus(); inp.oninput=()=>filterPicker(inp.value); } },320);
+}
+function filterPicker(q){
+  q=q.toLowerCase().trim();
+  const products=DB.get('products').slice().sort((a,b)=>a.name.localeCompare(b.name));
+  const isSale=cart.mode==='sale';
+  const list=products.filter(p=>!q||p.name.toLowerCase().includes(q)||(p.category||'').toLowerCase().includes(q)||(p.barcode||'').includes(q));
+  const box=document.getElementById('pickList');
+  if(!list.length){ box.innerHTML=`<div class="empty"><i class="fas fa-magnifying-glass"></i><p>${t('no_match')}</p></div>`; return; }
+  box.innerHTML=list.map(p=>{
+    const qty=+p.quantity||0; const out=isSale&&qty<=0;
+    const ppb=+p.pieces_per_box||1;
+    const isSized = p.unit === 'kg' || p.unit === 'liter';
+    const boxInfo = ppb>1 ? ' • 📦 '+ppb+'/box' : '';
+    const bcInfo = p.barcode ? ' • 🏷️ '+esc(p.barcode) : '';
+    const clickFn = isSized ? `openSizePicker(${p.id})` : `addToCart(${p.id},1)`;
+    return `<div class="li" style="${out?'opacity:.45':''}">
+      <div class="av" style="background:${avatarColor(p.name)}" ${out?'':`onclick="${clickFn}"`}>${initials(p.name)}</div>
+      <div class="info" ${out?'':`onclick="${clickFn}"`} style="cursor:${out?'default':'pointer'}">
+        <b style="display:flex;align-items:center;gap:6px">
+          <span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.name)}</span>
+          ${unitBadge(p)}
+        </b>
+        <small>${t('kitna_left')}: ${isSale?qty:fmt(p.purchase_price)}${boxInfo}${bcInfo}</small>
+      </div>
+      <div class="amt" style="color:var(--success)" ${out?'':`onclick="${clickFn}"`}>${isSized?'':fmt(isSale?p.sale_price:p.purchase_price)}</div>
+      ${out?'':(isSized?`<span class="badge-x b-green">⚖️ Size</span>`:(ppb>1?`<button class="chip active" style="padding:6px 10px;font-size:.68rem" onclick="event.stopPropagation();addToCart(${p.id},${ppb})"><i class="fas fa-box"></i> +${t('box')}</button>`:''))}
+    </div>`;
+  }).join('');
+}
+function addToCart(pid, count){
+  count = count || 1;
+  const p=DB.get('products').find(x=>x.id===pid); if(!p) return;
+  const isSale=cart.mode==='sale';
+  const itemKey = pid + '_n';
+  const existing = cart.items.find(i => (i.key||i.product_id) === itemKey);
+  if(existing) existing.qty += count;
+  else cart.items.push({
+    key: itemKey, product_id: pid, name: p.name, qty: count,
+    price: isSale ? (+p.sale_price||0) : (+p.purchase_price||0),
+    cost: +p.purchase_price||0, stock: +p.quantity||0,
+    ppb: +p.pieces_per_box||1, unit: p.unit || 'piece'
+  });
+  closeSheet(); renderCart();
+  if(isSale) calcSale(); else calcPurchase();
+  toast(p.name+' — '+t('t_added'));
+}
+function changeQty(key,delta){
+  const it=cart.items.find(i=>(i.key||i.product_id)==key); if(!it) return;
+  it.qty+=delta;
+  if(it.qty<=0) cart.items=cart.items.filter(i=>(i.key||i.product_id)!=key);
+  renderCart(); if(cart.mode==='sale') calcSale(); else calcPurchase();
+}
+function setPrice(key,val){
+  const it=cart.items.find(i=>(i.key||i.product_id)==key); if(!it) return;
+  it.price=parseFloat(val)||0;
+  if(cart.mode==='sale') calcSale(); else calcPurchase();
+}
+function removeItem(key){
+  cart.items=cart.items.filter(i=>(i.key||i.product_id)!=key);
+  renderCart();
+  if(cart.mode==='sale') calcSale(); else calcPurchase();
+}
+function renderCart(){
+  const box=document.getElementById('cartItems'); if(!box) return;
+  if(!cart.items.length){
+    box.innerHTML=`<div class="empty" style="padding:28px 16px"><i class="fas fa-cart-shopping"></i><p>${t('cart_empty')}</p></div>`;
+    return;
+  }
+  box.innerHTML=cart.items.map(i=>{
+    const itemKey = i.key || i.product_id;
+    let boxHint = '';
+    if(i.ppb && i.ppb>1 && !i.size_label){
+      const fullBoxes = Math.floor(i.qty / i.ppb);
+      const rem = i.qty % i.ppb;
+      boxHint = `<div style="font-size:.68rem;color:var(--primary);font-weight:700;margin-top:2px"><i class="fas fa-box"></i> ${fullBoxes} ${t('box')}${rem>0 ? ' + '+rem+' '+t('pcs') : ''}</div>`;
+    }
+    const sizeTag = i.size_label
+      ? `<div style="font-size:.74rem;color:var(--primary);font-weight:800;margin-top:2px"><i class="fas fa-balance-scale"></i> ${i.size_label} × ${i.qty}</div>`
+      : '';
+    return `
+    <div class="cart-row">
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:6px">
+          <div style="flex:1;min-width:0;font-weight:700;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(i.name)}</div>
+          ${unitBadge(i)}
+        </div>
+        ${sizeTag}
+        ${boxHint}
+        <div style="display:flex;align-items:center;gap:6px;margin-top:6px">
+          <button class="qty-btn minus" onclick="changeQty('${itemKey}',-1)"><i class="fas fa-minus"></i></button>
+          <span style="font-weight:800;min-width:28px;text-align:center">${i.qty}</span>
+          <button class="qty-btn plus" onclick="changeQty('${itemKey}',1)"><i class="fas fa-plus"></i></button>
+          <span style="color:var(--muted);font-size:.75rem">×</span>
+          <input type="number" step="0.01" inputmode="decimal" value="${i.price}" onchange="setPrice('${itemKey}',this.value)" style="width:82px;padding:5px 8px;border-radius:9px;border:1.5px solid var(--border);background:var(--card);color:var(--text);font-weight:700;font-size:.82rem">
+        </div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-weight:800;color:var(--success);font-size:.95rem">${fmt(i.qty*i.price)}</div>
+        <button class="qty-btn" style="margin-top:5px;color:var(--danger)" onclick="removeItem('${itemKey}')"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>`;
+  }).join('');
+}
+function cartSubtotal(){ return cart.items.reduce((s,i)=>s+i.qty*i.price,0); }
+
+/* ============================================================
+   SALE FORM
+============================================================ */
+function renderSaleForm(){
+  const customers=DB.get('customers').slice().sort((a,b)=>a.name.localeCompare(b.name));
+  const m=cart.meta;
+  return `<div class="wrap">
+    <div class="page-head">
+      <button class="back-btn" onclick="go('dashboard')"><i class="fas fa-arrow-left"></i></button>
+      <h4>${t('new_sale')}</h4>
+      <button class="back-btn" onclick="go('sales')"><i class="fas fa-list"></i></button>
+    </div>
+    <div class="card-x">
+      <div class="mb-3"><label class="form-label">${t('customer')}</label>
+        <div style="display:flex;gap:8px">
+          <select class="form-select" id="s_cust" onchange="cart.meta.customer_id=this.value?+this.value:null">
+            <option value="">🚶 ${t('cash_sale')}</option>
+            ${customers.map(c=>`<option value="${c.id}" ${m.customer_id==c.id?'selected':''}>${esc(c.name)}${+c.balance>0?' — '+fmtN(c.balance):''}</option>`).join('')}
+          </select>
+          <button type="button" class="back-btn" style="background:var(--info);color:#fff;flex-shrink:0" onclick="quickAddParty('customer')"><i class="fas fa-user-plus"></i></button>
+        </div>
+      </div>
+      <div class="row g-2">
+        <div class="col-6"><label class="form-label">${t('sale_type')}</label>
+          <div class="seg">
+            <button type="button" class="${m.type==='cash'?'active':''}" onclick="cart.meta.type='cash';renderSaleFormRefresh()">${t('cash')}</button>
+            <button type="button" class="${m.type==='credit'?'active':''}" onclick="cart.meta.type='credit';renderSaleFormRefresh()">${t('credit')}</button>
+          </div>
+        </div>
+        <div class="col-6"><label class="form-label">${t('date')}</label><input type="date" class="form-control" id="s_date" value="${m.date}" onchange="cart.meta.date=this.value"></div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px">
+      <b style="font-size:1rem"><i class="fas fa-basket-shopping" style="color:var(--success)"></i> ${t('cart')}</b>
+      <div style="display:flex;gap:6px">
+        <button class="chip active" style="background:var(--warning);border-color:var(--warning)" onclick="scanForSale()"><i class="fas fa-barcode"></i> ${t('scan')}</button>
+        <button class="chip active" onclick="openProductPicker()"><i class="fas fa-plus"></i> ${t('item_add')}</button>
+      </div>
+    </div>
+    <div class="card-x" style="padding:12px"><div id="cartItems"></div></div>
+    <div class="card-x">
+      <div class="row g-2 mb-2">
+        <div class="col-6"><label class="form-label">${t('discount')}</label><input type="number" step="0.01" inputmode="decimal" class="form-control" id="s_disc" value="${m.discount||0}" oninput="cart.meta.discount=parseFloat(this.value)||0;calcSale()"></div>
+        <div class="col-6"><label class="form-label">${t('paid_amt')}</label>
+          <div style="display:flex;gap:6px">
+            <input type="number" step="0.01" inputmode="decimal" class="form-control" id="s_paid" value="${m.paid||0}" oninput="cart.meta.paid=parseFloat(this.value)||0;calcSale()">
+            <button type="button" class="back-btn" style="background:var(--success);color:#fff;flex-shrink:0" onclick="fullPay()"><i class="fas fa-check"></i></button>
+          </div>
+        </div>
+      </div>
+      <div id="saleTotals"></div>
+    </div>
+    <div class="card-x"><label class="form-label">${t('notes')}</label><input class="form-control" id="s_notes" value="${esc(m.notes||'')}" oninput="cart.meta.notes=this.value"></div>
+    <button class="btn-x bg-s mb-2" onclick="saveSale()"><i class="fas fa-floppy-disk"></i> ${t('save_sale')}</button>
+    <button class="btn-x btn-soft" onclick="go('dashboard')">${t('cancel')}</button>
+  </div>`;
+}
+function renderSaleFormRefresh(){ go('sale_form'); }
+function fullPay(){ const {total}=saleTotalsCalc(); cart.meta.paid=total; const el=document.getElementById('s_paid'); if(el) el.value=total.toFixed(2); calcSale(); }
+function saleTotalsCalc(){
+  const sub=cartSubtotal(), disc=+cart.meta.discount||0;
+  const total=Math.max(0,sub-disc);
+  const profit=cart.items.reduce((s,i)=>s+i.qty*(i.price-i.cost),0)-disc;
+  return {sub,disc,total,profit};
+}
+function calcSale(){
+  const box=document.getElementById('saleTotals'); if(!box) return;
+  const {sub,disc,total,profit}=saleTotalsCalc();
+  const paid=+cart.meta.paid||0, rem=Math.max(0,total-paid);
+  box.innerHTML=`<div class="row-total"><span style="color:var(--muted)">${t('subtotal')}</span><span>${fmt(sub)}</span></div>
+    ${disc>0?`<div class="row-total"><span style="color:var(--muted)">${t('discount')}</span><span style="color:var(--danger)">− ${fmt(disc)}</span></div>`:''}
+    <div class="row-total big"><span>${t('total')}</span><span style="color:var(--success)">${fmt(total)}</span></div>
+    <div class="row-total"><span style="color:var(--muted)">${t('paid_amt')}</span><span>${fmt(paid)}</span></div>
+    ${rem>0?`<div class="row-total"><span style="color:var(--muted)">${t('remaining')}</span><span style="color:var(--danger);font-weight:800">${fmt(rem)}</span></div>`:''}
+    ${profit>0?`<div style="margin-top:8px;text-align:center"><span class="badge-x b-green"><i class="fas fa-arrow-trend-up"></i> ${t('profit')}: ${fmt(profit)}</span></div>`:''}`;
+}
+function saveSale(){
+  if(!cart.items.length) return toast(t('t_add_items_first'),'warning');
+  const {total,disc,profit}=saleTotalsCalc();
+  const paid=+cart.meta.paid||0;
+  if(paid>total+0.01) return toast(t('t_paid_exceeds'),'danger');
+  const products=DB.get('products');
+  for(const it of cart.items){
+    const p=products.find(x=>x.id===it.product_id); if(!p) continue;
+    const deductAmt = it.size_mult ? (it.qty * it.size_mult) : it.qty;
+    if((+p.quantity||0) < deductAmt) return toast(t('t_stock_only',{name:p.name,n:p.quantity}),'danger');
+  }
+  const rem=Math.max(0,total-paid);
+  const customer_id=cart.meta.customer_id;
+  if(rem>0 && !customer_id) return toast(t('t_select_customer'),'warning');
+  const sales=DB.get('sales');
+  const sale={
+    id:DB.nextId('sales'), customer_id:customer_id||null, sale_date:cart.meta.date,
+    total_amount:total, discount:disc, paid_amount:paid, remaining:rem,
+    sale_type:rem>0?'credit':'cash', profit, notes:cart.meta.notes||'',
+    items:cart.items.map(i=>({
+      product_id:i.product_id, name:i.name, quantity:i.qty, price:i.price, cost:i.cost,
+      size_label:i.size_label||'', size_mult:i.size_mult||null, unit:i.unit||'piece'
+    }))
+  };
+  sales.push(sale); DB.set('sales',sales);
+  cart.items.forEach(it=>{
+    const p=products.find(x=>x.id===it.product_id);
+    if(p){
+      const deductAmt = it.size_mult ? (it.qty * it.size_mult) : it.qty;
+      p.quantity=Math.max(0,(+p.quantity||0)-deductAmt);
+      recalcBoxes(p);
+    }
+  });
+  DB.set('products',products);
+  if(customer_id){
+    const customers=DB.get('customers');
+    const c=customers.find(x=>x.id===+customer_id);
+    if(c){ c.balance = DB.calcBalance('customer', +customer_id); DB.set('customers',customers); }
+  }
+  toast(t('t_sale_saved'));
+  const saleId=sale.id;
+  cart={mode:'sale',items:[],meta:{customer_id:null,type:'cash',date:today(),discount:0,paid:0,notes:''}};
+  go('sales');
+  setTimeout(()=>showReceipt(saleId),350);
+}
+
+/* ============================================================
+   PURCHASE FORM
+============================================================ */
+function renderPurchaseForm(){
+  const suppliers=DB.get('suppliers').slice().sort((a,b)=>a.name.localeCompare(b.name));
+  const m=cart.meta;
+  return `<div class="wrap">
+    <div class="page-head">
+      <button class="back-btn" onclick="go('dashboard')"><i class="fas fa-arrow-left"></i></button>
+      <h4>${t('new_purchase')}</h4>
+      <button class="back-btn" onclick="go('purchases')"><i class="fas fa-list"></i></button>
+    </div>
+    <div class="card-x">
+      <div class="mb-3"><label class="form-label">${t('supplier')}</label>
+        <div style="display:flex;gap:8px">
+          <select class="form-select" id="pu_sup" onchange="cart.meta.supplier_id=this.value?+this.value:null">
+            <option value="">-- ${t('select_party')} --</option>
+            ${suppliers.map(s=>`<option value="${s.id}" ${m.supplier_id==s.id?'selected':''}>${esc(s.name)}${+s.balance>0?' — '+fmtN(s.balance):''}</option>`).join('')}
+          </select>
+          <button type="button" class="back-btn" style="background:var(--info);color:#fff;flex-shrink:0" onclick="quickAddParty('supplier')"><i class="fas fa-user-plus"></i></button>
+        </div>
+      </div>
+      <div><label class="form-label">${t('date')}</label><input type="date" class="form-control" id="pu_date" value="${m.date}" onchange="cart.meta.date=this.value"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px">
+      <b style="font-size:1rem"><i class="fas fa-basket-shopping" style="color:var(--primary)"></i> ${t('items')}</b>
+      <div style="display:flex;gap:6px">
+        <button class="chip active" style="background:var(--warning);border-color:var(--warning)" onclick="scanForSale()"><i class="fas fa-barcode"></i> ${t('scan')}</button>
+        <button class="chip active" onclick="openProductPicker()"><i class="fas fa-plus"></i> ${t('item_add')}</button>
+      </div>
+    </div>
+    <div class="card-x" style="padding:12px"><div id="cartItems"></div></div>
+    <div class="card-x">
+      <label class="form-label">${t('paid_amt')}</label>
+      <div style="display:flex;gap:6px">
+        <input type="number" step="0.01" inputmode="decimal" class="form-control" id="pu_paid" value="${m.paid||0}" oninput="cart.meta.paid=parseFloat(this.value)||0;calcPurchase()">
+        <button type="button" class="back-btn" style="background:var(--success);color:#fff;flex-shrink:0" onclick="fullPayPurchase()"><i class="fas fa-check"></i></button>
+      </div>
+      <div id="purTotals" style="margin-top:10px"></div>
+    </div>
+    <div class="card-x"><label class="form-label">${t('notes')}</label><input class="form-control" id="pu_notes" value="${esc(m.notes||'')}" oninput="cart.meta.notes=this.value"></div>
+    <button class="btn-x bg-p mb-2" onclick="savePurchase()"><i class="fas fa-floppy-disk"></i> ${t('save_purchase')}</button>
+    <button class="btn-x btn-soft" onclick="go('dashboard')">${t('cancel')}</button>
+  </div>`;
+}
+function fullPayPurchase(){ const total=cartSubtotal(); cart.meta.paid=total; const el=document.getElementById('pu_paid'); if(el) el.value=total.toFixed(2); calcPurchase(); }
+function calcPurchase(){
+  const box=document.getElementById('purTotals'); if(!box) return;
+  const total=cartSubtotal(), paid=+cart.meta.paid||0, rem=Math.max(0,total-paid);
+  box.innerHTML=`<div class="row-total big"><span>${t('total')}</span><span style="color:var(--primary)">${fmt(total)}</span></div>
+    <div class="row-total"><span style="color:var(--muted)">${t('paid_amt')}</span><span>${fmt(paid)}</span></div>
+    ${rem>0?`<div class="row-total"><span style="color:var(--muted)">${t('remaining')}</span><span style="color:var(--danger);font-weight:800">${fmt(rem)}</span></div>`:''}`;
+}
+function savePurchase(){
+  if(!cart.items.length) return toast(t('t_add_items_first'),'warning');
+  const supplier_id=cart.meta.supplier_id;
+  if(!supplier_id) return toast(t('t_select_supplier'),'warning');
+  const total=cartSubtotal(), paid=+cart.meta.paid||0;
+  if(paid>total+0.01) return toast(t('t_paid_exceeds'),'danger');
+  const rem=Math.max(0,total-paid);
+  const purchases=DB.get('purchases');
+  purchases.push({
+    id:DB.nextId('purchases'), supplier_id:+supplier_id, purchase_date:cart.meta.date,
+    total_amount:total, paid_amount:paid, remaining:rem, notes:cart.meta.notes||'',
+    items:cart.items.map(i=>({
+      product_id:i.product_id, name:i.name, quantity:i.qty, price:i.price,
+      size_label:i.size_label||'', size_mult:i.size_mult||null, unit:i.unit||'piece'
+    }))
+  });
+  DB.set('purchases',purchases);
+  const products=DB.get('products');
+  cart.items.forEach(it=>{
+    const p=products.find(x=>x.id===it.product_id);
+    if(p){
+      const addAmt = it.size_mult ? (it.qty * it.size_mult) : it.qty;
+      p.quantity=(+p.quantity||0)+addAmt;
+      if(!it.size_mult && it.price>0) p.purchase_price=it.price;
+      recalcBoxes(p);
+    }
+  });
+  DB.set('products',products);
+  const suppliers=DB.get('suppliers');
+  const s=suppliers.find(x=>x.id===+supplier_id);
+  if(s){ s.balance=DB.calcBalance('supplier',+supplier_id); DB.set('suppliers',suppliers); }
+  toast(t('t_purchase_saved'));
+  cart={mode:'purchase',items:[],meta:{supplier_id:null,date:today(),paid:0,notes:''}};
+  go('purchases');
+}
+
+/* ============================================================
+   SALES LIST
+============================================================ */
+let saleSearch='';
+function renderSales(){
+  const sales=DB.get('sales').slice().sort((a,b)=>b.id-a.id);
+  const customers=DB.get('customers');
+  const q=saleSearch.toLowerCase().trim();
+  let list=sales.filter(s=>{
+    if(!q) return true;
+    const c=customers.find(x=>x.id===s.customer_id);
+    const name=c?c.name.toLowerCase():'cash';
+    return name.includes(q)||String(s.total_amount).includes(q)||s.sale_date.includes(q);
+  });
+  const totalAmt=list.reduce((a,s)=>a+(+s.total_amount||0),0);
+  const totalRem=list.reduce((a,s)=>a+(+s.remaining||0),0);
+  let html=`<div class="wrap">
+    <div class="page-head">
+      <button class="back-btn" onclick="go('dashboard')"><i class="fas fa-arrow-left"></i></button>
+      <h4>${t('sales')}</h4>
+      <button class="back-btn" style="background:var(--success);color:#fff" onclick="startSale()"><i class="fas fa-plus"></i></button>
+    </div>
+    <div class="input-icon mb-3"><input class="form-control" placeholder="${t('search')}" value="${esc(saleSearch)}" oninput="saleSearch=this.value;refreshSalesList()"><i class="fas fa-magnifying-glass"></i></div>
+    <div class="row g-2 mb-3">
+      <div class="col-6"><div class="stat" style="--c:#16a34a;cursor:default"><div class="num">${fmt(totalAmt)}</div><div class="lbl">${t('total')}</div></div></div>
+      <div class="col-6"><div class="stat" style="--c:#dc2626;cursor:default"><div class="num">${fmt(totalRem)}</div><div class="lbl">${t('remaining')}</div></div></div>
+    </div>
+    <div id="salesList"></div></div>`;
+  setTimeout(refreshSalesList,0);
+  return html;
+}
+function refreshSalesList(){
+  const box=document.getElementById('salesList'); if(!box) return;
+  const sales=DB.get('sales').slice().sort((a,b)=>b.id-a.id);
+  const customers=DB.get('customers');
+  const q=(saleSearch||'').toLowerCase().trim();
+  let list=sales.filter(s=>{
+    if(!q) return true;
+    const c=customers.find(x=>x.id===s.customer_id);
+    const name=c?c.name.toLowerCase():'cash sale';
+    return name.includes(q)||String(s.total_amount).includes(q)||s.sale_date.includes(q);
+  });
+  if(!list.length){ box.innerHTML=`<div class="empty"><i class="fas fa-receipt"></i><p>${sales.length?t('no_match'):t('no_sales_yet')}</p></div>`; return; }
+  box.innerHTML=list.slice(0,150).map(s=>{
+    const c=customers.find(x=>x.id===s.customer_id);
+    const name=c?c.name:t('cash_sale');
+    return `<div class="li" onclick="showReceipt(${s.id})">
+      <div class="av" style="background:${avatarColor(name)}">${initials(name)}</div>
+      <div class="info"><b>${esc(name)}</b><small>${shortDate(s.sale_date)} • ${(s.items||[]).length} ${t('items_word')}</small></div>
+      <div style="text-align:right"><div class="amt" style="color:var(--success)">${fmt(s.total_amount)}</div>
+        ${(+s.remaining>0)?`<span class="badge-x b-red">${t('remaining')} ${fmtN(s.remaining)}</span>`:`<span class="badge-x b-green">${t('paid_amt')}</span>`}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ============================================================
+   RECEIPT
+============================================================ */
+function showReceipt(saleId){
+  const s=DB.get('sales').find(x=>x.id===saleId); if(!s) return;
+  const c=DB.get('customers').find(x=>x.id===s.customer_id);
+  const name=c?c.name:t('cash_customer');
+  const shop=localStorage.getItem('cd_shopname')||'Chota Dukan';
+  const itemsHtml=(s.items||[]).map(i=>{
+    const sizeTxt = i.size_label ? ` (${i.size_label})` : '';
+    return `<div class="r-line"><span>${esc(i.name)}${sizeTxt} × ${i.quantity}</span><span>${fmtN(i.price*i.quantity)}</span></div>`;
+  }).join('');
+  const text=`*${shop}*\n\n${t('customer')}: ${name}\n${t('date')}: ${dateFmt(s.sale_date)}\n\n`+
+    (s.items||[]).map(i=>{
+      const sizeTxt = i.size_label ? ` (${i.size_label})` : '';
+      return `• ${i.name}${sizeTxt} × ${i.quantity} = Rs ${fmtN(i.price*i.quantity)}`;
+    }).join('\n')+
+    `\n\n${t('subtotal')}: Rs ${fmtN((+s.total_amount||0)+(+s.discount||0))}`+
+    (+s.discount>0?`\n${t('discount')}: -Rs ${fmtN(s.discount)}`:'')+
+    `\n*${t('total')}: Rs ${fmtN(s.total_amount)}*\n${t('paid_amt')}: Rs ${fmtN(s.paid_amount)}`+
+    (+s.remaining>0?`\n*${t('remaining')}: Rs ${fmtN(s.remaining)}*`:'')+
+    `\n\n${t('whatsapp_msg')} 🙏`;
+  openSheet(`<div class="grab"></div>
+    <div class="sheet-head"><h5><i class="fas fa-receipt" style="color:var(--success)"></i> ${t('receipt')}</h5><button onclick="closeSheet()"><i class="fas fa-times"></i></button></div>
+    <div class="sheet-body">
+      <div class="receipt" id="receiptBox">
+        <h5>${esc(shop)}</h5>
+        <div style="text-align:center;font-size:.72rem;color:#666">${t('bikri_receipt')}</div>
+        <hr>
+        <div class="r-line"><span>${t('customer')}</span><span>${esc(name)}</span></div>
+        <div class="r-line"><span>${t('date')}</span><span>${dateFmt(s.sale_date)}</span></div>
+        <div class="r-line"><span>${t('bill_no')}</span><span>${String(s.id).padStart(5,'0')}</span></div>
+        <hr>${itemsHtml}<hr>
+        <div class="r-line"><span>${t('subtotal')}</span><span>${fmtN((+s.total_amount||0)+(+s.discount||0))}</span></div>
+        ${(+s.discount>0)?`<div class="r-line"><span>${t('discount')}</span><span>− ${fmtN(s.discount)}</span></div>`:''}
+        <div class="r-line" style="font-weight:800;font-size:1rem"><span>${t('total').toUpperCase()}</span><span>${fmtN(s.total_amount)}</span></div>
+        <div class="r-line"><span>${t('paid_amt')}</span><span>${fmtN(s.paid_amount)}</span></div>
+        ${(+s.remaining>0)?`<div class="r-line" style="font-weight:800"><span>${t('remaining').toUpperCase()}</span><span>${fmtN(s.remaining)}</span></div>`:''}
+        <hr><div style="text-align:center;font-size:.75rem">${t('thanks')}</div>
+      </div>
+      <div class="row g-2 mt-3 no-print">
+        <div class="col-6"><button class="btn-x bg-s" onclick="shareWhatsApp(${s.id})"><i class="fab fa-whatsapp"></i> ${t('share_wa')}</button></div>
+        <div class="col-6"><button class="btn-x bg-i" onclick="window.print()"><i class="fas fa-print"></i> ${t('print')}</button></div>
+        <div class="col-12"><button class="btn-x btn-soft" onclick="deleteSale(${s.id})" style="color:var(--danger)"><i class="fas fa-trash"></i> ${t('delete')}</button></div>
+      </div>
+    </div>`);
+  window._receiptText=text;
+}
+function shareWhatsApp(saleId){
+  const s=DB.get('sales').find(x=>x.id===saleId);
+  const c=DB.get('customers').find(x=>x.id===s?.customer_id);
+  const phone=(c?.phone||'').replace(/\D/g,'');
+  const url=phone?`https://wa.me/${phone.length>10?phone:'92'+phone.replace(/^0/,'')}?text=${encodeURIComponent(window._receiptText)}`:`https://wa.me/?text=${encodeURIComponent(window._receiptText)}`;
+  window.open(url,'_blank');
+}
+function deleteSale(id){
+  confirmBox(t('c_delete_sale'), ()=>{
+    const sales=DB.get('sales');
+    const s=sales.find(x=>x.id===id);
+    if(s){
+      const products=DB.get('products');
+      (s.items||[]).forEach(it=>{
+        const p=products.find(x=>x.id===it.product_id);
+        if(p){
+          const addAmt = it.size_mult ? (it.quantity * it.size_mult) : it.quantity;
+          p.quantity=(+p.quantity||0)+addAmt;
+          recalcBoxes(p);
+        }
+      });
+      DB.set('products',products);
+      if(s.customer_id){ const customers=DB.get('customers'); const c=customers.find(x=>x.id===s.customer_id); if(c){ c.balance=DB.calcBalance('customer',s.customer_id); DB.set('customers',customers); } }
+    }
+    DB.set('sales',sales.filter(x=>x.id!==id));
+    closeSheet(); toast(t('t_deleted'),'danger');
+    go(currentPage==='sales'?'sales':'dashboard');
+  },{danger:true,title:t('c_delete')});
+}
+
+/* ============================================================
+   PURCHASES LIST
+============================================================ */
+function renderPurchases(){
+  const purchases=DB.get('purchases').slice().sort((a,b)=>b.id-a.id);
+  const suppliers=DB.get('suppliers');
+  const total=purchases.reduce((a,p)=>a+(+p.total_amount||0),0);
+  const rem=purchases.reduce((a,p)=>a+(+p.remaining||0),0);
+  let html=`<div class="wrap">
+    <div class="page-head">
+      <button class="back-btn" onclick="go('dashboard')"><i class="fas fa-arrow-left"></i></button>
+      <h4>${t('purchases')}</h4>
+      <button class="back-btn" style="background:var(--primary);color:#fff" onclick="startPurchase()"><i class="fas fa-plus"></i></button>
+    </div>
+    <div class="row g-2 mb-3">
+      <div class="col-6"><div class="stat" style="--c:#4f46e5;cursor:default"><div class="num">${fmt(total)}</div><div class="lbl">${t('total')}</div></div></div>
+      <div class="col-6"><div class="stat" style="--c:#dc2626;cursor:default"><div class="num">${fmt(rem)}</div><div class="lbl">${t('remaining')}</div></div></div>
+    </div>`;
+  if(!purchases.length){ html+=`<div class="empty"><i class="fas fa-truck"></i><p>${t('no_purchases_yet')}</p></div>`; }
+  else {
+    purchases.slice(0,150).forEach(p=>{
+      const s=suppliers.find(x=>x.id===p.supplier_id);
+      const name=s?s.name:'—';
+      html+=`<div class="li" onclick="showPurchaseDetail(${p.id})">
+        <div class="av" style="background:${avatarColor(name)}">${initials(name)}</div>
+        <div class="info"><b>${esc(name)}</b><small>${shortDate(p.purchase_date)} • ${(p.items||[]).length} ${t('items_word')}</small></div>
+        <div style="text-align:right"><div class="amt" style="color:var(--primary)">${fmt(p.total_amount)}</div>
+          ${(+p.remaining>0)?`<span class="badge-x b-red">${t('remaining')} ${fmtN(p.remaining)}</span>`:`<span class="badge-x b-green">${t('paid_amt')}</span>`}</div>
+      </div>`;
+    });
+  }
+  html+=`</div>`;
+  return html;
+}
+function showPurchaseDetail(id){
+  const p=DB.get('purchases').find(x=>x.id===id); if(!p) return;
+  const s=DB.get('suppliers').find(x=>x.id===p.supplier_id);
+  const itemsHtml=(p.items||[]).map(i=>{
+    const sizeTxt = i.size_label ? ` (${i.size_label})` : '';
+    return `<div class="row-total"><span>${esc(i.name)}${sizeTxt} × ${i.quantity}</span><b>${fmt(i.price*i.quantity)}</b></div>`;
+  }).join('');
+  openSheet(`<div class="grab"></div>
+    <div class="sheet-head"><h5><i class="fas fa-truck" style="color:var(--primary)"></i> ${t('party_detail')}</h5><button onclick="closeSheet()"><i class="fas fa-times"></i></button></div>
+    <div class="sheet-body">
+      <div class="card-x" style="margin-bottom:12px">
+        <div class="row-total"><span style="color:var(--muted)">${t('supplier')}</span><b>${esc(s?.name||'—')}</b></div>
+        <div class="row-total"><span style="color:var(--muted)">${t('date')}</span><b>${dateFmt(p.purchase_date)}</b></div>
+        ${p.notes?`<div class="row-total"><span style="color:var(--muted)">${t('notes')}</span><b>${esc(p.notes)}</b></div>`:''}
+      </div>
+      <b style="font-size:.9rem">${t('items')}</b>
+      <div class="card-x mt-2">${itemsHtml}</div>
+      <div class="card-x">
+        <div class="row-total big"><span>${t('total')}</span><span style="color:var(--primary)">${fmt(p.total_amount)}</span></div>
+        <div class="row-total"><span style="color:var(--muted)">${t('paid_amt')}</span><span>${fmt(p.paid_amount)}</span></div>
+        ${(+p.remaining>0)?`<div class="row-total"><span style="color:var(--muted)">${t('remaining')}</span><span style="color:var(--danger);font-weight:800">${fmt(p.remaining)}</span></div>`:''}
+      </div>
+      <button class="btn-x bg-d mt-2" onclick="deletePurchase(${p.id})"><i class="fas fa-trash"></i> ${t('delete')}</button>
+    </div>`);
+}
+function deletePurchase(id){
+  confirmBox(t('c_delete_purchase'), ()=>{
+    const purchases=DB.get('purchases');
+    const p=purchases.find(x=>x.id===id);
+    if(p){
+      const products=DB.get('products');
+      (p.items||[]).forEach(it=>{
+        const pr=products.find(x=>x.id===it.product_id);
+        if(pr){
+          const deductAmt = it.size_mult ? (it.quantity * it.size_mult) : it.quantity;
+          pr.quantity=Math.max(0,(+pr.quantity||0)-deductAmt);
+          recalcBoxes(pr);
+        }
+      });
+      DB.set('products',products);
+      if(p.supplier_id){ const suppliers=DB.get('suppliers'); const s=suppliers.find(x=>x.id===p.supplier_id); if(s){ s.balance=DB.calcBalance('supplier',p.supplier_id); DB.set('suppliers',suppliers); } }
+    }
+    DB.set('purchases',purchases.filter(x=>x.id!==id));
+    closeSheet(); toast(t('t_deleted'),'danger'); go('purchases');
+  },{danger:true,title:t('c_delete')});
+}
+
+/* ============================================================
+   PARTIES
+============================================================ */
+let partyTab='customer';
+function renderParties(){
+  const customers=DB.get('customers'), suppliers=DB.get('suppliers');
+  const list=partyTab==='customer'?customers:suppliers;
+  const totalDue=list.reduce((a,x)=>a+(+x.balance||0),0);
+  const isC=partyTab==='customer';
+  let html=`<div class="wrap">
+    <div class="page-head">
+      <button class="back-btn" onclick="go('dashboard')"><i class="fas fa-arrow-left"></i></button>
+      <h4>${isC?t('customers'):t('suppliers')}</h4>
+      <button class="back-btn" style="background:var(--success);color:#fff" onclick="addParty('${partyTab}')"><i class="fas fa-plus"></i></button>
+    </div>
+    <div class="seg mb-3">
+      <button class="${isC?'active':''}" onclick="partyTab='customer';go('parties')">${t('customers')} (${customers.length})</button>
+      <button class="${!isC?'active':''}" onclick="partyTab='supplier';go('parties')">${t('suppliers')} (${suppliers.length})</button>
+    </div>
+    <div class="stat mb-3" style="--c:${isC?'#16a34a':'#dc2626'};cursor:default"><div class="num">${fmt(totalDue)}</div><div class="lbl">${isC?t('recv'):t('pay')}</div></div>`;
+  if(!list.length){ html+=`<div class="empty"><i class="fas fa-users"></i><p>${t('no_data')}</p></div>`; }
+  else {
+    list.slice().sort((a,b)=>(b.balance||0)-(a.balance||0)).forEach(p=>{
+      html+=`<div class="li" onclick="go('party_detail',{type:'${partyTab}',id:${p.id}})">
+        <div class="av" style="background:${avatarColor(p.name)}">${initials(p.name)}</div>
+        <div class="info"><b>${esc(p.name)}</b><small>${p.phone?esc(p.phone):'—'}</small></div>
+        <div style="text-align:right"><div class="amt" style="color:${+p.balance>0?(isC?'var(--success)':'var(--danger)'):'var(--muted)'}">${fmt(p.balance)}</div>
+          <small style="color:var(--muted);font-size:.7rem">${+p.balance>0?(isC?t('lena_hai'):t('dena_hai')):t('ok')}</small></div>
+      </div>`;
+    });
+  }
+  html+=`<div style="height:8px"></div></div>`;
+  return html;
+}
+function addParty(type){ go('party_form',{type,id:null}); }
+function renderPartyForm({type,id}){
+  const isC=type==='customer';
+  const list=DB.get(isC?'customers':'suppliers');
+  const p=id?list.find(x=>x.id===id):null;
+  return `<div class="wrap">
+    <div class="page-head">
+      <button class="back-btn" onclick="go('parties')"><i class="fas fa-arrow-left"></i></button>
+      <h4>${p?t('edit'):(isC?t('new_customer'):t('new_supplier'))}</h4>
+    </div>
+    <form onsubmit="saveParty(event,'${type}',${id||'null'})">
+      <div class="card-x">
+        <div class="mb-3"><label class="form-label">${t('name')} * <button type="button" class="voice" onclick="startVoice('pt_name')"><i class="fas fa-microphone"></i></button></label>
+          <input class="form-control" id="pt_name" required value="${esc(p?.name||'')}"></div>
+        <div class="mb-3"><label class="form-label">${t('phone')}</label><input type="tel" inputmode="tel" class="form-control" id="pt_phone" value="${esc(p?.phone||'')}" placeholder="03001234567"></div>
+        <div class="mb-3"><label class="form-label">${t('address')}</label><input class="form-control" id="pt_addr" value="${esc(p?.address||'')}"></div>
+        ${p?`<div><label class="form-label">${t('opening_balance')}</label><input type="number" step="0.01" inputmode="decimal" class="form-control" id="pt_bal" value="${p.opening_balance||0}"><small style="color:var(--muted);font-size:.72rem">${t('opening_balance_hint')}</small></div>`:''}
+      </div>
+      <button type="submit" class="btn-x ${isC?'bg-s':'bg-p'} mb-2"><i class="fas fa-floppy-disk"></i> ${t('save')}</button>
+      ${p?`<button type="button" class="btn-x bg-d mb-2" onclick="deleteParty('${type}',${id})"><i class="fas fa-trash"></i> ${t('delete')}</button>`:''}
+      <button type="button" class="btn-x btn-soft" onclick="go('parties')">${t('cancel')}</button>
+    </form></div>`;
+}
+function saveParty(e,type,id){
+  e.preventDefault();
+  const isC=type==='customer';
+  const key=isC?'customers':'suppliers';
+  const list=DB.get(key);
+  const name=document.getElementById('pt_name').value.trim();
+  if(!name) return toast(t('t_name_required'),'danger');
+  const data={name,phone:document.getElementById('pt_phone').value.trim(),address:document.getElementById('pt_addr').value.trim()};
+  if(id){
+    const i=list.findIndex(x=>x.id===id);
+    if(i>-1){
+      const balEl=document.getElementById('pt_bal');
+      list[i]={...list[i],...data,opening_balance:balEl?(parseFloat(balEl.value)||0):(list[i].opening_balance||0)};
+      list[i].balance=DB.calcBalance(isC?'customer':'supplier',id);
+    }
+    toast(t('t_updated'),'info');
+  } else {
+    list.push({id:DB.nextId(key),...data,balance:0,opening_balance:0,created:today()});
+    toast(t('t_added'));
+  }
+  DB.set(key,list); go('parties');
+}
+function deleteParty(type,id){
+  const isC=type==='customer';
+  confirmBox(t('c_delete_party'), ()=>{
+    DB.set(isC?'customers':'suppliers',DB.get(isC?'customers':'suppliers').filter(x=>x.id!==id));
+    toast(t('t_deleted'),'danger'); go('parties');
+  },{danger:true,title:t('c_delete')});
+}
+function quickAddParty(type){
+  const isC=type==='customer';
+  openSheet(`<div class="grab"></div>
+    <div class="sheet-head"><h5><i class="fas fa-user-plus" style="color:var(--info)"></i> ${isC?t('new_customer'):t('new_supplier')}</h5><button onclick="closeSheet()"><i class="fas fa-times"></i></button></div>
+    <div class="sheet-body">
+      <div class="mb-3"><label class="form-label">${t('name')} *</label><input class="form-control" id="q_name"></div>
+      <div class="mb-3"><label class="form-label">${t('phone')}</label><input type="tel" inputmode="tel" class="form-control" id="q_phone"></div>
+      <button class="btn-x ${isC?'bg-s':'bg-p'}" onclick="saveQuickParty('${type}')"><i class="fas fa-check"></i> ${t('save')}</button>
+    </div>`);
+  setTimeout(()=>document.getElementById('q_name')?.focus(),320);
+}
+function saveQuickParty(type){
+  const isC=type==='customer';
+  const key=isC?'customers':'suppliers';
+  const name=document.getElementById('q_name').value.trim();
+  if(!name) return toast(t('t_name_required'),'warning');
+  const list=DB.get(key);
+  const newId=DB.nextId(key);
+  list.push({id:newId,name,phone:document.getElementById('q_phone').value.trim(),address:'',balance:0,opening_balance:0});
+  DB.set(key,list);
+  cart.meta[isC?'customer_id':'supplier_id']=newId;
+  closeSheet(); toast(name+' — '+t('t_added'));
+  setTimeout(()=>{ const sel=document.getElementById(isC?'s_cust':'pu_sup'); if(sel) sel.value=newId; },200);
+}
+
+/* ============================================================
+   PARTY DETAIL
+============================================================ */
+function renderPartyDetail({type,id}){
+  const isC=type==='customer';
+  const key=isC?'customers':'suppliers';
+  const party=DB.get(key).find(x=>x.id===id);
+  if(!party){ go('parties'); return ''; }
+  const liveBalance=DB.calcBalance(isC?'customer':'supplier',id);
+  if(liveBalance!==(+party.balance||0)){ party.balance=liveBalance; const list=DB.get(key); const i=list.findIndex(x=>x.id===id); if(i>-1){ list[i].balance=liveBalance; DB.set(key,list); } }
+  let entries=[];
+  if(isC){
+    DB.get('sales').filter(s=>s.customer_id===id).forEach(s=>{ entries.push({date:s.sale_date,id:s.id,type:'sale',label:t('sales')+' #'+String(s.id).padStart(4,'0'),amount:+s.total_amount||0,paid:+s.paid_amount||0,ref:s}); });
+    DB.get('payments').filter(p=>p.type==='customer'&&p.party_id===id).forEach(p=>{ entries.push({date:p.payment_date,id:p.id,type:'payment',label:t('received'),amount:0,paid:+p.amount||0}); });
+  } else {
+    DB.get('purchases').filter(p=>p.supplier_id===id).forEach(p=>{ entries.push({date:p.purchase_date,id:p.id,type:'purchase',label:t('purchases')+' #'+String(p.id).padStart(4,'0'),amount:+p.total_amount||0,paid:+p.paid_amount||0,ref:p}); });
+    DB.get('payments').filter(p=>p.type==='supplier'&&p.party_id===id).forEach(p=>{ entries.push({date:p.payment_date,id:p.id,type:'payment',label:t('paid'),amount:0,paid:+p.amount||0}); });
+  }
+  entries.sort((a,b)=>(b.date||'').localeCompare(a.date||'')||b.id-a.id);
+  const totalBiz=entries.filter(e=>e.amount>0).reduce((a,e)=>a+e.amount,0);
+  return `<div class="wrap">
+    <div class="page-head">
+      <button class="back-btn" onclick="go('parties')"><i class="fas fa-arrow-left"></i></button>
+      <h4>${esc(party.name)}</h4>
+      <button class="back-btn" onclick="go('party_form',{type:'${type}',id:${id}})"><i class="fas fa-pen"></i></button>
+    </div>
+    <div class="card-x" style="background:${isC?'linear-gradient(135deg,#16a34a,#22c55e)':'linear-gradient(135deg,#dc2626,#ef4444)'};color:#fff;border:none">
+      <div style="font-size:.78rem;opacity:.9;font-weight:700">${isC?t('lena_hai').toUpperCase():t('dena_hai').toUpperCase()}</div>
+      <div style="font-size:2rem;font-weight:800;line-height:1.2">${fmt(party.balance)}</div>
+      <div style="font-size:.8rem;opacity:.9;margin-top:6px">${party.phone?'<i class="fas fa-phone"></i> '+esc(party.phone)+' • ':''}${t('biz_total')} ${fmt(totalBiz)}</div>
+    </div>
+    <div class="row g-2 mb-3">
+      <div class="col-6"><button class="btn-x ${isC?'bg-w':'bg-d'}" onclick="showPayment('${isC?'customer':'supplier'}',${id})"><i class="fas fa-money-bill-wave"></i> ${isC?t('received'):t('paid')}</button></div>
+      <div class="col-6">
+        ${party.phone?`<a class="btn-x bg-s" style="text-decoration:none" href="tel:${esc(party.phone)}"><i class="fas fa-phone"></i> ${t('call')}</a>`:
+          `<a class="btn-x bg-s" style="text-decoration:none" href="https://wa.me/?text=${encodeURIComponent(t('whatsapp_msg')+' - '+party.name)}" target="_blank"><i class="fab fa-whatsapp"></i> ${t('share_wa')}</a>`}
+      </div>
+    </div>
+    <b style="font-size:.95rem;display:block;margin-bottom:9px"><i class="fas fa-clock-rotate-left"></i> ${t('transactions')} (${entries.length})</b>
+    ${entries.length?entries.map(e=>{
+      const isPay=e.type==='payment';
+      return `<div class="li" onclick='${e.ref?`showReceipt(${e.ref.id})`:''}'>
+        <div class="av" style="background:${isPay?'#f59e0b':(isC?'#16a34a':'#4f46e5')}"><i class="fas ${isPay?'fa-money-bill-wave':(isC?'fa-cart-shopping':'fa-truck')}"></i></div>
+        <div class="info"><b>${esc(e.label)}</b><small>${dateFmt(e.date)}</small></div>
+        <div style="text-align:right"><div class="amt">${fmt(e.amount||e.paid)}</div>
+          ${e.amount>0&&e.amount-e.paid>0?`<span class="badge-x b-red">${t('remaining')} ${fmtN(e.amount-e.paid)}</span>`:`<span class="badge-x b-green">${t('paid_amt')}</span>`}</div>
+      </div>`;
+    }).join(''):`<div class="empty"><i class="fas fa-receipt"></i><p>${t('no_transactions')}</p></div>`}
+  </div>`;
+}
+
+/* ============================================================
+   LEDGER
+============================================================ */
+function renderLedger(){
+  const customers=DB.get('customers').filter(c=>(+c.balance||0)>0).sort((a,b)=>b.balance-a.balance);
+  const suppliers=DB.get('suppliers').filter(s=>(+s.balance||0)>0).sort((a,b)=>b.balance-a.balance);
+  const totalLena=customers.reduce((a,c)=>a+(+c.balance||0),0);
+  const totalDena=suppliers.reduce((a,s)=>a+(+s.balance||0),0);
+  return `<div class="wrap">
+    <div class="page-head"><h4><i class="fas fa-book" style="color:var(--primary)"></i> ${t('ledger_title')}</h4>
+      <button class="back-btn" onclick="go('parties')"><i class="fas fa-users"></i></button>
+    </div>
+    <div class="row g-2 mb-3">
+      <div class="col-6"><div class="stat" style="--c:#16a34a" onclick="go('udhar',{tab:'customer'})">
+        <div class="ico"><i class="fas fa-hand-holding-dollar"></i></div>
+        <div class="num">${fmt(totalLena)}</div><div class="lbl">${t('recv')}</div>
+        <div class="view-all">${t('view_all')} →</div></div></div>
+      <div class="col-6"><div class="stat" style="--c:#dc2626" onclick="go('udhar',{tab:'supplier'})">
+        <div class="ico"><i class="fas fa-hand-holding-heart"></i></div>
+        <div class="num">${fmt(totalDena)}</div><div class="lbl">${t('pay')}</div>
+        <div class="view-all">${t('view_all')} →</div></div></div>
+    </div>
+    <div class="row g-2 mb-3">
+      <div class="col-6"><button class="btn-x bg-w" onclick="showPayment('customer')"><i class="fas fa-hand-holding-dollar"></i> ${t('received')}</button></div>
+      <div class="col-6"><button class="btn-x bg-d" onclick="showPayment('supplier')"><i class="fas fa-hand-holding-heart"></i> ${t('paid')}</button></div>
+    </div>
+    <div class="card-x">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <b style="color:var(--success)"><i class="fas fa-arrow-down"></i> ${t('lena_list')} (${customers.length})</b>
+        <button class="chip" onclick="go('udhar',{tab:'customer'})">${t('view_all')}</button>
+      </div>
+      ${customers.length?customers.slice(0,6).map(c=>`
+        <div class="li" style="box-shadow:none;margin-bottom:7px" onclick="go('party_detail',{type:'customer',id:${c.id}})">
+          <div class="av" style="background:${avatarColor(c.name)}">${initials(c.name)}</div>
+          <div class="info"><b>${esc(c.name)}</b><small>${c.phone?esc(c.phone):'—'}</small></div>
+          <div class="amt" style="color:var(--success)">${fmt(c.balance)}</div>
+        </div>`).join(''):`<div style="text-align:center;padding:14px;color:var(--muted);font-size:.85rem">${t('no_receivable')}</div>`}
+    </div>
+    <div class="card-x">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <b style="color:var(--danger)"><i class="fas fa-arrow-up"></i> ${t('dena_list')} (${suppliers.length})</b>
+        <button class="chip" onclick="go('udhar',{tab:'supplier'})">${t('view_all')}</button>
+      </div>
+      ${suppliers.length?suppliers.slice(0,6).map(s=>`
+        <div class="li" style="box-shadow:none;margin-bottom:7px" onclick="go('party_detail',{type:'supplier',id:${s.id}})">
+          <div class="av" style="background:${avatarColor(s.name)}">${initials(s.name)}</div>
+          <div class="info"><b>${esc(s.name)}</b><small>${s.phone?esc(s.phone):'—'}</small></div>
+          <div class="amt" style="color:var(--danger)">${fmt(s.balance)}</div>
+        </div>`).join(''):`<div style="text-align:center;padding:14px;color:var(--muted);font-size:.85rem">${t('no_payable')}</div>`}
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   PAYMENT
+============================================================ */
+function showPayment(type,preselectedId=null){
+  const isC=type==='customer';
+  const parties=DB.get(isC?'customers':'suppliers').filter(p=>(+p.balance||0)>0||preselectedId===p.id);
+  if(!parties.length) return toast(t('t_no_party'),'info');
+  const opts=parties.sort((a,b)=>b.balance-a.balance).map(p=>`<option value="${p.id}" ${preselectedId==p.id?'selected':''}>${esc(p.name)} — ${fmt(p.balance)}</option>`).join('');
+  openSheet(`<div class="grab"></div>
+    <div class="sheet-head"><h5><i class="fas ${isC?'fa-hand-holding-dollar':'fa-hand-holding-heart'}" style="color:${isC?'var(--success)':'var(--danger)'}"></i> ${isC?t('received'):t('paid')}</h5><button onclick="closeSheet()"><i class="fas fa-times"></i></button></div>
+    <div class="sheet-body">
+      <div class="mb-3"><label class="form-label">${isC?t('customer'):t('supplier')}</label>
+        <select class="form-select" id="pay_party" onchange="updatePartyBalanceHint('${type}')"><option value="">-- ${t('select_party')} --</option>${opts}</select>
+        <div id="payHint" style="margin-top:8px;font-size:.82rem;color:var(--muted);font-weight:600"></div>
+      </div>
+      <div class="mb-3"><label class="form-label">${t('amount')}</label>
+        <div style="display:flex;gap:6px">
+          <input type="number" step="0.01" inputmode="decimal" class="form-control" id="pay_amt" placeholder="0">
+          <button class="back-btn" style="background:var(--warning);color:#fff;flex-shrink:0;width:auto;padding:0 14px;font-size:.8rem;font-weight:700" onclick="fillFullPay('${type}')">${t('pay_full')}</button>
+        </div>
+      </div>
+      <div class="mb-3"><label class="form-label">${t('date')}</label><input type="date" class="form-control" id="pay_date" value="${today()}"></div>
+      <div class="mb-3"><label class="form-label">${t('notes')}</label><input class="form-control" id="pay_notes"></div>
+      <button class="btn-x ${isC?'bg-w':'bg-d'}" onclick="savePayment('${type}')"><i class="fas fa-floppy-disk"></i> ${t('save')}</button>
+    </div>`);
+  if(preselectedId) setTimeout(()=>updatePartyBalanceHint(type),100);
+  setTimeout(()=>document.getElementById('pay_amt')?.focus(),350);
+}
+function updatePartyBalanceHint(type){
+  const isC=type==='customer';
+  const id=parseInt(document.getElementById('pay_party')?.value);
+  const hint=document.getElementById('payHint');
+  if(!hint) return;
+  if(!id){ hint.textContent=''; return; }
+  const p=DB.get(isC?'customers':'suppliers').find(x=>x.id===id);
+  if(!p) return;
+  const bal=DB.calcBalance(isC?'customer':'supplier',id);
+  hint.innerHTML=`<i class="fas fa-info-circle"></i> ${t('current_balance')}: <b style="color:var(--primary)">${fmt(bal)}</b>`;
+}
+function fillFullPay(type){
+  const isC=type==='customer';
+  const id=parseInt(document.getElementById('pay_party').value);
+  if(!id) return toast(t('t_party_required'),'warning');
+  const p=DB.get(isC?'customers':'suppliers').find(x=>x.id===id);
+  if(p){
+    const bal=DB.calcBalance(isC?'customer':'supplier',id);
+    document.getElementById('pay_amt').value=bal.toFixed(2);
+  }
+}
+function savePayment(type){
+  const isC=type==='customer';
+  const key=isC?'customers':'suppliers';
+  const id=parseInt(document.getElementById('pay_party').value);
+  if(!id) return toast(t('t_select_party'),'warning');
+  const amount=parseFloat(document.getElementById('pay_amt').value)||0;
+  if(amount<=0) return toast(t('t_amount_invalid'),'warning');
+  const p=DB.get(key).find(x=>x.id===id);
+  if(!p) return;
+  const currentBal=DB.calcBalance(isC?'customer':'supplier',id);
+  if(amount>currentBal+0.01){
+    return confirmBox(t('t_payment_too_much',{amt:fmt(currentBal)}), ()=>doPayment(type,id,amount,key), {title:t('c_extra_amount')});
+  }
+  doPayment(type,id,amount,key);
+}
+function doPayment(type,id,amount,key){
+  const isC=type==='customer';
+  const payments=DB.get('payments');
+  payments.push({id:DB.nextId('payments'),type,party_id:id,amount,payment_date:document.getElementById('pay_date').value||today(),notes:(document.getElementById('pay_notes')?.value||'').trim()});
+  DB.set('payments',payments);
+  const list=DB.get(key);
+  const p=list.find(x=>x.id===id);
+  if(p){ p.balance=DB.calcBalance(isC?'customer':'supplier',id); DB.set(key,list); }
+  closeSheet();
+  toast(t('t_payment_saved'));
+  setTimeout(()=>go(currentPage==='ledger'?'ledger':(currentPage==='udhar'?'udhar':currentPage)),150);
+}
+
+/* ============================================================
+   EXPENSES
+============================================================ */
+const EXP_CATS=[
+  {k:'bijli',i:'fa-bolt'},{k:'kiraya',i:'fa-house'},
+  {k:'transport',i:'fa-truck-fast'},{k:'salary',i:'fa-user-tie'},
+  {k:'safai',i:'fa-broom'},{k:'khana',i:'fa-mug-hot'},
+  {k:'other',i:'fa-ellipsis'}
+];
+function expCatName(k){ return t('exp_'+k) || k; }
+function renderExpenses(){
+  const expenses=DB.get('expenses').slice().sort((a,b)=>b.id-a.id);
+  const t0=today();
+  const todayTotal=expenses.filter(e=>e.expense_date===t0).reduce((a,e)=>a+(+e.amount||0),0);
+  const monthTotal=expenses.filter(e=>(e.expense_date||'').slice(0,7)===t0.slice(0,7)).reduce((a,e)=>a+(+e.amount||0),0);
+  return `<div class="wrap">
+    <div class="page-head">
+      <button class="back-btn" onclick="go('dashboard')"><i class="fas fa-arrow-left"></i></button>
+      <h4>${t('expenses')}</h4>
+      <button class="back-btn" style="background:var(--warning);color:#fff" onclick="openExpenseForm()"><i class="fas fa-plus"></i></button>
+    </div>
+    <div class="row g-2 mb-3">
+      <div class="col-6"><div class="stat" style="--c:#f59e0b;cursor:default"><div class="num">${fmt(todayTotal)}</div><div class="lbl">${t('today_exp')}</div></div></div>
+      <div class="col-6"><div class="stat" style="--c:#7c3aed;cursor:default"><div class="num">${fmt(monthTotal)}</div><div class="lbl">${t('month_exp')}</div></div></div>
+    </div>
+    ${expenses.length?expenses.slice(0,150).map(e=>{
+      const cat=EXP_CATS.find(c=>c.k===e.category)||EXP_CATS[6];
+      return `<div class="li" onclick="deleteExpense(${e.id})">
+        <div class="av" style="background:${avatarColor(cat.k)}"><i class="fas ${cat.i}"></i></div>
+        <div class="info"><b>${esc(expCatName(cat.k))}</b><small>${shortDate(e.expense_date)}${e.notes?' • '+esc(e.notes):''}</small></div>
+        <div class="amt" style="color:var(--warning)">${fmt(e.amount)}</div>
+      </div>`;
+    }).join(''):`<div class="empty"><i class="fas fa-receipt"></i><p>${t('no_expenses')}</p></div>`}
+  </div>`;
+}
+function openExpenseForm(){
+  openSheet(`<div class="grab"></div>
+    <div class="sheet-head"><h5><i class="fas fa-receipt" style="color:var(--warning)"></i> ${t('new_expense')}</h5><button onclick="closeSheet()"><i class="fas fa-times"></i></button></div>
+    <div class="sheet-body">
+      <div class="mb-3"><label class="form-label">${t('category')}</label>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+          ${EXP_CATS.map(c=>`<button type="button" class="chip" style="justify-content:flex-start;padding:12px" id="expc_${c.k}" onclick="pickExpCat('${c.k}')"><i class="fas ${c.i}"></i> ${expCatName(c.k)}</button>`).join('')}
+        </div>
+      </div>
+      <div class="mb-3"><label class="form-label">${t('amount')} *</label><input type="number" step="0.01" inputmode="decimal" class="form-control" id="ex_amt" placeholder="0"></div>
+      <div class="mb-3"><label class="form-label">${t('date')}</label><input type="date" class="form-control" id="ex_date" value="${today()}"></div>
+      <div class="mb-3"><label class="form-label">${t('notes')}</label><input class="form-control" id="ex_notes"></div>
+      <button class="btn-x bg-w" onclick="saveExpense()"><i class="fas fa-floppy-disk"></i> ${t('save')}</button>
+    </div>`);
+  setTimeout(()=>{ pickExpCat('bijli'); document.getElementById('ex_amt')?.focus(); },320);
+}
+let _expCat='bijli';
+function pickExpCat(k){ _expCat=k; EXP_CATS.forEach(c=>{ const b=document.getElementById('expc_'+c.k); if(b) b.classList.toggle('active',c.k===k); }); }
+function saveExpense(){
+  const amt=parseFloat(document.getElementById('ex_amt').value)||0;
+  if(amt<=0) return toast(t('t_amount_invalid'),'warning');
+  const expenses=DB.get('expenses');
+  expenses.push({id:DB.nextId('expenses'),category:_expCat,amount:amt,expense_date:document.getElementById('ex_date').value||today(),notes:document.getElementById('ex_notes').value.trim()});
+  DB.set('expenses',expenses);
+  closeSheet(); toast(t('t_added'));
+  setTimeout(()=>go('expenses'),150);
+}
+function deleteExpense(id){
+  confirmBox(t('c_delete_expense'), ()=>{ DB.set('expenses',DB.get('expenses').filter(e=>e.id!==id)); toast(t('t_deleted'),'danger'); go('expenses'); },{danger:true,title:t('c_delete')});
+}
+
+/* ============================================================
+   REPORTS
+============================================================ */
+let reportRange={from:today(),to:today(),quick:'today'};
+function setReportQuick(q){
+  const d=new Date();
+  const iso=x=>new Date(x.getTime()-x.getTimezoneOffset()*60000).toISOString().slice(0,10);
+  if(q==='today'){ reportRange.from=today(); reportRange.to=today(); }
+  else if(q==='7d'){ const f=new Date(d); f.setDate(f.getDate()-6); reportRange.from=iso(f); reportRange.to=today(); }
+  else if(q==='30d'){ const f=new Date(d); f.setDate(f.getDate()-29); reportRange.from=iso(f); reportRange.to=today(); }
+  else if(q==='month'){ reportRange.from=today().slice(0,8)+'01'; reportRange.to=today(); }
+  else if(q==='year'){ reportRange.from=today().slice(0,4)+'-01-01'; reportRange.to=today(); }
+  reportRange.quick=q; go('reports');
+}
+function renderReports(){
+  const {from,to}=reportRange;
+  const sales=DB.get('sales').filter(s=>s.sale_date>=from&&s.sale_date<=to);
+  const purchases=DB.get('purchases').filter(p=>p.purchase_date>=from&&p.purchase_date<=to);
+  const expenses=DB.get('expenses').filter(e=>e.expense_date>=from&&e.expense_date<=to);
+  const totSale=sales.reduce((a,s)=>a+(+s.total_amount||0),0);
+  const totProfit=sales.reduce((a,s)=>a+(+s.profit||0),0);
+  const totPur=purchases.reduce((a,p)=>a+(+p.total_amount||0),0);
+  const totExp=expenses.reduce((a,e)=>a+(+e.amount||0),0);
+  const netProfit=totProfit-totExp;
+  const prodMap={};
+  sales.forEach(s=>(s.items||[]).forEach(i=>{ const k=i.product_id; if(!prodMap[k]) prodMap[k]={name:i.name,qty:0,amt:0}; prodMap[k].qty+=i.quantity; prodMap[k].amt+=i.quantity*i.price; }));
+  const top=Object.values(prodMap).sort((a,b)=>b.amt-a.amt).slice(0,5);
+  const quickBtns=[['today','range_today'],['7d','range_7d'],['30d','range_30d'],['month','range_month'],['year','range_year']];
+  const curMonth = today().slice(0,7);
+  const lastMonthDate = new Date(); lastMonthDate.setMonth(lastMonthDate.getMonth()-1);
+  const lastMonth = new Date(lastMonthDate.getTime() - lastMonthDate.getTimezoneOffset()*60000).toISOString().slice(0,7);
+  const curPL = getMonthPL(curMonth);
+  const lastPL = getMonthPL(lastMonth);
+  const deadStock = getDeadStock(30);
+  return `<div class="wrap">
+    <div class="page-head"><button class="back-btn" onclick="go('dashboard')"><i class="fas fa-arrow-left"></i></button><h4>${t('reports')}</h4></div>
+    <div class="card-x" style="background:linear-gradient(135deg,${curPL.netProfit>=0?'#16a34a,#22c55e':'#dc2626,#ef4444'});color:#fff;border:none;padding:20px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div style="flex:1">
+          <div style="font-size:.78rem;opacity:.85;font-weight:700;letter-spacing:.5px">${t('monthly_pl').toUpperCase()} — ${monthLabel(curMonth)}</div>
+          <div style="font-size:2.2rem;font-weight:800;line-height:1.15;margin-top:4px">${fmt(Math.abs(curPL.netProfit))}</div>
+          <div style="font-size:.85rem;opacity:.95;margin-top:6px;font-weight:700">
+            ${curPL.netProfit > 0 ? '📈 ' + t('profit_earned') : curPL.netProfit < 0 ? '📉 ' + t('loss_incurred') : '➖ ' + t('break_even')}
+          </div>
+        </div>
+        <div style="width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.5rem">
+          <i class="fas ${curPL.netProfit>=0?'fa-arrow-trend-up':'fa-arrow-trend-down'}"></i>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px;font-size:.78rem">
+        <div style="background:rgba(255,255,255,.15);border-radius:11px;padding:9px 6px;text-align:center">
+          <div style="font-weight:800;font-size:1rem">${fmt(curPL.totSale)}</div>
+          <div style="opacity:.85;font-weight:700">${t('report_bikri')}</div></div>
+        <div style="background:rgba(255,255,255,.15);border-radius:11px;padding:9px 6px;text-align:center">
+          <div style="font-weight:800;font-size:1rem">${fmt(curPL.totProfit)}</div>
+          <div style="opacity:.85;font-weight:700">${t('profit')}</div></div>
+        <div style="background:rgba(255,255,255,.15);border-radius:11px;padding:9px 6px;text-align:center">
+          <div style="font-weight:800;font-size:1rem">${fmt(curPL.totExp)}</div>
+          <div style="opacity:.85;font-weight:700">${t('exp')}</div></div>
+      </div>
+    </div>
+    <div class="card-x">
+      <b style="font-size:.9rem;display:block;margin-bottom:10px"><i class="fas fa-calendar-days" style="color:var(--info)"></i> ${t('last_month')} — ${monthLabel(lastMonth)}</b>
+      <div class="row-total"><span style="color:var(--muted)">${t('report_bikri')}</span><b>${fmt(lastPL.totSale)}</b></div>
+      <div class="row-total"><span style="color:var(--muted)">${t('profit')}</span><b style="color:var(--success)">${fmt(lastPL.totProfit)}</b></div>
+      <div class="row-total"><span style="color:var(--muted)">${t('exp')}</span><b style="color:var(--warning)">− ${fmt(lastPL.totExp)}</b></div>
+      <div class="row-total big"><span>${t('report_net')}</span>
+        <span style="color:${lastPL.netProfit>=0?'var(--success)':'var(--danger)'}">${fmt(lastPL.netProfit)}</span></div>
+    </div>
+    ${deadStock.length ? `<div class="alert-x alert-danger mb-3" onclick="go('dead_stock')" style="cursor:pointer">
+      <i class="fas fa-skull-crossbones"></i>
+      <div><b>${t('dead_stock_alert')}</b><br>
+      <span style="font-weight:600;font-size:.82rem">${t('dead_stock_msg',{n:deadStock.length})} — ${t('view_dead')} →</span></div>
+    </div>` : `<div class="alert-x alert-success mb-3"><i class="fas fa-check-circle"></i><div><b>${t('no_dead_stock')}</b></div></div>`}
+    <b style="font-size:.95rem;display:block;margin:6px 0 10px"><i class="fas fa-calendar-range"></i> Custom Range</b>
+    <div class="scroll-x">${quickBtns.map(([k,tk])=>`<button class="chip ${reportRange.quick===k?'active':''}" onclick="setReportQuick('${k}')">${t(tk)}</button>`).join('')}</div>
+    <div class="card-x" style="padding:12px">
+      <div class="row g-2">
+        <div class="col-6"><label class="form-label" style="font-size:.75rem">${t('from')}</label><input type="date" class="form-control" value="${from}" onchange="reportRange.from=this.value;reportRange.quick='';go('reports')"></div>
+        <div class="col-6"><label class="form-label" style="font-size:.75rem">${t('to')}</label><input type="date" class="form-control" value="${to}" onchange="reportRange.to=this.value;reportRange.quick='';go('reports')"></div>
+      </div>
+    </div>
+    <div class="row g-2 mb-2">
+      <div class="col-6"><div class="stat" style="--c:#16a34a;cursor:default"><div class="num">${fmt(totSale)}</div><div class="lbl">${t('report_bikri')} (${sales.length})</div></div></div>
+      <div class="col-6"><div class="stat" style="--c:#4f46e5;cursor:default"><div class="num">${fmt(totPur)}</div><div class="lbl">${t('report_khareed')} (${purchases.length})</div></div></div>
+      <div class="col-6"><div class="stat" style="--c:${netProfit>=0?'#0891b2':'#dc2626'};cursor:default"><div class="num">${fmt(netProfit)}</div><div class="lbl">${t('report_net')}</div></div></div>
+      <div class="col-6"><div class="stat" style="--c:#f59e0b;cursor:default"><div class="num">${fmt(totExp)}</div><div class="lbl">${t('report_kharcha')}</div></div></div>
+    </div>
+    <div class="card-x"><b style="font-size:.95rem;display:block;margin-bottom:12px"><i class="fas fa-chart-column" style="color:var(--info)"></i> ${t('report_bikri')} vs ${t('report_khareed')}</b><canvas id="reportChart" height="200"></canvas></div>
+    <div class="card-x">
+      <b style="font-size:.95rem"><i class="fas fa-arrow-trend-up" style="color:var(--success)"></i> ${t('top_products')}</b>
+      ${top.length?top.map((tt,i)=>`<div style="display:flex;align-items:center;gap:11px;padding:9px 0;${i?'border-top:1px solid var(--border)':'margin-top:8px'}">
+        <div style="width:30px;height:30px;border-radius:9px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.82rem;color:var(--muted)">${i+1}</div>
+        <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(tt.name)}</div><small style="color:var(--muted)">${tt.qty} ${t('units')}</small></div>
+        <b style="color:var(--success);font-size:.9rem">${fmt(tt.amt)}</b>
+      </div>`).join(''):`<div style="text-align:center;padding:20px;color:var(--muted)">${t('no_data')}</div>`}
+    </div>
+    <div class="card-x">
+      <b style="font-size:.95rem;display:block;margin-bottom:10px"><i class="fas fa-calculator"></i> ${t('hisab')}</b>
+      <div class="row-total"><span style="color:var(--muted)">${t('report_bikri')}</span><b>${fmt(totSale)}</b></div>
+      <div class="row-total"><span style="color:var(--muted)">− ${t('report_khareed')}</span><b style="color:var(--danger)">− ${fmt(totPur)}</b></div>
+      <div class="row-total"><span style="color:var(--muted)">− ${t('report_kharcha')}</span><b style="color:var(--warning)">− ${fmt(totExp)}</b></div>
+      <div class="row-total big"><span>${t('report_net')}</span><span style="color:${netProfit>=0?'var(--success)':'var(--danger)'}">${fmt(totSale-totPur-totExp)}</span></div>
+    </div>
+  </div>`;
+}
+function drawChart(){
+  const cvs=document.getElementById('reportChart'); if(!cvs||typeof Chart==='undefined') return;
+  if(chartRef){ chartRef.destroy(); chartRef=null; }
+  const {from,to}=reportRange;
+  const sales=DB.get('sales'), purchases=DB.get('purchases');
+  const days=[]; const cur=new Date(from+'T00:00:00'); const end=new Date(to+'T00:00:00');
+  const diff=Math.round((end-cur)/86400000);
+  const step=diff>40?Math.ceil(diff/30):1;
+  let i=0;
+  while(cur<=end&&i<62){ const ds=new Date(cur.getTime()-cur.getTimezoneOffset()*60000).toISOString().slice(0,10); days.push(ds); cur.setDate(cur.getDate()+step); i++; }
+  const labels=days.map(d=>new Date(d+'T00:00:00').toLocaleDateString('en-GB',{day:'2-digit',month:'short'}));
+  const saleData=days.map(d=>sales.filter(s=>s.sale_date===d).reduce((a,s)=>a+(+s.total_amount||0),0));
+  const purData=days.map(d=>purchases.filter(p=>p.purchase_date===d).reduce((a,p)=>a+(+p.total_amount||0),0));
+  const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  const gridColor=isDark?'rgba(148,163,184,.15)':'rgba(100,116,139,.12)';
+  const tickColor=isDark?'#94a3b8':'#64748b';
+  chartRef=new Chart(cvs.getContext('2d'),{
+    type:'bar',
+    data:{labels,datasets:[
+      {label:t('report_bikri'),data:saleData,backgroundColor:'rgba(22,163,74,.75)',borderRadius:6,maxBarThickness:26},
+      {label:t('report_khareed'),data:purData,backgroundColor:'rgba(79,70,229,.7)',borderRadius:6,maxBarThickness:26}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:tickColor,font:{size:11,weight:'600'},boxWidth:12,usePointStyle:true,pointStyle:'circle'}},tooltip:{callbacks:{label:c=>c.dataset.label+': Rs '+Number(c.raw).toLocaleString('en-PK')}}},
+      scales:{x:{grid:{display:false},ticks:{color:tickColor,font:{size:9},maxRotation:0,autoSkip:true,maxTicksLimit:8}},y:{beginAtZero:true,grid:{color:gridColor,drawBorder:false},ticks:{color:tickColor,font:{size:10},callback:v=>v>=1000?(v/1000)+'k':v}}}
+    }
+  });
+}
+
+/* ============================================================
+   SETTINGS
+============================================================ */
+function renderSettings(){
+  const shopName=localStorage.getItem('cd_shopname')||'Chota Dukan';
+  const counts={products:DB.get('products').length,customers:DB.get('customers').length,suppliers:DB.get('suppliers').length,sales:DB.get('sales').length,purchases:DB.get('purchases').length,expenses:DB.get('expenses').length};
+  const bytes=DB.usage();
+  const size=bytes>1024*1024?(bytes/1024/1024).toFixed(2)+' MB':(bytes/1024).toFixed(1)+' KB';
+  const lastBackup=localStorage.getItem('cd_last_backup')||'';
+  let daysSince2=null;
+  if(lastBackup){ daysSince2=Math.floor((Date.now()-new Date(lastBackup).getTime())/86400000); }
+  const needBackup=!lastBackup||daysSince2>=7;
+  const barcodeCount = DB.get('products').filter(p=>p.barcode).length;
+  return `<div class="wrap">
+    <div class="page-head"><button class="back-btn" onclick="go('dashboard')"><i class="fas fa-arrow-left"></i></button><h4>${t('settings')}</h4></div>
+    ${needBackup?`<div class="alert-x alert-warn mb-3"><i class="fas fa-bell"></i><div><b>${t('backup_reminder')}</b><br><span style="font-weight:600;font-size:.82rem">${lastBackup?t('days_ago_backup',{n:daysSince2}):t('never_backed_up')}. ${t('take_backup_today')}</span></div></div>`:''}
+    <div class="card-x">
+      <label class="form-label">${t('shop_name')}</label>
+      <div style="display:flex;gap:8px">
+        <input class="form-control" id="shopName" value="${esc(shopName)}">
+        <button class="back-btn" style="background:var(--primary);color:#fff;flex-shrink:0" onclick="saveShopName()"><i class="fas fa-check"></i></button>
+      </div>
+    </div>
+    <div class="card-x">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <b style="font-size:.95rem"><i class="fas fa-database"></i> ${t('data_summary')}</b>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;text-align:center">
+        ${[[t('products'),counts.products,'#4f46e5'],[t('sales'),counts.sales,'#16a34a'],[t('purchases'),counts.purchases,'#0891b2'],[t('customers'),counts.customers,'#f59e0b'],[t('suppliers'),counts.suppliers,'#dc2626'],[t('expenses'),counts.expenses,'#7c3aed']]
+          .map(([n,v,c])=>`<div style="background:var(--card2);border-radius:13px;padding:11px 6px"><div style="font-size:1.25rem;font-weight:800;color:${c}">${v}</div><div style="font-size:.7rem;color:var(--muted);font-weight:700">${n}</div></div>`).join('')}
+      </div>
+      <div style="margin-top:10px;padding:10px 12px;background:var(--card2);border-radius:12px;font-size:.82rem;font-weight:700;display:flex;justify-content:space-between;align-items:center">
+        <span><i class="fas fa-barcode" style="color:var(--warning)"></i> ${t('barcode')}</span>
+        <span style="color:var(--primary)">${barcodeCount} / ${counts.products} <span style="color:var(--muted);font-weight:600;font-size:.75rem">(no limit)</span></span>
+      </div>
+      <div style="margin-top:10px;padding:10px 12px;background:var(--card2);border-radius:12px;font-size:.82rem;font-weight:700;display:flex;justify-content:space-between;align-items:center">
+        <span><i class="fas fa-hdd" style="color:var(--info)"></i> ${t('storage_used')}</span>
+        <span style="color:var(--success)">${size} • <i class="fas fa-infinity"></i></span>
+      </div>
+      <div style="margin-top:12px;text-align:center">
+        <button class="chip" onclick="recalcAllBoxes();DB.recalcAll();toast(t('t_recalc_done'));go('settings')"><i class="fas fa-sync"></i> ${t('recalc')}</button>
+      </div>
+    </div>
+    <div class="card-x">
+      <b style="font-size:.95rem;display:block;margin-bottom:6px"><i class="fas fa-download" style="color:var(--primary)"></i> ${t('backup')}</b>
+      <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px">${t('backup_desc')}</p>
+      <button class="btn-x bg-p" onclick="exportData()"><i class="fas fa-download"></i> ${t('backup_download')}</button>
+    </div>
+    <div class="card-x">
+      <b style="font-size:.95rem;display:block;margin-bottom:6px"><i class="fas fa-upload" style="color:var(--success)"></i> ${t('restore')}</b>
+      <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px">${t('restore_desc')}</p>
+      <input type="file" accept=".json" class="form-control" id="importFile" onchange="importData(event)">
+    </div>
+    <div class="card-x" style="border-color:color-mix(in srgb,#dc2626 40%,var(--border))">
+      <b style="font-size:.95rem;display:block;margin-bottom:6px;color:var(--danger)"><i class="fas fa-triangle-exclamation"></i> ${t('reset')}</b>
+      <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px">${t('reset_desc')}</p>
+      <button class="btn-x bg-d" onclick="resetAll()"><i class="fas fa-trash"></i> ${t('reset')}</button>
+    </div>
+    <div style="text-align:center;padding:22px 0 10px;color:var(--muted);font-size:.78rem">
+      <div style="font-weight:800;font-size:.95rem;color:var(--text);margin-bottom:3px"><i class="fas fa-store" style="color:var(--primary)"></i> Chota Dukan</div>
+      Version 4.2 • Made with ❤️
+    </div>
+  </div>`;
+}
+function recalcAllBoxes(){
+  const products = DB.get('products');
+  products.forEach(p => recalcBoxes(p));
+  DB.set('products', products);
+}
+function saveShopName(){
+  const v=document.getElementById('shopName').value.trim();
+  if(!v) return toast(t('t_name_required'),'warning');
+  localStorage.setItem('cd_shopname',v);
+  toast(t('t_saved'));
+}
+function exportData(){
+  const data={};
+  ['products','suppliers','customers','purchases','sales','payments','expenses'].forEach(k=>data[k]=DB.get(k));
+  data._shopname=localStorage.getItem('cd_shopname')||'Chota Dukan';
+  data._lang=LANG;
+  data._exported=new Date().toISOString();
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download=`chota_dukan_backup_${today()}.json`;
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  localStorage.setItem('cd_last_backup',new Date().toISOString());
+  toast(t('t_backup_done'));
+}
+function importData(e){
+  const file=e.target.files[0]; if(!file) return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    try{
+      const data=JSON.parse(ev.target.result);
+      confirmBox(t('c_restore'), ()=>{
+        ['products','suppliers','customers','purchases','sales','payments','expenses'].forEach(k=>{ if(Array.isArray(data[k])) DB.set(k,data[k]); });
+        if(data._shopname) localStorage.setItem('cd_shopname',data._shopname);
+        recalcAllBoxes();
+        DB.recalcAll();
+        toast(t('t_restored'));
+        setTimeout(()=>go('dashboard'),900);
+      },{title:t('restore')});
+    }catch(err){ toast(t('t_invalid_file'),'danger'); }
+  };
+  r.readAsText(file); e.target.value='';
+}
+function resetAll(){
+  confirmBox(t('c_reset'), ()=>{
+    confirmBox(t('c_reset_confirm'), ()=>{
+      const theme=localStorage.getItem('cd_theme'), lang=localStorage.getItem('cd_lang');
+      localStorage.clear();
+      if(theme) localStorage.setItem('cd_theme',theme);
+      if(lang) localStorage.setItem('cd_lang',lang);
+      toast(t('t_reset_done'),'danger');
+      setTimeout(()=>location.reload(),900);
+    },{danger:true,title:t('c_reset')});
+  },{danger:true,title:t('reset')});
+}
+
+/* ============================================================
+   PAGES MAP
+============================================================ */
+const pages={
+  dashboard:renderDashboard, products:renderProducts, product_form:renderProductForm,
+  categories:renderCategories, dead_stock:renderDeadStock, sales:renderSales,
+  sale_form:renderSaleForm, purchases:renderPurchases, purchase_form:renderPurchaseForm,
+  parties:renderParties, party_form:renderPartyForm, party_detail:renderPartyDetail,
+  ledger:renderLedger, udhar:renderUdhar, expenses:renderExpenses,
+  reports:renderReports, settings:renderSettings
+};
+
+/* ============================================================
+   INIT
+============================================================ */
+recalcAllBoxes();
+DB.recalcAll();
+applyLang();
+document.addEventListener('gesturestart', e => e.preventDefault());
+</script>
+</body>
+</html>
