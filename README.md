@@ -1,7 +1,7 @@
-# 🏪 Chota Dukan
+#  Chota Dukan
 
 <p align="center">
-  <img width="50%" alt="screencapture-127-0-0-1-5500-index-html-2026-10-26-12_38_49" src="https://github.com/user-attachments/assets/525cea7a-8164-460e-aa22-950ec832743e" />
+  <img width="70%" alt="screencapture-127-0-0-1-5500-index-html-2026-10-26-12_38_49" src="https://github.com/user-attachments/assets/525cea7a-8164-460e-aa22-950ec832743e" />
 
 </p>
 
@@ -20,48 +20,49 @@
 
 ---
 
-## 🖼️ Screenshots
+##  Screenshots
 
 <p align="center">
-  <img width="50%" alt="screencapture-127-0-0-1-5500-index-html-2026-10-26-12_38_49" src="https://github.com/user-attachments/assets/525cea7a-8164-460e-aa22-950ec832743e" />
+  <img width="30%" alt="screencapture-127-0-0-1-5500-index-html-2026-10-26-12_38_49" src="https://github.com/user-attachments/assets/525cea7a-8164-460e-aa22-950ec832743e" />
   <img width="30%" alt="screencapture-127-0-0-1-5500-index-html-2026-10-26-12_42_27" src="https://github.com/user-attachments/assets/9fc3a0da-1d9e-4928-9c5a-3fedb1fd9d72" />
+  <img width="30%" alt="screencapture-127-0-0-1-5500-index-html-2026-10-31-15_55_04" src="https://github.com/user-attachments/assets/e5736b27-4d5f-40c2-8788-b0fd1f3a78ec" />
 
-  <img src="screenshots/udhar.png"     width="30%" alt="Udhar Ledger">
 </p>
 <p align="center">
-  <img src="screenshots/products.png"  width="30%" alt="Products">
-  <img src="screenshots/reports.png"   width="30%" alt="Reports">
-  <img src="screenshots/scanner.png"   width="30%" alt="Barcode Scanner">
+  <img width="30%"  alt="screencapture-127-0-0-1-5500-index-html-2026-10-31-16_21_50" src="https://github.com/user-attachments/assets/a774cacb-41af-4362-9acc-22904d22fd07" />
+  <img width="30%" alt="screencapture-127-0-0-1-5500-index-html-2026-10-31-15_55_39" src="https://github.com/user-attachments/assets/86267423-94d8-47e9-96b5-f3da1e7f98b3" />
+  <img width="30%" alt="screencapture-127-0-0-1-5500-index-html-2026-10-31-16_18_04" src="https://github.com/user-attachments/assets/72870d7c-2c8f-47fd-8e3e-9dd0e3fb6fff" />
+
 </p>
 
 ---
 
-## ✨ Features
+##  Features
 
 | Feature | Description |
 |---|---|
-| 🛒 **Bikri / Khareed** | Sale & purchase with cart, discount, paid/remaining |
-| 💰 **Udhar Ledger** | Customer & supplier balances auto-calculated |
-| 📷 **Barcode Scanner** | `html5-qrcode` — camera se scan (torch + zoom) |
-| 📦 **Box / Piece System** | Pieces per box support, auto box calculation |
-| ⚖️ **Kg / Liter Sizes** | 250g, 500g, 1kg, 1.5L etc. quick select |
-| 📊 **Reports** | Daily / 7d / 30d / monthly profit-loss chart |
-| 💀 **Dead Stock Alert** | 30+ din se na bike items auto-flag |
-| 🏷️ **Categories** | Group products, per-category analytics |
-| 💾 **Backup / Restore** | One-click JSON download & upload |
-| 🌐 **3 Languages** | Roman Urdu, English, اردو (RTL) |
-| 🌙 **Dark Mode** | Auto-saved preference |
-| 📱 **Mobile-First** | Bottom navigation, sheets, PWA-ready |
-| 🔌 **100% Offline** | Data in `localStorage`, no server needed |
+|  **Bikri / Khareed** | Sale & purchase with cart, discount, paid/remaining |
+|  **Udhar Ledger** | Customer & supplier balances auto-calculated |
+|  **Barcode Scanner** | `html5-qrcode` — camera se scan (torch + zoom) |
+|  **Box / Piece System** | Pieces per box support, auto box calculation |
+|  **Kg / Liter Sizes** | 250g, 500g, 1kg, 1.5L etc. quick select |
+|  **Reports** | Daily / 7d / 30d / monthly profit-loss chart |
+|  **Dead Stock Alert** | 30+ din se na bike items auto-flag |
+|  **Categories** | Group products, per-category analytics |
+|  **Backup / Restore** | One-click JSON download & upload |
+|  **3 Languages** | Roman Urdu, English, اردو (RTL) |
+|  **Dark Mode** | Auto-saved preference |
+|  **Mobile-First** | Bottom navigation, sheets, PWA-ready |
+|  **100% Offline** | Data in `localStorage`, no server needed |
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Option 1 — Sirf file khol lein
 1. `index.html` download karein
 2. Browser mein double-click karein
-3. Bas! 🎉
+3. Bas! 
 
 > ⚠️ Barcode scanner ke liye **HTTPS** zaroori hai (localhost ya GitHub Pages fine hai).
 
@@ -69,19 +70,19 @@
 1. Ye repo fork / clone karein
 2. **Settings → Pages → Source: `main` branch → `/root`** select karein
 3. Live URL: `https://<username>.github.io/chota-dukan/`
-4. Mobile browser mein kholein → **"Add to Home Screen"** → app ki tarah chale ga ✅
+4. Mobile browser mein kholein → **"Add to Home Screen"** → app ki tarah chale ga 
 
 ---
 
-## 📱 Kaise Use Karein
+##  Kaise Use Karein
 
 | Tab | Kaam |
 |---|---|
-| 🏠 **Home** | Aaj ki bikri, lena/dena, monthly summary |
-| 📦 **Stock** | Products list, categories, dead stock |
-| 🛒 **Bech** (center FAB) | Nai sale shuru karein |
-| 💵 **Udhar** | Customers/suppliers ke baqaya |
-| 📖 **Hisab** | Ledger + payment record |
+|  **Home** | Aaj ki bikri, lena/dena, monthly summary |
+|  **Stock** | Products list, categories, dead stock |
+|  **Bech** (center FAB) | Nai sale shuru karein |
+|  **Udhar** | Customers/suppliers ke baqaya |
+|  **Hisab** | Ledger + payment record |
 
 **Barcode Scan:** Top-right 🏷️ icon ya sale form mein "Scan" button → camera kholo → barcode frame ke andar rakho.
 
@@ -89,7 +90,7 @@
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **HTML5 + CSS3** — no framework, no build step
 - **Vanilla JavaScript** — single file, ~3500 lines
@@ -101,4 +102,4 @@
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
